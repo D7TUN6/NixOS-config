@@ -8,24 +8,20 @@
   networking = {
     hostName = "nixos";
     wireless.enable = false;
-    networkmanager.enable = true;
+    networkmanager.enable = false;
+    useDHCP = false;
+    interfaces.eth0.useDHCP = true;
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
     nat.enable = true;
     firewall = {
       enable = true;
       allowPing = false;
       allowedTCPPorts = [
-        47610 # P2P
-        25565 # Minecraft
-        443 # HTTPS
-        80 # HTTP
-        34655 # SSH
       ];
       allowedUDPPorts = [
-        47610 # P2P
-        25565 # Minecraft
-        443 # HTTPS
-        80 # HTTP
-        34655 # SSH
       ];
     };
   };

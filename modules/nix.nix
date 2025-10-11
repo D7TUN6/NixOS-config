@@ -7,26 +7,22 @@
 }: {
   nixpkgs = {
     hostPlatform = lib.mkDefault "x86_64-linux";
-    # Sucking optimisations, do not use it please
-    #hostPlatform = {
-    # gcc.arch = "znver1";
-    # gcc.tune = "znver1";
-    # gcc.lto = true;
-    # gcc.cflags = [ "-O3" "-flto" ];
-    # system = "x86_64-linux";
-    # cpu = "znver1";
-    #};
     config = {
       allowInsecure = true;
       allowUnfree = true;
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "reaper"
+      ];
       permittedInsecurePackages = [
         "ventoy-gtk3-1.1.07"
+        "ventoy-gtk3-1.1.05"
       ];
     };
   };
 
   nix = {
     settings = {
+      extra-platforms = [ "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
       system-features = ["nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-znver1" "gccarch-native"];
       download-buffer-size = "99999999999";
       max-jobs = 13;

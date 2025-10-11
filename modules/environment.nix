@@ -3,14 +3,23 @@
   pkgs,
   lib,
   inputs,
+  outputs,
+  pkgsStable,
+  pkgsMaster,
   ...
 }: {
   environment = {
-    variables = {
+    sessionVariables = {
+      # Graphics optimize.
+      __GL_MaxFramesAllowed = "1";
+      RADV_PERFTEST = "sam";
+      RUSTICL_ENABLE = "radeonsi";
+      # Base.
+      TERMINAL = "kitty";
+      EDITOR = "helix";
+      XDG_BIN_HOME = "$HOME/.local/bin";
     };
-
     systemPackages = with pkgs; [
-      # some fhs env for building stuff
       (let
         base = pkgs.appimageTools.defaultFhsEnvArgs;
       in
@@ -20,13 +29,10 @@
             targetPkgs = pkgs:
               (base.targetPkgs pkgs)
               ++ (with pkgs; [
-                clang
-                gcc
-                cargo
               ]);
             profile = "export FHS=1";
-            runScript = "bash";
-            extraOutputsToInstall = ["dev"];
+            runScript = "fish";
+            extraOutputsToInstall = ["my-dev-env"];
           }))
 
       # CLI.
@@ -36,24 +42,48 @@
       p7zip
       fastfetch
       btop
-      stress-ng
       git
-      smartmontools
       jq
       killall
       usbutils
-      helix
-
-      # CPU.
-      linuxPackages.cpupower
-
-      # Base system.
-      btrfs-progs
+      pciutils
+      compsize
+      libimobiledevice
+      libimobiledevice-glue
+      android-file-transfer
+      jmtpfs
+      go-mtpfs
+      usbmuxd
       cryptsetup
+      btrfs-progs
+      e2fsprogs
+      util-linux
+      hdparm
+      sysstat
+      mtools
+      gnome.gvfs
+      helix
+      modprobed-db
+      sbctl
+      efitools
+      kernel-hardening-checker
+
+      # Diagnostic and metrics.
+      hw-probe
+      cpu-x
+      hardinfo2
+      stress-ng
+      smartmontools
+      kdiskmark
+            
+
+      # Firmware.
+      linux-firmware
 
       # Base software.
       telegram-desktop
       kdePackages.dolphin
+      kdePackages.gwenview
       nwg-look
       vesktop
       strawberry
@@ -61,16 +91,29 @@
       qbittorrent
       peazip
       keepassxc
-      libreoffice
+      # libreoffice
+      libreoffice-fresh-unwrapped
       vlc
       fluidsynth
       schismtracker
       imv
       mpv
+      cmus
+      bleachbit
+      btrfs-assistant
+      kdePackages.filelight
+      gnome-calculator
+      gnome-disk-utility
+      gparted
+      wlr-randr
+      kanshi
+      way-displays
 
       # Gaming.
       osu-lazer-bin
       mangohud
+      steamcmd
+      steam-run
 
       # Nix.
       appimage-run
@@ -79,28 +122,23 @@
 
       # Audio production.
       # DAW.
-      reaper
+      pkgsMaster.reaper
       audacity
       # Synth.
-      zynaddsubfx
-      # Effects.
-      lsp-plugins
-      calf
+      pkgsMaster.zynaddsubfx
 
       # Compatability, virtulisation, emulation, etc...
       # Wine.
-      wineWowPackages.yabridge
+      wineWow64Packages.waylandFull
       winetricks
-
-      #bottles-unwrapped
-      # mono
+      
       # Yabridge.
       yabridgectl
       yabridge
 
       # Virtualisation tools.
       qemu
-      virtualbox
+      gnome-boxes
       pcem
 
       # Recording & streaming
@@ -108,20 +146,23 @@
 
       # Graphics.
       krita
-      gimp
-      inkscape
 
       # Audio tuning.
       pavucontrol
       helvum
       easyeffects
+      # jamesdsp
 
       # Development.
-      vscode
       python3
-
+      gcc
+      clang
+      cargo
+      gnumake
+      pkg-config-unwrapped
+      
       # Runtime.
-      jdk24
+      jdk21
 
       # Flash & program.
       ventoy-full-gtk
@@ -131,13 +172,11 @@
       # Desktop.
       wayland-utils
       wl-clipboard
-      wf-recorder
       waybar
       swaynotificationcenter
       foot
       kitty
       fuzzel
-      yofi
       swaybg
       swaylock
       xwayland-satellite
@@ -146,11 +185,7 @@
 
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk-sans
     noto-fonts-emoji
-    liberation_ttf
-    font-awesome
-    jetbrains-mono
     nerd-fonts.jetbrains-mono
     nerd-fonts.bigblue-terminal
   ];

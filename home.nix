@@ -1,22 +1,26 @@
 {
   config,
+  lib,
   pkgs,
   inputs,
   ...
 }: {
   imports = [
     # Desktop.
-    ./home-manager/niri.nix
-    ./home-manager/waybar.nix
+    ./home-manager/desktop/niri.nix
+    ./home-manager/desktop/waybar.nix
+    ./home-manager/desktop/foot.nix
+    ./home-manager/desktop/kitty.nix
+    ./home-manager/desktop/fuzzel.nix
+    ./home-manager/desktop/gtk.nix
 
     # Apps.
-    ./home-manager/foot.nix
-    ./home-manager/fuzzel.nix
-    ./home-manager/helix.nix
-    ./home-manager/btop.nix
-    ./home-manager/fastfetch.nix
-    ./home-manager/fish.nix
-    ./home-manager/gtk.nix
+    ./home-manager/apps/helix.nix
+    ./home-manager/apps/btop.nix
+    ./home-manager/apps/fastfetch.nix
+
+    # System.
+    ./home-manager/system/fish.nix
   ];
 
   home = {
@@ -27,12 +31,13 @@
     homeDirectory = "/home/d7tun6";
 
     # Home-manager version.
-    stateVersion = "25.05";
+    stateVersion = "25.11";
 
     # User packages.
     packages = with pkgs; [
       # Home-manager itself (for management).
       inputs.home-manager.packages.${pkgs.system}.default
+      # Freesm Minecraft launcher.
       inputs.freesm.packages.${pkgs.system}.freesmlauncher
     ];
   };

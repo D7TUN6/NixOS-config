@@ -6,6 +6,7 @@
   ...
 }: {
   security = {
+    lsm = lib.mkForce [];
     rtkit.enable = true;
     pam = {
       loginLimits = [
@@ -32,6 +33,30 @@
           item = "nofile";
           type = "hard";
           value = "99999";
+        }
+        {
+          domain = "*";
+          type = "hard";
+          item = "nofile";
+          value = "524288";
+        }
+        {
+          domain = "*";
+          type = "soft";
+          item = "nofile";
+          value = "523288";
+        }
+        {
+          domain = "d7tun6";
+          type = "hard";
+          item = "nofile";
+          value = "524288";
+        }
+        {
+          domain = "d7tun6";
+          type = "soft";
+          item = "nofile";
+          value = "523288";
         }
       ];
     };

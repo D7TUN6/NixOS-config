@@ -8,10 +8,12 @@
   hardware = {
     # To fix gpu.
     enableAllFirmware = true;
-    firmware = with pkgs; [firmwareLinuxNonfree];
-
+    firmware = with pkgs; [firmwareLinuxNonfree linux-firmware];
     cpu = {
       amd = {
+        updateMicrocode = true;
+      };
+      intel = {
         updateMicrocode = true;
       };
     };
@@ -22,7 +24,6 @@
         driversi686Linux.mesa
       ];
       extraPackages = with pkgs; [
-        mesa.opencl
         mesa
       ];
     };

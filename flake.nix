@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nix-gaming.url = "github:fufexan/nix-gaming";
     chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
     freesm.url = "github:FreesmTeam/FreesmLauncher";
@@ -12,14 +14,39 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    chaotic,
-    ...
-  } @ inputs: {
+  outputs =
+    {
+      self,
+      home-manager,
+      nixpkgs,
+      nixpkgs-master,
+      nixpkgs-stable,
+      chaotic,
+      ...
+    } @inputs:
+    let
+      args = {
+        pkgsStable = import nixpkgs-stable {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+        pkgsMaster = import nixpkgs-master {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+        inherit inputs;
+      };
+    in
+    {
+
+    system = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+  
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
+      #specialArgs = { inherit inputs; };
+      specialArgs = args; 
       modules = [
         ./configuration.nix
         chaotic.nixosModules.default
@@ -32,14 +59,7 @@
             extraSpecialArgs = {inherit inputs;};
 
             # User-specific configuration.
-            users = {
-              d7tun6 = {
-                imports = [
-                  # Home-manager configuration.
-                  ./home.nix
-                ];
-              };
-            };
+            users.d7tun6.imports = [./home.nix];
           };
         }
       ];
