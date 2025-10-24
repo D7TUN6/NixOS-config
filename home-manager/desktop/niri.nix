@@ -10,7 +10,7 @@
           keyboard {
               xkb {
                   layout "us,ru"
-                  options "grp:alt_shift_toggle"
+                  options "grp:caps_toggle"
               }
               numlock
           }
@@ -49,11 +49,12 @@
       }
 
       // Outputs section.
-//      output "HDMI-A-1" {
-  //        mode "1920x1080@73"          scale 1
-  //        transform "normal"
- //         position x=0 y=0
-//      }
+      output "HDMI-A-1" {
+          mode "1920x1080@74.013"
+          transform "normal"
+          position x=0 y=0
+          scale 1
+      }
 
       layout {
           gaps 16
@@ -92,8 +93,8 @@
           }
       }
 
-      spawn-at-startup "waybar"
-      spawn-at-startup "swaync"
+      spawn-sh-at-startup "waybar"
+      spawn-sh-at-startup "swaync"
       spawn-sh-at-startup "polkit-agent-helper-1"
       spawn-sh-at-startup "systemctl start --user polkit-gnome-authentication-agent-1"
       spawn-sh-at-startup "swaybg -i /etc/nixos/wallpaper/wall.jpg"

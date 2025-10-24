@@ -6,6 +6,9 @@
   ...
 }: {
   programs = {
+    ssh = {
+      askPassword = lib.mkForce "${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass";
+    };
     niri = {
       enable = true;
     };
@@ -25,10 +28,13 @@
       localNetworkGameTransfers.openFirewall = true;
       extraPackages = [ pkgs.jdk ];
     };
+    direnv.enable = true;
     nekoray = {
       enable = true;
       tunMode.enable = true;
     };
-    fish.enable = true;
+    fish = {
+      enable = true;
+    };
   };
 }

@@ -7,7 +7,7 @@
 }: {
   boot = {
     loader = {
-      timeout = 5;
+      timeout = 0;
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot";
@@ -19,8 +19,6 @@
     };
     initrd = {
       systemd.enable = true;
-      compressor = "zstd";
-      compressorArgs = ["-15"];
       luks = {
         devices = {
           "cryptdisk" = {
@@ -40,185 +38,28 @@
       availableKernelModules = [
         "xhci_pci"
         "ahci"
-        "usbhid"
-        "usb_storage"
-        "sd_mod"
         "ehci_pci"
         "ohci_pci"
         "evdev"
       ];
       kernelModules = [
+        "amdgpu"
       ];
     };
-      kernelPackages = pkgs.linuxPackages_latest;
-    # kernelPackages = let
-    #   linux_tkg = pkgs.callPackage ({
-    #       fetchurl,
-    #       buildLinux,
-    #       ...
-    #     } @ args:
-    #       buildLinux (args
-    #         // rec {
-    #           version = "6.17.1-rt5";
-    #           modDirVersion = "6.17.1-rt5";
-    #           # configfile = "/etc/nixos/kernel/.config";
-    #           src = pkgs.fetchurl {
-    #             url = "https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-rt-devel.git/snapshot/linux-rt-devel-v6.17.1-rt5.tar.gz";
-    #             hash = "sha256-+hY1hVwAGu+PZwqEYgkjKeMywcPviNMAuuYMP90QpBU=";
-    #           };
 
-    #           kernelPatches = [
-    #             {
-    #               name = "0003-glitched-base";
-    #               patch = pkgs.fetchurl {
-    #                 url = "https://raw.githubusercontent.com/Frogging-Family/linux-tkg/master/linux-tkg-patches/6.17/0003-glitched-base.patch";
-    #                 hash = "sha256-TsIYTcIEknI4IK5uCZ32f+oZp8JsAb4THLrlobFkRDg=";
-    #               };
-    #             }
-    #             {
-    #               name = "clear-patches";
-    #               patch = pkgs.fetchurl {
-    #                 url = "https://raw.githubusercontent.com/Frogging-Family/linux-tkg/master/linux-tkg-patches/6.17/0002-clear-patches.patch";
-    #                 hash = "sha256-J90p4D9hMM/ZGNTQeITWXEn+0O6tIyN/6mRPmRjIRTA=";
-    #               };
-    #             }
-    #             {
-    #               name = "optimize_harder_O3";
-    #               patch = pkgs.fetchurl {
-    #                 url = "https://raw.githubusercontent.com/Frogging-Family/linux-tkg/master/linux-tkg-patches/6.17/0013-optimize_harder_O3.patch";
-    #                 hash = "sha256-lIKY3/JVKn+m8Ftpi9erBaULCvdRbSuaxmTRrTj9qV8=";
-    #               };
-    #             }
-    #             {
-    #               name = "misc-additions";
-    #               patch = pkgs.fetchurl {
-    #                 url = "https://raw.githubusercontent.com/Frogging-Family/linux-tkg/master/linux-tkg-patches/6.17/0012-misc-additions.patch";
-    #                 hash = "sha256-C7B8DV3Dc/IEPcWRXkrH/6Kby8WSX31z0bi+pnluqxY=";
-    #               };
-    #             }
-    #             {
-    #               name = "suse-additions";
-    #               patch = pkgs.fetchurl {
-    #                 url = "https://raw.githubusercontent.com/Frogging-Family/linux-tkg/master/linux-tkg-patches/6.17/0013-suse-additions.patch";
-    #                 hash = "sha256-FmJmtZjpnet9T4Mj9xRZ4JSSTma5owI1EW8yarI+6f0=";
-    #               };
-    #             }
-    #             {
-    #               name = "add-sysctl-to-disallow-unprivileged";
-    #               patch = pkgs.fetchurl {
-    #                 url = "https://raw.githubusercontent.com/Frogging-Family/linux-tkg/master/linux-tkg-patches/6.17/0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch";
-    #                 hash = "sha256-tlY1UF7BpCbF7J3X6+l4VT5hRKINpzRMzPpWwUY8B1I=";
-    #               };
-    #             }
-    #              {
-    #                name = "bore";
-    #                patch = pkgs.fetchurl {
-    #                  url = "https://raw.githubusercontent.com/Frogging-Family/linux-tkg/refs/heads/master/linux-tkg-patches/6.17/0001-bore.patch";
-    #                  hash = "sha256-2ili3gZxia9A4w1s5hO8PBQ2nJ2g/BuylSP3q8C9Fe0=";
-    #                };
-    #              }
-    #              {
-    #                name = "acs_override";
-    #                patch = pkgs.fetchurl {
-    #                  url = "https://raw.githubusercontent.com/Frogging-Family/linux-tkg/refs/heads/master/linux-tkg-patches/6.17/0006-add-acs-overrides_iommu.patch";
-    #                  hash = "sha256-EiE5vvw9olsAtRGemi/FmyZu0N5T82kS6eYPMofEedY=";
-    #                };
-    #              }
-    #              {
-    #               name = "config";
-    #               patch = null;
-    #               extraConfig = ''
-    #                 ZENIFY y
-    #                 PREEMPT y
-    #                 PREEMPT_RT y
-    #                 PREEMPTION y
-    #                 HZ_1000 y
-    #                 HIGH_RES_TIMERS y
-    #                 NO_HZ_FULL y
-    #                 IRQ_FORCED_THREADING y
-    #                 RCU_NOCB_CPU y
-    #                 CC_OPTIMIZE_FOR_PERFORMANCE y
-    #                 CC_OPTIMIZE_FOR_PERFORMANCE_O3 y
-    #                 CC_HAS_MARCH_NATIVE y
-    #                 LTO_NONE n
-    #                 ARCH_SUPPORTS_LTO_CLANG y
-    #                 CONFIG_LTO_CLANG_THIN n
-    #                 DEBUG_INFO n
-    #                 DEBUG_KERNEL n
-    #                 GENERIC_CPU n
-    #                 UNWINDER_ORC y
-    #                 STACKPROTECTOR n
-    #                 X86_KERNEL_IBT n
-    #                 PAGE_POISONING n
-    #                 SCHED_STACK_END_CHECK n
-    #                 DEBUG_VM n
-    #                 DEBUG_INFO_BTF n
-    #                 DEBUG_VIRTUAL n
-    #                 DEBUG_LIST n
-    #                 DEBUG_PLIST n
-    #                 DEBUG_SG n
-    #                 DEBUG_NOTIFIERS n
-    #                 DEBUG_MAPLE_TREE n
-    #                 DEBUG_CREDENTIALS n
-    #                 SLUB_DEBUG n
-    #                 SCHED_DEBUG n
-    #                 SCHEDSTATS n
-    #               '';
-    #             }
-    #           ];
-    #           extraStructuredConfig = with lib.kernel; {
-    #             ZENIFY = lib.mkForce yes;
-    #             PREEMPT = lib.mkForce  yes;
-    #             PREEMPT_RT = lib.mkForce yes;
-    #             PREEMPTION = lib.mkForce yes;
-    #             HZ_1000 = lib.mkForce yes;
-    #             HIGH_RES_TIMERS = lib.mkForce yes;
-    #             NO_HZ_FULL = lib.mkForce yes;
-    #             IRQ_FORCED_THREADING = lib.mkForce yes;
-    #             RCU_NOCB_CPU = lib.mkForce yes;
-    #             CC_OPTIMIZE_FOR_PERFORMANCE = lib.mkForce yes;
-    #             CC_OPTIMIZE_FOR_PERFORMANCE_O3 = lib.mkForce yes;
-    #             CC_HAS_MARCH_NATIVE = lib.mkForce yes;
-    #             LTO_NONE = lib.mkForce no;
-    #             ARCH_SUPPORTS_LTO_CLANG = lib.mkForce yes;
-    #             CONFIG_LTO_CLANG_THIN = lib.mkForce no;
-    #             DEBUG_INFO = lib.mkForce no;
-    #             DEBUG_KERNEL = lib.mkForce no;
-    #             GENERIC_CPU = lib.mkForce no;
-    #             UNWINDER_ORC = lib.mkForce yes;
-    #             STACKPROTECTOR = lib.mkForce no;
-    #             X86_KERNEL_IBT = lib.mkForce no;
-    #             PAGE_POISONING = lib.mkForce no;
-    #             SCHED_STACK_END_CHECK = lib.mkForce no;
-    #             DEBUG_VM = lib.mkForce no;
-    #             DEBUG_INFO_BTF = lib.mkForce no;
-    #             DEBUG_VIRTUAL = lib.mkForce no;
-    #             DEBUG_LIST = lib.mkForce no;
-    #             DEBUG_PLIST = lib.mkForce no;
-    #             DEBUG_SG = lib.mkForce no;
-    #             DEBUG_NOTIFIERS = lib.mkForce no;
-    #             DEBUG_MAPLE_TREE = lib.mkForce no;
-    #             DEBUG_CREDENTIALS = lib.mkForce no;
-    #             SLUB_DEBUG = lib.mkForce no;
-    #             SCHED_DEBUG = lib.mkForce no;
-    #             SCHEDSTATS = lib.mkForce no; 
-    #           };
-    #           makeFlags = [ "KCFLAGS=-O3 -march=native -mtune=native -flto -pipe -ftree-vectorize -fomit-frame-pointer -fno-semantic-interposition -mmmx -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mavx2 -mfma -maes -msha -mbmi -mbmi2 -mpclmul -mfsgsbase -mrdseed -madx -mclzero -mclflushopt -mxsavec -mxsaveopt -mxsave -mf16c" ];
-    #           stdenv = pkgs.clangStdenv;              
-    #           ignoreConfigErrors = true;
-    #           extraMeta.branch = "6.17";
-    #         })) {};
-    # in
-    #   pkgs.linuxPackagesFor linux_tkg;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     kernelModules = [
       "kvm-amd"
+      "xt_multiport"
+      "tcp_bbr"      
     ];
 
     blacklistedKernelModules = [
       "radeon"
       "iTCO_wdt"
       "sp5100-tco"
+      "serial8250"
     ];
 
     kernelParams = [
@@ -229,13 +70,15 @@
       "amdgpu.si_support=1"
       "amdgpu.dc=1"
       "amdgpu.dpm=1"
+      "amdgpu.runpm=1"
+      "amdgpu.audio=0"
       "modprobe.blacklist=radeon"
-      "amdgpu.ppfeaturemask=0xffffffff"
       "video=HDMI-A-1:1920x1080@74"
 
       # Logging.
-      # "quiet"
-      # "loglevel=0"
+      "loglevel=0"
+      "rd.udev.log_level=0"
+      "systemd.show_status=false"
 
       # BIOS.
       "pcie_aspm=off"
@@ -245,28 +88,41 @@
 
       # ACPI.
       "libahci.ignore_sss=1"
-
-      # Disks.
-      "libata.force=noncq" 
+      "acpi_osi=Linux"
+      "acpi=ht"
       
       # CPU.
-      # "mitigations=off"
-      # "processor.ignore_ppc=1"
-      # "intel_idle.max_cstate=0"
-      # "processor.max_cstate=0"
-      # "cpuidle.off=1"
-      "idle=nomwait"
+      "mitigations=off"
+      "processor.ignore_ppc=1"
+      "idle=poll"
       "modprobe.blacklist=iTCO_wdt"
       "modprobe.blacklist=sp5100-tco"
 
+      # Disable CPU powersaving features.
+      # Global.
+      "cpufreq.performance=1"
+      "processor.max_cstate=0"
+      "cpuidle.off=1"
+      # Intel.
+      "intel_idle.max_cstate=0"
+      "intel_pstate=disable"
+      # AMD.
+      "amd_pstate=disable"
+      
       # Network.
       "net.ifnames=0"
 
       # Optimizations.
       "tsc=reliable"
       "clocksource=tsc"
+      "clock=tsc"
+      "nolapic_timer"
+      "usbcore.autosuspend=-1"
+      "libata.force=noncq"
+      "libata.noacpi=1"
       "nosoftlockup"
       "preempt=full"
+      "tsx_async_abort=off"
       "nowatchdog"
       "nmi_watchdog=0"
       "split_lock_detect=off"
@@ -348,7 +204,7 @@
         "net.core.somaxconn" = 65535;
         "net.ipv4.tcp_fastopen" = 3;
         "net.ipv4.tcp_mtu_probing" = 1;
-        "net.ipv4.tcp_ecn" = 2;
+        "net.ipv4.tcp_ecn" = 1;
         "net.ipv4.tcp_timestamps" = 1;
         "net.ipv4.tcp_keepalive_time" = "60";
         "net.ipv4.tcp_keepalive_intvl" = 10;
@@ -360,16 +216,13 @@
       };
     };
     plymouth = {
-      # enable = false;
+      enable = false;
     };
   };
 
   # Power.
   powerManagement = {
-    cpuFreqGovernor = "schedutil";
+    cpuFreqGovernor = "performance";
     enable = true;
   };
-
-  # Console.
-  #  console.earlySetup = true;
 }

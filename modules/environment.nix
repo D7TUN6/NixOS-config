@@ -37,9 +37,6 @@
 
       # CLI.
       wget
-      unzip
-      unrar
-      p7zip
       fastfetch
       btop
       git
@@ -68,6 +65,14 @@
       efitools
       kernel-hardening-checker
 
+      # Compression & archives.
+      unzip
+      unrar
+      p7zip
+      lrzip
+      squashfsTools
+      peazip
+      
       # Diagnostic and metrics.
       hw-probe
       cpu-x
@@ -75,8 +80,7 @@
       stress-ng
       smartmontools
       kdiskmark
-            
-
+      
       # Firmware.
       linux-firmware
 
@@ -84,17 +88,20 @@
       telegram-desktop
       kdePackages.dolphin
       kdePackages.gwenview
+      blueman
+      overskride
       nwg-look
       vesktop
       strawberry
       firefox
+      chromium
+      google-chrome
+      qutebrowser
+      nyxt
       qbittorrent
-      peazip
       keepassxc
-      # libreoffice
       libreoffice-fresh-unwrapped
       vlc
-      fluidsynth
       schismtracker
       imv
       mpv
@@ -123,13 +130,13 @@
       # Audio production.
       # DAW.
       pkgsMaster.reaper
-      audacity
+      # audacity
       # Synth.
       pkgsMaster.zynaddsubfx
 
       # Compatability, virtulisation, emulation, etc...
       # Wine.
-      wineWow64Packages.waylandFull
+      wineWowPackages.yabridge
       winetricks
       
       # Yabridge.
@@ -141,6 +148,10 @@
       gnome-boxes
       pcem
 
+      # DPI & VPN
+      zapret
+      amnezia-vpn
+
       # Recording & streaming
       obs-studio
 
@@ -151,7 +162,7 @@
       pavucontrol
       helvum
       easyeffects
-      # jamesdsp
+      jamesdsp
 
       # Development.
       python3
@@ -170,16 +181,19 @@
       imsprog
 
       # Desktop.
+      lutgen
+      lutgen-studio
+      pywal
       wayland-utils
       wl-clipboard
-      waybar
-      swaynotificationcenter
-      foot
-      kitty
-      fuzzel
-      swaybg
-      swaylock
-      xwayland-satellite
+      # waybar
+      # swaynotificationcenter
+      # foot
+      # kitty
+      # fuzzel
+      # swaybg
+      # swaylock
+      # xwayland-satellite
     ];
   };
 

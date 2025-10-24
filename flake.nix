@@ -41,7 +41,6 @@
 
     system = [
       "x86_64-linux"
-      "aarch64-linux"
     ];
   
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
@@ -55,6 +54,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
+            backupFileExtension = "backup";
             # Pass inputs to Home-manager.
             extraSpecialArgs = {inherit inputs;};
 

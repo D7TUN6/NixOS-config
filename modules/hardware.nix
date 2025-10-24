@@ -6,6 +6,7 @@
   ...
 }: {
   hardware = {
+    bluetooth.enable = true;
     # To fix gpu.
     enableAllFirmware = true;
     firmware = with pkgs; [firmwareLinuxNonfree linux-firmware];

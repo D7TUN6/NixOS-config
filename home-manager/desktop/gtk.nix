@@ -10,26 +10,13 @@
     enable = true;
     # Set GTK theme.
     theme = {
-      # Catpuccin
-      #package = pkgs.catppuccin-gtk.override {
-      #  accents = ["lavender"];
-      #  size = "standard";
-      #  tweaks = ["rimless" "normal"];
-      #  variant = "mocha";
-
       # adw-gtk3
       package = pkgs.adw-gtk3;
-      #name = "catppuccin-mocha-lavender-standart+rimless,normal";
       name = "adw-gtk3-dark";
     };
     # Set icon theme.
     iconTheme = {
       name = "Papirus-Dark";
-      # Catpuccin.
-      #package = pkgs.catppuccin-papirus-folders.override {
-      #  flavor = "mocha";
-      #  accent = "lavender";
-      #};
       package = pkgs.papirus-icon-theme;
     };
     # Set font.

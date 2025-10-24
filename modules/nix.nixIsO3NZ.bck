@@ -30,16 +30,10 @@
         "flakes"
       ];
       substitute = true;
-      substituters = [
+      substituters = lib.mkForce [
         "https://cache.nixos.org/"
       ];
-      trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      ];
-      extra-substituters = [
-        "https://cache.nixos.org/"
-      ];
-      extra-trusted-public-keys = [
+      trusted-public-keys = lib.mkForce [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       ];
     };

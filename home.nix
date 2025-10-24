@@ -38,10 +38,12 @@
       # Home-manager itself (for management).
       inputs.home-manager.packages.${pkgs.system}.default
       # Freesm Minecraft launcher.
-      inputs.freesm.packages.${pkgs.system}.freesmlauncher
+      # inputs.freesm.packages.${pkgs.system}.freesmlauncher
     ];
   };
 
   # Let Home-manager enable himself.
-  programs.home-manager.enable = true;
+  programs.home-manager = {
+    enable = true;
+  };
 }

@@ -48,6 +48,23 @@
       ];
     };
 
+    #  "/run/libvirt" = {
+    #   device = "/dev/mapper/cryptssd";
+    #   fsType = "btrfs";
+    #   options = [
+    #     "subvol=vm"
+    #     "compress-force=zstd:15"
+    #     "noatime"
+    #     "ssd"
+    #     "discard=async"
+    #     "ssd_spread"
+    #     "max_inline=256"
+    #     "commit=300"
+    #     "space_cache=v2"
+    #   ];
+    # };
+
+
     "/home/d7tun6/tripleHDD" = {
       device = "/dev/mapper/crypthdd";
       fsType = "btrfs";

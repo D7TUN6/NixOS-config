@@ -7,10 +7,7 @@
 }: {
   networking = {
     hostName = "nixos";
-    wireless.enable = false;
-    networkmanager.enable = false;
-    useDHCP = false;
-    interfaces.eth0.useDHCP = true;
+    networkmanager.enable = true;
     nameservers = [
       "1.1.1.1"
       "1.0.0.1"
@@ -20,8 +17,12 @@
       enable = true;
       allowPing = false;
       allowedTCPPorts = [
+        17011
+        21001
       ];
       allowedUDPPorts = [
+        17011
+        21001
       ];
     };
   };

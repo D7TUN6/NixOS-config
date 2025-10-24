@@ -6,12 +6,28 @@
   ...
 }: {
   services = {
+    getty.autologinUser = "d7tun6";
+    blueman.enable = true;
     lact.enable = true;
     gvfs.enable = true;
-    usbmuxd.enable = true;
+    usbmuxd.enable = false;
     fstrim.enable = true;
+    dbus.implementation = "broker";
+    zapret = {
+      enable = true;
+      params = [
+        "--dpi-desync=fake,disorder2"
+        "--dpi-desync-ttl=1"
+        "--dpi-desync-autottl=2"
+      ];
+    };
+    logind = {
+      settings.Login = {
+        HandlePowerKey = "poweroff";
+      };
+    };
     flatpak = {
-      enable = false;
+      enable = true;
     };
     displayManager = {
       sddm = {
@@ -20,8 +36,12 @@
       };
       autoLogin = {
         user = "d7tun6";
-        enable = true;
+        enable = false;
       };
+    };
+    desktopManager = {
+      plasma6.enable = true;
+      gnome.enable = true;
     };
     xserver = {
       enable = true;
@@ -31,10 +51,9 @@
       };
       xkb = {
         layout = "us,ru";
-        options = "grp:alt_shift_toggle";
+        options = "grp:shift_caps_toggle";
       };
     };
-    # das_watchdog.enable = true;
     pipewire = {
       enable = true;
       alsa = {
@@ -52,7 +71,7 @@
       DEVPATH=="/devices/virtual/misc/cpu_dma_latency", OWNER="root", GROUP="audio", MODE="0660"
       ACTION=="add", SUBSYSTEM=="sound", KERNEL=="card*", DRIVERS=="snd_hda_intel", TEST!="/run/udev/snd-hda-intel-powersave", \
           RUN+="${pkgs.bash}/bin/bash -c 'touch /run/udev/snd-hda-intel-powersave; \
-              [[ $$(cat /sys/class/power_supply/BAT0/status 2>/dev/null) != \"Discharging\" ]] && \
+              [[ $$(cat /sys/class/power_supply/BAT0a/status 2>/dev/null) != \"Discharging\" ]] && \
               echo $$(cat /sys/module/snd_hda_intel/parameters/power_save) > /run/udev/snd-hda-intel-powersave && \
               echo 0 > /sys/module/snd_hda_intel/parameters/power_save'"
 
@@ -90,7 +109,7 @@
     pulseaudio.enable = lib.mkForce false;
     openssh = {
       enable = true;
-      ports = [ 2424 ];
+      ports = [ 21001 ];
       settings = {
         PasswordAuthentication = true;
         UseDns = true;
