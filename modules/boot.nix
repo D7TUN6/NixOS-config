@@ -7,10 +7,9 @@
 }: {
   boot = {
     loader = {
-      timeout = 0;
+      timeout = 5;
       efi = {
         canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot";
       };
       systemd-boot = {
         enable = true;
@@ -18,27 +17,27 @@
       };
     };
     initrd = {
-      systemd.enable = true;
+      #systemd.enable = true;
       luks = {
         devices = {
-          "cryptdisk" = {
-            device = "/dev/disk/by-uuid/e4b76db2-39af-443e-9cc8-a564437b5804";
-            preLVM = true;
+          "cryptroot" = {
+            device = "/dev/disk/by-uuid/dd914a6e-3721-4c11-8592-fd5f9d0b8605";
           };
           "crypthdd" = {
             device = "/dev/disk/by-uuid/38355555-1901-4d09-a0a1-505af525deab";
-            preLVM = true;
           };
           "cryptssd" = {
             device = "/dev/disk/by-uuid/07d112c7-4ab6-471d-9239-b2c45a800797";
-            preLVM = true;
           };
         };
       };
       availableKernelModules = [
-        "xhci_pci"
-        "ahci"
-        "ehci_pci"
+      	"xhci_pci"
+      	"ahci"
+      	"usb_storage"
+      	"usbhid"
+      	"sd_mod"
+      	"ehci_pci"
         "ohci_pci"
         "evdev"
       ];
@@ -47,7 +46,7 @@
       ];
     };
 
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages-rt_latest;
 
     kernelModules = [
       "kvm-amd"
@@ -57,10 +56,13 @@
 
     blacklistedKernelModules = [
       "radeon"
+      "r8169"
       "iTCO_wdt"
       "sp5100-tco"
       "serial8250"
     ];
+    
+    extraModulePackages = with config.boot.kernelPackages; [ r8168 ];
 
     kernelParams = [
       # GPU.
@@ -68,17 +70,16 @@
       "amdgpu.cik_support=1"
       "radeon.si_support=0"
       "amdgpu.si_support=1"
-      "amdgpu.dc=1"
-      "amdgpu.dpm=1"
-      "amdgpu.runpm=1"
-      "amdgpu.audio=0"
-      "modprobe.blacklist=radeon"
+      # "amdgpu.dc=1"
+      # "amdgpu.dpm=1"
+      # "amdgpu.runpm=1"
+      # "amdgpu.audio=0"
       "video=HDMI-A-1:1920x1080@74"
 
       # Logging.
-      "loglevel=0"
-      "rd.udev.log_level=0"
-      "systemd.show_status=false"
+      #"loglevel=0"
+      # "rd.udev.log_level=0"
+      # "systemd.show_status=false"
 
       # BIOS.
       "pcie_aspm=off"
@@ -89,7 +90,7 @@
       # ACPI.
       "libahci.ignore_sss=1"
       "acpi_osi=Linux"
-      "acpi=ht"
+      # "acpi=ht"
       
       # CPU.
       "mitigations=off"
@@ -109,16 +110,14 @@
       # AMD.
       "amd_pstate=disable"
       
-      # Network.
+      # # Network.
       "net.ifnames=0"
 
       # Optimizations.
-      "tsc=reliable"
       "clocksource=tsc"
+      "tsc=reliable" 
       "clock=tsc"
-      "nolapic_timer"
       "usbcore.autosuspend=-1"
-      "libata.force=noncq"
       "libata.noacpi=1"
       "nosoftlockup"
       "preempt=full"
@@ -158,7 +157,7 @@
 
         # Scheduler tuning.
         "kernel.sched_burst_cache_lifetime" = 75000000;
-        "kernel.sched_burst_penalty_offset" = 22;
+	"kernel.sched_burst_penalty_offset" = 22;
         "kernel.sched_burst_penalty_scale" = 1280;
         
         # Increase limits.
@@ -188,8 +187,7 @@
         "net.ipv4.tcp_rfc1337" = 1;
         "net.ipv4.conf.default.rp_filter" = 1;
         "net.ipv4.conf.all.rp_filter" = 1;
-        "net.ipv4.conf.default.log_martians" = 1;
-        "net.ipv4.conf.all.log_martians" = 1;
+	"net.ipv4.conf.all.log_martians" = 1;
         "net.ipv4.conf.all.accept_redirects" = 0;
         "net.ipv4.conf.default.accept_redirects" = 0;
         "net.ipv4.conf.all.secure_redirects" = 0;
@@ -201,18 +199,21 @@
         "net.ipv4.icmp_echo_ignore_all" = 0;
         "net.ipv6.icmp.echo_ignore_all" = 0;
         "net.ipv4.ping_group_range" = "0 65535";
-        "net.core.somaxconn" = 65535;
         "net.ipv4.tcp_fastopen" = 3;
         "net.ipv4.tcp_mtu_probing" = 1;
-        "net.ipv4.tcp_ecn" = 1;
         "net.ipv4.tcp_timestamps" = 1;
         "net.ipv4.tcp_keepalive_time" = "60";
         "net.ipv4.tcp_keepalive_intvl" = 10;
         "net.ipv4.tcp_keepalive_probes" = 6;
         "net.ipv4.tcp_max_syn_backlog" = 8192;
         "net.ipv4.tcp_max_tw_buckets" = 2000000;
-        "net.ipv4.tcp_tw_reuse" = 1;
         "net.ipv4.tcp_fin_timeout" = 10;
+
+        # Not good
+        "net.ipv4.tcp_tw_reuse" = 0; # not good if = 1
+        "net.ipv4.tcp_ecn" = 0; # not good if = 1
+        "net.ipv4.conf.default.log_martians" = 0;
+        #"net.core.somaxconn" = 65535; # TOO MUCH
       };
     };
     plymouth = {

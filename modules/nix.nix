@@ -12,15 +12,14 @@
       allowUnfree = true;
       permittedInsecurePackages = [
         "ventoy-gtk3-1.1.07"
-        "ventoy-gtk3-1.1.05"
       ];
     };
   };
 
   nix = {
     settings = {
-      trusted-users = [ "root" "d7tun6" ];
-      system-features = ["nixos-test" "benchmark" "big-parallel" "kvm" "gccarch-znver1" "gccarch-native"];
+      substitute = true;
+      trusted-users = [ "d7tun6" ];
       download-buffer-size = "99999999999";
       max-jobs = 13;
       cores = 13;
@@ -28,19 +27,6 @@
       experimental-features = [
         "nix-command"
         "flakes"
-      ];
-      substitute = true;
-      substituters = [
-        "https://cache.nixos.org/"
-      ];
-      trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      ];
-      extra-substituters = [
-        "https://cache.nixos.org/"
-      ];
-      extra-trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       ];
     };
   };

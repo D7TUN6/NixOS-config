@@ -6,21 +6,20 @@
   ...
 }: {
   services = {
-    getty.autologinUser = "d7tun6";
     blueman.enable = true;
     lact.enable = true;
     gvfs.enable = true;
     usbmuxd.enable = false;
     fstrim.enable = true;
     dbus.implementation = "broker";
-    zapret = {
-      enable = true;
-      params = [
-        "--dpi-desync=fake,disorder2"
-        "--dpi-desync-ttl=1"
-        "--dpi-desync-autottl=2"
-      ];
-    };
+    # zapret = {
+    #   enable = true;
+    #   params = [
+    #     "--dpi-desync=fake,disorder2"
+    #     "--dpi-desync-ttl=1"
+    #     "--dpi-desync-autottl=2"
+    #   ];
+    # };
     logind = {
       settings.Login = {
         HandlePowerKey = "poweroff";
@@ -30,9 +29,9 @@
       enable = true;
     };
     displayManager = {
-      sddm = {
+      gdm = {
         enable = true;
-        wayland.enable = true;
+        # wayland.enable = true;
       };
       autoLogin = {
         user = "d7tun6";
@@ -40,7 +39,6 @@
       };
     };
     desktopManager = {
-      plasma6.enable = true;
       gnome.enable = true;
     };
     xserver = {
@@ -51,7 +49,7 @@
       };
       xkb = {
         layout = "us,ru";
-        options = "grp:shift_caps_toggle";
+        options = "grp:caps_toggle";
       };
     };
     pipewire = {

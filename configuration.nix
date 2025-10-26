@@ -12,6 +12,7 @@
     ./modules/locale.nix
     ./modules/services.nix
     ./modules/security.nix
+    ./modules/system.nix
     ./modules/users.nix
     ./modules/systemd.nix
     ./modules/programs.nix
@@ -20,8 +21,4 @@
     ./modules/environment.nix
     ./modules/virtualisation.nix
   ];
-
-  system = {
-    stateVersion = "25.05";
-  };
 }

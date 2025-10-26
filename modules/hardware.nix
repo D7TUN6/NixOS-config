@@ -10,6 +10,7 @@
     # To fix gpu.
     enableAllFirmware = true;
     firmware = with pkgs; [firmwareLinuxNonfree linux-firmware];
+    enableRedistributableFirmware = true;
     cpu = {
       amd = {
         updateMicrocode = true;

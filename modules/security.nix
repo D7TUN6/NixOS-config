@@ -60,9 +60,7 @@
         }
       ];
     };
-    sudo.enable = lib.mkForce false;
-    doas.enable = lib.mkForce false;
-    sudo-rs = {
+    sudo = {
       enable = true;
       wheelNeedsPassword = false;
       extraRules = [

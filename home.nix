@@ -7,17 +7,18 @@
 }: {
   imports = [
     # Desktop.
-    ./home-manager/desktop/niri.nix
-    ./home-manager/desktop/waybar.nix
-    ./home-manager/desktop/foot.nix
-    ./home-manager/desktop/kitty.nix
-    ./home-manager/desktop/fuzzel.nix
+    # ./home-manager/desktop/niri.nix
+    # ./home-manager/desktop/waybar.nix
+    # ./home-manager/desktop/foot.nix
+    # ./home-manager/desktop/kitty.nix
+    # ./home-manager/desktop/fuzzel.nix
     ./home-manager/desktop/gtk.nix
 
     # Apps.
-    ./home-manager/apps/helix.nix
-    ./home-manager/apps/btop.nix
+    #./home-manager/apps/helix.nix
+    #./home-manager/apps/btop.nix
     ./home-manager/apps/fastfetch.nix
+    #./home-manager/apps/chrome.nix
 
     # System.
     ./home-manager/system/fish.nix
@@ -31,7 +32,7 @@
     homeDirectory = "/home/d7tun6";
 
     # Home-manager version.
-    stateVersion = "25.11";
+    stateVersion = "25.05";
 
     # User packages.
     packages = with pkgs; [

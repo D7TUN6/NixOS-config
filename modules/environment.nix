@@ -15,8 +15,8 @@
       RADV_PERFTEST = "sam";
       RUSTICL_ENABLE = "radeonsi";
       # Base.
-      TERMINAL = "kitty";
-      EDITOR = "helix";
+      TERMINAL = "gnome-terminal";
+      EDITOR = "gnome-text-editor";
       XDG_BIN_HOME = "$HOME/.local/bin";
     };
     systemPackages = with pkgs; [
@@ -80,6 +80,16 @@
       stress-ng
       smartmontools
       kdiskmark
+      sysbench
+    phoronix-test-suite
+    fio
+    bonnie
+    hdparm
+    iperf3
+    netperf
+    qperf
+    memtester
+    glmark2   
       
       # Firmware.
       linux-firmware
@@ -94,10 +104,7 @@
       vesktop
       strawberry
       firefox
-      chromium
       google-chrome
-      qutebrowser
-      nyxt
       qbittorrent
       keepassxc
       libreoffice-fresh-unwrapped
@@ -107,20 +114,19 @@
       mpv
       cmus
       bleachbit
-      btrfs-assistant
       kdePackages.filelight
       gnome-calculator
       gnome-disk-utility
       gparted
       wlr-randr
-      kanshi
-      way-displays
+      # kanshi
+      # way-displays
 
       # Gaming.
       osu-lazer-bin
       mangohud
-      steamcmd
-      steam-run
+      # steamcmd
+      # steam-run
 
       # Nix.
       appimage-run
@@ -129,10 +135,10 @@
 
       # Audio production.
       # DAW.
-      pkgsMaster.reaper
-      # audacity
+      #reaper
+       audacity
       # Synth.
-      pkgsMaster.zynaddsubfx
+      zynaddsubfx
 
       # Compatability, virtulisation, emulation, etc...
       # Wine.
@@ -151,6 +157,8 @@
       # DPI & VPN
       zapret
       amnezia-vpn
+      protonvpn-cli
+      protonvpn-gui
 
       # Recording & streaming
       obs-studio
