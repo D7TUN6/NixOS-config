@@ -6,6 +6,12 @@
   ...
 }: {
   systemd = {
+    targets = {
+      sleep.enable = false;
+      suspend.enable = false;
+      hibernate.enable = false;
+      hybrid-sleep.enable = false;
+    };
     network.wait-online.enable = false;
     tmpfiles.rules = [
       "w! /sys/kernel/mm/transparent_hugepage/defrag - - - - defer+madvise"
@@ -19,6 +25,7 @@
         DefaultLimitNOFILE=523288
       '';
       services = {
+        waydroid-container.enable = true;
         polkit-gnome-authentication-agent-1 = {
           description = "polkit-gnome-authentication-agent-1";
           wantedBy = ["graphical-session.target"];
@@ -30,6 +37,9 @@
             Restart = "on-failure";
             RestartSec = 1;
           };
+        };
+        gnome-remote-desktop = {
+          wantedBy = [ "graphical.target" ];
         };
       };
     };

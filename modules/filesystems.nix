@@ -33,32 +33,32 @@
     #  ];
     #};
 
-    "/home/d7tun6/secondSSD" = {
-      device = "/dev/mapper/cryptssd";
-      fsType = "btrfs";
-      neededForBoot = false;
-      options = [
-        "subvol=home"
-        "compress-force=zstd:15"
-        "noatime"
-        "ssd"
-        "discard=async"
-        "ssd_spread"
-        "max_inline=256"
-        "commit=300"
-        "space_cache=v2"
-      ];
-    };
+    # "/home/d7tun6/secondSSD" = {
+    #   device = "/dev/mapper/cryptssd";
+    #   fsType = "btrfs";
+    #   neededForBoot = false;
+    #   options = [
+    #     "subvol=home"
+    #     "compress-force=zstd:15"
+    #     "noatime"
+    #     "ssd"
+    #     "discard=async"
+    #     "ssd_spread"
+    #     "max_inline=256"
+    #     "commit=300"
+    #     "space_cache=v2"
+    #   ];
+    # };
 
-    "/home/d7tun6/tripleHDD" = {
-      device = "/dev/mapper/crypthdd";
-      fsType = "btrfs";
-      neededForBoot = false;
-      options = [
-        "compress-force=zstd:15"
-        "noatime"
-      ];
-    };
+    # "/home/d7tun6/tripleHDD" = {
+    #   device = "/dev/mapper/crypthdd";
+    #   fsType = "btrfs";
+    #   neededForBoot = false;
+    #   options = [
+    #     "compress-force=zstd:15"
+    #     "noatime"
+    #   ];
+    # };
 
     #"/nix" = {
     #  device = "/dev/mapper/cryptroot";
@@ -93,7 +93,7 @@
     #};
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/00FE-F2D7";
+      device = "/dev/disk/by-uuid/C6CA-A9EF";
       fsType = "vfat";
       options = [
         "fmask=0022"

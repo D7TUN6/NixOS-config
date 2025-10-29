@@ -81,29 +81,31 @@
       smartmontools
       kdiskmark
       sysbench
-    phoronix-test-suite
-    fio
-    bonnie
-    hdparm
-    iperf3
-    netperf
-    qperf
-    memtester
-    glmark2   
+      phoronix-test-suite
+      fio
+      bonnie
+      hdparm
+      iperf3
+      netperf
+      qperf
+      memtester
+      glmark2   
       
       # Firmware.
       linux-firmware
 
       # Base software.
       telegram-desktop
-      kdePackages.dolphin
-      kdePackages.gwenview
+      ayugram-desktop
+      joplin-desktop
       blueman
       overskride
       nwg-look
       vesktop
       strawberry
       firefox
+      torsocks
+      tor-browser-bundle-bin
       google-chrome
       qbittorrent
       keepassxc
@@ -202,6 +204,8 @@
       # swaybg
       # swaylock
       # xwayland-satellite
+      dmenu
+      st
     ];
   };
 

@@ -5,17 +5,6 @@
   inputs,
   ...
 }: {
-  nixpkgs = {
-    hostPlatform = lib.mkDefault "x86_64-linux";
-    config = {
-      allowInsecure = true;
-      allowUnfree = true;
-      permittedInsecurePackages = [
-        "ventoy-gtk3-1.1.07"
-      ];
-    };
-  };
-
   nix = {
     settings = {
       substitute = true;

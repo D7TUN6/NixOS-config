@@ -47,4 +47,14 @@
   programs.home-manager = {
     enable = true;
   };
+  programs = {
+    vscode = {
+      enable = true;
+      package = pkgs.vscode.fhsWithPackages (ps: with ps; [ rustup zlib openssl.dev pkg-config cargo gcc clang python3 ]);
+      extensions = with pkgs.vscode-extensions; [
+        bbenoist.nix
+        ms-python.python
+      ];
+    };
+  };
 }

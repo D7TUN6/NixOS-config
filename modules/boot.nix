@@ -17,18 +17,34 @@
       };
     };
     initrd = {
-      #systemd.enable = true;
+      systemd.enable = true;
+      network = {
+        enable = true;
+        ssh = {
+          enable = true;
+          port = 2001;
+          hostKeys = [
+            "/etc/secrets/initrd/ssh_host_rsa_key"
+            "/etc/secrets/initrd/ssh_host_ed25519_key"
+          ];
+          authorizedKeys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOk2jHBd/oVuZceIU6xARMewB/syDhWz8H0Mfn8AjubE"
+            "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDe9RfURC6cBGnsqhkdQ2E0xN7m4mdgZWpbFM2hzkbmi175ZRm6/aNjMsKuqzKqT8S7yAM8wXoJWB1z5FIW4bauVIRvaQ8GUMXCF68Snzh6IYGHOjjqolnPoCgp6n96ye+SBsTZ2ye+Jhp24F4DEpJjpljN7DTt8/1UUv5MBRlAb8IScaDy5nV6MwQpYV5y9vtJn9jUCd3qns1ccKG1ezmXS/4zmNfCIfH4093Rp6T435LEckLRUoMAlN920WPkOteiKo698Q+huemeeFt6CnYjLeLK4NAOHhvbAx9EUrUNKsvB33GmekCJheVdc57/y42YHGRjQGWPvP/3VYWijFcvJ+oGrDY0m0kCHLfW4vM1EHWcuaP0T0pxwsfbaZPCMh/pPdKQ3GnPUY/D2Rv+Xle19NfhDIE9vemUNNNFurPpZjMugdHvQ3GrF+EQkk8121MdP5teI+6uk1tVTmQXCSbcLIIXiTX2ufwzdWKtIFCV7UAnPcBL5UhrAxKs6IzzHXs=0"
+          ];
+          shell = "/bin/cryptsetup-askpass";
+        };
+      };
       luks = {
         devices = {
           "cryptroot" = {
-            device = "/dev/disk/by-uuid/dd914a6e-3721-4c11-8592-fd5f9d0b8605";
+            device = "/dev/disk/by-uuid/f453bd75-2452-4913-a558-290932ff5d34";
           };
-          "crypthdd" = {
-            device = "/dev/disk/by-uuid/38355555-1901-4d09-a0a1-505af525deab";
-          };
-          "cryptssd" = {
-            device = "/dev/disk/by-uuid/07d112c7-4ab6-471d-9239-b2c45a800797";
-          };
+          # "crypthdd" = {
+          #   device = "/dev/disk/by-uuid/38355555-1901-4d09-a0a1-505af525deab";
+          # };
+          # "cryptssd" = {
+          #   device = "/dev/disk/by-uuid/07d112c7-4ab6-471d-9239-b2c45a800797";
+          # };
         };
       };
       availableKernelModules = [
@@ -43,10 +59,11 @@
       ];
       kernelModules = [
         "amdgpu"
+        "r8168"
       ];
     };
 
-    kernelPackages = pkgs.linuxPackages-rt_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     kernelModules = [
       "kvm-amd"
@@ -112,6 +129,7 @@
       
       # # Network.
       "net.ifnames=0"
+      "ip=dhcp"
 
       # Optimizations.
       "clocksource=tsc"
