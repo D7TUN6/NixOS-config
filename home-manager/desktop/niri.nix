@@ -30,7 +30,7 @@
           mouse {
               // off
               // natural-scroll
-              accel-speed 0.2
+              accel-speed 1
               accel-profile "flat"
               // scroll-method "no-scroll"
           }
@@ -54,6 +54,7 @@
           transform "normal"
           position x=0 y=0
           scale 1
+          variable-refresh-rate
       }
 
       layout {
@@ -97,15 +98,32 @@
       spawn-sh-at-startup "swaync"
       spawn-sh-at-startup "polkit-agent-helper-1"
       spawn-sh-at-startup "systemctl start --user polkit-gnome-authentication-agent-1"
-      spawn-sh-at-startup "swaybg -i /etc/nixos/wallpaper/wall.jpg"
+      spawn-sh-at-startup "swaybg -i ~/files/files/wallpaper/OSX-10-6-6k-detuned-krita.jpg"
 
       hotkey-overlay {
       }
       prefer-no-csd
       screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
       animations {
-          // off
-          // slowdown 3.0
+          workspace-switch {
+              curve "cubic-bezier" 0.05 0.9 0.1 1
+              duration-ms 300
+          }
+          window-open {
+              curve "cubic-bezier" 0.06 1.2 0.25 1
+              duration-ms 350
+          }
+          window-close {
+              curve "cubic-bezier" 0.17 0.69 0.01 0.74
+              duration-ms 500
+          }
+          window-movement {
+              curve "cubic-bezier" 0.05 0.9 0.1 1
+          }
+          horizontal-view-movement {
+              curve "cubic-bezier" 0.05 0.9 0.1 1
+              duration-ms 500
+          }
       }
 
       window-rule {
@@ -137,7 +155,7 @@
           Mod+Shift+Slash { show-hotkey-overlay; }
 
           // Terminal.
-          Mod+Shift+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
+          Mod+Shift+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
           // Launcher.
           Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
           // Lock.

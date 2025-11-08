@@ -10,14 +10,13 @@
 }: {
   environment = {
     sessionVariables = {
-      # Graphics optimize.
-      __GL_MaxFramesAllowed = "1";
-      RADV_PERFTEST = "sam";
+      __GL_THREADED_OPTIMIZATIONS = 1;
+      __GL_MaxFramesAllowed = 1;
+      __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = 1;
+      __GL_YIELD="NOTHING";
+      RADV_PERFTEST = "gpl,nggc,sam";
       RUSTICL_ENABLE = "radeonsi";
-      # Base.
-      TERMINAL = "gnome-terminal";
-      EDITOR = "gnome-text-editor";
-      XDG_BIN_HOME = "$HOME/.local/bin";
+      # LD_BIND_NOW = 1;
     };
     systemPackages = with pkgs; [
       (let
@@ -36,60 +35,49 @@
           }))
 
       # CLI.
+      curl
       wget
       fastfetch
       btop
+      htop
       git
-      jq
       killall
       usbutils
       pciutils
-      compsize
-      libimobiledevice
-      libimobiledevice-glue
-      android-file-transfer
-      jmtpfs
-      go-mtpfs
-      usbmuxd
-      cryptsetup
-      btrfs-progs
-      e2fsprogs
       util-linux
       hdparm
-      sysstat
-      mtools
-      gnome.gvfs
       helix
-      modprobed-db
-      sbctl
-      efitools
-      kernel-hardening-checker
+      tree
+      ncdu
+      w3m
+      tty-clock
 
+      # Network
+      traceroute
+      tcpdump
+      iftop
+      nmap
+      whois
+      dig
+
+      # Apple
+      libimobiledevice
+      ideviceinstaller
+      bsdiff
+            
       # Compression & archives.
       unzip
       unrar
       p7zip
       lrzip
-      squashfsTools
-      peazip
       
       # Diagnostic and metrics.
       hw-probe
-      cpu-x
-      hardinfo2
       stress-ng
       smartmontools
-      kdiskmark
-      sysbench
-      phoronix-test-suite
-      fio
-      bonnie
-      hdparm
       iperf3
-      netperf
-      qperf
       memtester
-      glmark2   
+      mprime
       
       # Firmware.
       linux-firmware
@@ -97,48 +85,49 @@
       # Base software.
       telegram-desktop
       ayugram-desktop
-      joplin-desktop
-      blueman
       overskride
-      nwg-look
       vesktop
       strawberry
       firefox
-      torsocks
-      tor-browser-bundle-bin
       google-chrome
+      zathura
+      mupdf
+      tor-browser
       qbittorrent
       keepassxc
-      libreoffice-fresh-unwrapped
+      libreoffice
       vlc
       schismtracker
       imv
       mpv
       cmus
       bleachbit
-      kdePackages.filelight
       gnome-calculator
-      gnome-disk-utility
-      gparted
       wlr-randr
-      # kanshi
-      # way-displays
 
       # Gaming.
       osu-lazer-bin
       mangohud
-      # steamcmd
-      # steam-run
-
+      protonup-qt
+      protontricks
+      cabextract
+      dxvk
+      vkd3d
+      faudio
+      gamemode
+      gamescope
+      lutris
+        
       # Nix.
       appimage-run
       alejandra
       nixfmt-tree
+      disko
 
       # Audio production.
       # DAW.
-      #reaper
-       audacity
+      reaper
+      audacity
       # Synth.
       zynaddsubfx
 
@@ -153,14 +142,11 @@
 
       # Virtualisation tools.
       qemu
-      gnome-boxes
       pcem
+      distrobox
 
       # DPI & VPN
       zapret
-      amnezia-vpn
-      protonvpn-cli
-      protonvpn-gui
 
       # Recording & streaming
       obs-studio
@@ -172,18 +158,14 @@
       pavucontrol
       helvum
       easyeffects
-      jamesdsp
 
       # Development.
       python3
       gcc
-      clang
-      cargo
-      gnumake
-      pkg-config-unwrapped
       
       # Runtime.
-      jdk21
+      # jdk21
+      javaPackages.compiler.temurin-bin.jre-21
 
       # Flash & program.
       ventoy-full-gtk
@@ -191,28 +173,25 @@
       imsprog
 
       # Desktop.
-      lutgen
-      lutgen-studio
-      pywal
+      xorg.xinit
+      cool-retro-term
+      xorg.xkill
       wayland-utils
       wl-clipboard
-      # waybar
-      # swaynotificationcenter
-      # foot
-      # kitty
-      # fuzzel
-      # swaybg
-      # swaylock
-      # xwayland-satellite
-      dmenu
-      st
+      waybar
+      swaynotificationcenter
+      foot
+      kitty
+      fuzzel
+      swaybg
+      swaylock
+      xwayland-satellite
+      pywal
+      swayimg
     ];
   };
 
   fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-emoji
-    nerd-fonts.jetbrains-mono
     nerd-fonts.bigblue-terminal
   ];
 }

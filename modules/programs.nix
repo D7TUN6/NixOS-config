@@ -9,6 +9,9 @@
     ssh = {
       askPassword = lib.mkForce "${pkgs.x11_ssh_askpass}/libexec/x11-ssh-askpass";
     };
+    gamescope = {
+      enable = true;
+    };
     chromium = {
       enable = true;
       extensions = [
@@ -31,16 +34,10 @@
         # "mnjggcdmjocbbbhaepdhchncahnbgone;https://clients2.google.com/service/update2/crx" # SponsorBlock
       ];
     };
-    amnezia-vpn = {
-      enable = true;
-    };
-    niri = {
-      enable = true;
-    };
-    virt-manager.enable = true;
+    niri.enable = true;
     java = {
       enable = true;
-      package = pkgs.jdk21;
+      package = pkgs.javaPackages.compiler.temurin-bin.jre-21;
     };
     appimage = {
       enable = true;
@@ -52,8 +49,8 @@
       dedicatedServer.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
       extraPackages = [ pkgs.jdk ];
+      # gamescopeSession.enable = true;
     };
-    direnv.enable = true;
     nekoray = {
       enable = true;
       tunMode.enable = true;

@@ -20,7 +20,9 @@
     # Configure kitty.
     settings = {
       # Set width of window padding.
-      window_padding_width = 8;
+      window_padding_width = 16;
+      cursor_trail = 3;
+      cursor_trail_decay = "0.1 0.4";
       # Set background opacity.
       #background_opacity = 0.9;
       # Toggle dynamic background opacity.

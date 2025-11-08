@@ -12,7 +12,7 @@
       allowUnfree = true;
       allowBroken = true;
       permittedInsecurePackages = [
-        "ventoy-gtk3-1.1.07"
+        "ventoy-gtk3-1.1.05"
       ];
     };
   };

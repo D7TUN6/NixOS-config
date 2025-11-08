@@ -6,6 +6,7 @@
   ...
 }: {
   security = {
+    polkit.enable = lib.mkForce false;
     lsm = lib.mkForce [];
     rtkit.enable = true;
     pam = {

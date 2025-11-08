@@ -3,9 +3,11 @@
   pkgs,
   lib,
   inputs,
+  modulesPath,
   ...
 }: {
   imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
     ./modules/boot.nix
     ./modules/filesystems.nix
     ./modules/networking.nix
@@ -22,5 +24,6 @@
     ./modules/nixpkgs.nix
     ./modules/environment.nix
     ./modules/virtualisation.nix
+    ./modules/powermanagement.nix
   ];
 }

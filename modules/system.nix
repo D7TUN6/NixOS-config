@@ -9,8 +9,8 @@
     stateVersion = "25.05";
     autoUpgrade = {
       enable = true;
-      dates = "**:30";
-      randomizedDelaySec = "5min";
+      dates = "daily";
+      randomizedDelaySec = "45min";
       flake = inputs.self.outPath;
       flags = [
         "--refresh"

@@ -7,106 +7,41 @@
 }: {
   fileSystems = {
     "/" = {
-      device = "/dev/mapper/cryptroot";
-      fsType = "ext4";
-      options = [
-        "noatime"
-        "relatime"
-        "commit=300"
-        "data=ordered"
-      ];
+      device = "zroot/root";
+      fsType = "zfs";
+      options = [ "zfsutil" ];
     };
-
-    #"/home" = {
-    #  device = "/dev/mapper/cryptroot";
-    #  fsType = "btrfs";
-    #  options = [
-    #    "subvol=home"
-    #    "compress-force=zstd:15"
-    #    "noatime"
-    #    "ssd"
-    #    "discard=async"
-    #    "ssd_spread"
-    #    "max_inline=256"
-    #    "commit=300"
-    #    "space_cache=v2"
-    #  ];
-    #};
-
-    # "/home/d7tun6/secondSSD" = {
-    #   device = "/dev/mapper/cryptssd";
-    #   fsType = "btrfs";
-    #   neededForBoot = false;
-    #   options = [
-    #     "subvol=home"
-    #     "compress-force=zstd:15"
-    #     "noatime"
-    #     "ssd"
-    #     "discard=async"
-    #     "ssd_spread"
-    #     "max_inline=256"
-    #     "commit=300"
-    #     "space_cache=v2"
-    #   ];
+    # "/" = {
+    #   device = "none";
+    #   fsType = "tmpfs";
+    #   options = [ "defaults" "size=16G" "mode=755" ];
     # };
-
-    # "/home/d7tun6/tripleHDD" = {
-    #   device = "/dev/mapper/crypthdd";
-    #   fsType = "btrfs";
-    #   neededForBoot = false;
-    #   options = [
-    #     "compress-force=zstd:15"
-    #     "noatime"
-    #   ];
-    # };
-
-    #"/nix" = {
-    #  device = "/dev/mapper/cryptroot";
-    #  fsType = "btrfs";
-    #  options = [
-    #    "subvol=nix"
-    #    "compress-force=zstd:15"
-    #    "noatime"
-    #    "ssd"
-    #    "discard=async"
-    #    "ssd_spread"
-    #    "max_inline=256"
-    #    "commit=300"
-    #    "space_cache=v2"
-    #  ];
-    #};
-
-    #"/etc/nixos" = {
-    #  device = "/dev/mapper/cryptroot";
-    #  fsType = "btrfs";
-    #  options = [
-    #    "subvol=nixos"
-    #    "compress-force=zstd:15"
-    #    "noatime"
-    #    "ssd"
-    #    "discard=async"
-    #    "ssd_spread"
-    #    "max_inline=256"
-    #    "commit=300"
-    #    "space_cache=v2"
-    #  ];
-    #};
-
+    "/nix" = {
+      device = "zroot/root/nix";
+      fsType = "zfs";
+      options = [ "zfsutil" ];
+    };
+    "/etc/nixos" = {
+      device = "zroot/root/nixos";
+      fsType = "zfs";
+      options = [ "zfsutil" ];
+    };
+    "/home" = {
+      device = "zroot/root/home";
+      fsType = "zfs";
+      options = [ "zfsutil" ];
+    };
     "/boot" = {
-      device = "/dev/disk/by-uuid/C6CA-A9EF";
+      device = "/dev/disk/by-uuid/EF37-2B27";
       fsType = "vfat";
-      options = [
-        "fmask=0022"
-        "dmask=0022"
-        "umask=0077"
-      ];
+      options = [ "fmask=0077" "dmask=0077" ];
     };
   };
 
   zramSwap = {
     enable = true;
     priority = 100;
-    algorithm = "lz4";
-    memoryPercent = 100;
+    algorithm = "zstd";
+    memoryPercent = 200;
   };
 }
