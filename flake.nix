@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    # chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     freesm.url = "github:FreesmTeam/FreesmLauncher";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -16,16 +15,14 @@
       self,
       home-manager,
       nixpkgs,
-      # chaotic,
       ...
     } @inputs: {
 
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
-        ./configuration.nix
+        ./hosts/desktop/configuration.nix
         inputs.home-manager.nixosModules.default
-        # chaotic.nixosModules.default
         {
           home-manager = {
             useGlobalPkgs = true;
@@ -35,7 +32,26 @@
             extraSpecialArgs = {inherit inputs;};
 
             # User-specific configuration.
-            users.d7tun6.imports = [./home.nix];
+            users.d7tun6.imports = [./hosts/desktop/home.nix];
+          };
+        }
+      ];
+    };
+    nixosConfigurations.server = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./hosts/server/configuration.nix
+        inputs.home-manager.nixosModules.default
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            backupFileExtension = "backup";
+            # Pass inputs to Home-manager.
+            extraSpecialArgs = {inherit inputs;};
+
+            # User-specific configuration.
+            users.d7tun6.imports = [./hosts/server/home.nix];
           };
         }
       ];
