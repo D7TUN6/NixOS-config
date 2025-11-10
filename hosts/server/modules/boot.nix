@@ -6,7 +6,7 @@
   ...
 }: {
   boot = {
-    consoleLogLevel = 8;
+    consoleLogLevel = 4;
     supportedFilesystems = {
       vfat = true;
       zfs = true;

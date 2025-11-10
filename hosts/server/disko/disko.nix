@@ -19,9 +19,10 @@
             };
             luks = {
               size = "100%";
+              label = "disk-cryptservssd-luks";
               content = {
                 type = "luks";
-                name = "cryptssd";
+                name = "cryptservssd";
                 extraOpenArgs = [ ];
                 settings = {
                   allowDiscards = true;
@@ -37,7 +38,7 @@
       };
     };
     zpool = {
-      zroot = {
+      zservroot = {
         type = "zpool";
         rootFsOptions = {
 	  mountpoint = "none";

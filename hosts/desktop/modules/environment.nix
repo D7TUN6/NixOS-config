@@ -26,6 +26,11 @@
             runScript = "fish";
             extraOutputsToInstall = ["my-dev-env"];
           }))
+        (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
+    exec qemu-system-x86_64 \
+      -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
+      "$@"
+  '')
 
       # CLI.
       curl
