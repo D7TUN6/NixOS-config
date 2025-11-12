@@ -6,18 +6,9 @@
   ...
 }: {
   security = {
-    lockKernelModules = lib.mkDefault true;
-    protectKernelImage = lib.mkDefault true;
-    allowSimultaneousMultithreading = lib.mkDefault false;
-    forcePageTableIsolation = lib.mkDefault true;
-    unprivilegedUsernsClone = lib.mkDefault config.virtualisation.containers.enable;
-    virtualisation.flushL1DataCache = lib.mkDefault "always";
-    apparmor = {
-      enable = lib.mkDefault true;
-      killUnconfinedConfinables = lib.mkDefault true;
-    };
+    polkit.enable = lib.mkForce false;
+    lsm = lib.mkForce [];
     rtkit.enable = true;
-    allowUserNamespaces = lib.mkForce true;
     pam = {
       loginLimits = [
         {
@@ -67,12 +58,6 @@
           type = "soft";
           item = "nofile";
           value = "523288";
-        }
-        {
-          domain = "*";
-          item = "core";
-          type = "hard";
-          value = "0";
         }
       ];
     };

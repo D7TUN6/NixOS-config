@@ -9,11 +9,11 @@
     settings = {
       auto-optimise-store = true;
       substitute = true;
-      allowed-users = [ "@users" ];
+      trusted-users = [ "d7tun6" ];
       download-buffer-size = "99999999999";
-      max-jobs = 13;
-      cores = 13;
-      build-cores = 13;
+      max-jobs = 1;
+      cores = 1;
+      build-cores = 1;
       substituters = [
         "https://cache.nixos.org/"
       ];

@@ -9,7 +9,6 @@
   ...
 }: {
   environment = {
-    memoryAllocator.provider = "graphene-hardened";
     sessionVariables = {
     };
     systemPackages = with pkgs; [
@@ -39,14 +38,6 @@
       fastfetch
       btop
       htop
-      jq
-      efibootmgr
-      efivar
-      parted
-      gptfdisk
-      ddrescue
-      ccrypt
-      cryptsetup
       git
       killall
       usbutils
@@ -57,8 +48,6 @@
       tree
       ncdu
       w3m
-      tty-clock
-      kernel-hardening-checker
 
       # Network
       traceroute
@@ -67,17 +56,7 @@
       nmap
       whois
       dig
-      fuse
-      fuse3
-      sshfs-fuse
-      socat
-      screen
-
-      # Apple
-      libimobiledevice
-      ideviceinstaller
-      bsdiff
-            
+           
       # Compression & archives.
       unzip
       unrar
@@ -91,79 +70,32 @@
       iperf3
       memtester
       mprime
-      sdparm
-      nvme-cli
-      ms-sys
-      
       
       # Firmware.
       linux-firmware
 
       # Base software.
       telegram-desktop
-      ayugram-desktop
-      overskride
-      vesktop
-      strawberry
       firefox
-      brave
-      google-chrome
-      zathura
       mupdf
-      tor-browser
       qbittorrent
       keepassxc
       libreoffice
       vlc
-      schismtracker
-      imv
-      mpv
-      cmus
       bleachbit
       gnome-calculator
-      wlr-randr
-
-      # Gaming.
-      osu-lazer-bin
-      mangohud
-      protonup-qt
-      protontricks
-      cabextract
-      dxvk
-      vkd3d
-      faudio
-      gamemode
-      gamescope
-      lutris
-        
+       
       # Nix.
       appimage-run
       alejandra
       nixfmt-tree
       disko
-
-      # Audio production.
-      # DAW.
-      reaper
-      renoise
-      audacity
-      # Synth.
-      zynaddsubfx
-      cardinal
-      surge-XT
-      vital
-      odin2
-      dexed
-      
+     
       # Compatability, virtulisation, emulation, etc...
       # Wine.
       wineWowPackages.yabridge
       winetricks
       
-      # Yabridge.
-      yabridgectl
-      yabridge
-
       # Virtualisation tools.
       qemu
       pcem
@@ -198,24 +130,10 @@
 
       # Desktop.
       xorg.xinit
-      cool-retro-term
       xorg.xkill
       wayland-utils
       wl-clipboard
-      waybar
-      swaynotificationcenter
-      foot
-      kitty
-      fuzzel
-      swaybg
-      swaylock
-      xwayland-satellite
       pywal
-      swayimg
     ];
   };
-
-  fonts.packages = with pkgs; [
-    nerd-fonts.bigblue-terminal
-  ];
 }

@@ -6,6 +6,13 @@
   ...
 }: {
   systemd = {
+    targets = {
+      sleep.enable = false;
+      suspend.enable = false;
+      hibernate.enable = false;
+      hybrid-sleep.enable = false;
+    };
+    network.wait-online.enable = false;
     tmpfiles.rules = [
       # "w! /sys/kernel/mm/transparent_hugepage/khugepaged/max_ptes_none - - - - 409"
       "d /var/lib/systemd/coredump 0755 root root 3d"

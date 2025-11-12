@@ -6,23 +6,19 @@
   ...
 }: {
   networking = {
-    hostName = "desktop";
+    hostName = "laptop";
     enableIPv6 = true;
-    hostId = lib.mkDefault "8425e349";
-    networkmanager = {
-      enable = true;
-    };
+    hostId = lib.mkDefault "laptn33x";
+    useDHCP = true;
     interfaces.eth0.useDHCP = lib.mkDefault true;
     nat.enable = true;
     firewall = {
-      enable = false;
+      enable = true;
       allowPing = false;
       rejectPackets = true;
       allowedTCPPorts = [
-        # 17011 # Wormnet.
       ];
       allowedUDPPorts = [
-        # 17011 # Wormnet.
       ];
     };
   };

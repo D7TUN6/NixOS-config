@@ -6,35 +6,35 @@
   ...
 }: {
   boot = {
-    consoleLogLevel = 4;
+    consoleLogLevel = 0;
+    plymouth.enable = true;
     supportedFilesystems = {
       vfat = true;
       zfs = true;
-      ext4 = true;
       btrfs = true;
+      ext4 = true;
     };
     zfs = {
-      extraPools = [ "zservroot" ];
+      extraPools = [ "zlaptoproot" ];
       forceImportRoot = true;
     };
     kernelPackages = pkgs.linuxPackages_6_1;
     loader = {
-      timeout = 3;
+      timeout = 0;
       efi = {
         canTouchEfiVariables = true;
       };
       systemd-boot = {
         enable = true;
         consoleMode = "max";
-        memtest86.enable = true;
       };
     };
     initrd = {
-      verbose = true;
+      verbose = false;
       systemd.enable = true;
       luks = {
         devices = {
-          "cryptservroot" = {
+          "cryptroot" = {
             device = "/dev/disk/by-uuid/fa869168-f013-4537-ab26-19a80857234e";
             preLVM = true;
           };
@@ -51,26 +51,21 @@
       ];
     };
     kernelModules = [
-      "kvm-intel"
+      "kvm-amd"
     ];
 
     blacklistedKernelModules = [
+      "radeon"
     ];
     
     kernelParams = [
-      # CPU.
-      "idle=poll"
-
-      # Disable CPU powersaving features.
-      # Global.
-      "processor.max_cstate=0"
-      "cpuidle.off=1"
-      # Intel.
-      "intel_idle.max_cstate=0"
-      "intel_pstate=disable"
-      # AMD.
-      "amd_pstate=disable"
+      # Silent boot.
+      "quiet"
+      "udev.log_level=3"
       
+      # CPU.
+      "mitigations=off"
+     
       # # Network.
       "net.ifnames=0"
 
