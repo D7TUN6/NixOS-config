@@ -9,7 +9,7 @@
   ...
 }: {
   environment = {
-    memoryAllocator.provider = "graphene-hardened";
+    # memoryAllocator.provider = "graphene-hardened";
     sessionVariables = {
     };
     systemPackages = with pkgs; [
@@ -59,6 +59,11 @@
       w3m
       tty-clock
       kernel-hardening-checker
+
+      # lib.
+      glib
+      gsettings-desktop-schemas
+      
 
       # Network
       traceroute
@@ -121,6 +126,11 @@
       cmus
       bleachbit
       gnome-calculator
+      cheese
+      joplin-desktop
+      obsidian
+      gnome-sound-recorder
+      gnome-text-editor
       wlr-randr
 
       # Gaming.

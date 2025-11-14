@@ -15,7 +15,7 @@
     interfaces.eth0.useDHCP = lib.mkDefault true;
     nat.enable = true;
     firewall = {
-      enable = false;
+      enable = true;
       allowPing = false;
       rejectPackets = true;
       allowedTCPPorts = [

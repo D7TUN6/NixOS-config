@@ -6,18 +6,7 @@
   ...
 }: {
   security = {
-    lockKernelModules = lib.mkDefault true;
-    protectKernelImage = lib.mkDefault true;
-    allowSimultaneousMultithreading = lib.mkDefault false;
-    forcePageTableIsolation = lib.mkDefault true;
-    unprivilegedUsernsClone = lib.mkDefault config.virtualisation.containers.enable;
-    virtualisation.flushL1DataCache = lib.mkDefault "always";
-    apparmor = {
-      enable = lib.mkDefault true;
-      killUnconfinedConfinables = lib.mkDefault true;
-    };
     rtkit.enable = true;
-    allowUserNamespaces = lib.mkForce true;
     pam = {
       loginLimits = [
         {
