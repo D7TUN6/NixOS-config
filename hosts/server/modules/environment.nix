@@ -4,8 +4,6 @@
   lib,
   inputs,
   outputs,
-  pkgsStable,
-  pkgsMaster,
   ...
 }: {
   environment = {
@@ -26,6 +24,11 @@
             runScript = "fish";
             extraOutputsToInstall = ["my-dev-env"];
           }))
+        (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
+    exec qemu-system-x86_64 \
+      -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
+      "$@"
+      '')
 
       # CLI.
       curl
@@ -33,6 +36,14 @@
       fastfetch
       btop
       htop
+      jq
+      efibootmgr
+      efivar
+      parted
+      gptfdisk
+      ddrescue
+      ccrypt
+      cryptsetup
       git
       killall
       usbutils
@@ -43,6 +54,14 @@
       tree
       ncdu
       w3m
+      tty-clock
+      kernel-hardening-checker
+
+      # lib.
+      glib
+      gsettings-desktop-schemas
+      libsForQt5.qt5.qtwayland
+      kdePackages.qtwayland
 
       # Network
       traceroute
@@ -51,7 +70,23 @@
       nmap
       whois
       dig
-     
+      fuse
+      fuse3
+      sshfs-fuse
+      socat
+      screen
+
+      # Apple
+      libimobiledevice
+      ideviceinstaller
+      bsdiff
+            
+      # Compression & archives.
+      unzip
+      unrar
+      p7zip
+      lrzip
+      
       # Diagnostic and metrics.
       hw-probe
       stress-ng
@@ -59,15 +94,83 @@
       iperf3
       memtester
       mprime
+      sdparm
+      nvme-cli
+      ms-sys
+      
       
       # Firmware.
       linux-firmware
 
+      # Base software.
+      telegram-desktop
+      overskride
+      vesktop
+      strawberry
+      firefox
+      brave
+      google-chrome
+      zathura
+      mupdf
+      tor-browser
+      qbittorrent
+      keepassxc
+      libreoffice
+      vlc
+      schismtracker
+      imv
+      mpv
+      bleachbit
+      gnome-calculator
+      cheese
+      joplin-desktop
+      obsidian
+      gnome-sound-recorder
+      gparted
+      gnome-disk-utility
+      gnome-text-editor
+      wlr-randr
+
+      # Gaming.
+      osu-lazer-bin
+      mangohud
+      protonup-qt
+      protontricks
+      cabextract
+      dxvk
+      vkd3d
+      faudio
+      gamemode
+      gamescope
+      lutris
+        
       # Nix.
       appimage-run
       alejandra
       nixfmt-tree
       disko
+
+      # Audio production.
+      # DAW.
+      reaper
+      renoise
+      audacity
+      # Synth.
+      zynaddsubfx
+      cardinal
+      surge-XT
+      vital
+      odin2
+      dexed
+      
+      # Compatability, virtulisation, emulation, etc...
+      # Wine.
+      wineWowPackages.yabridge
+      winetricks
+      
+      # Yabridge.
+      yabridgectl
+      yabridge
 
       # Virtualisation tools.
       qemu
@@ -77,8 +180,16 @@
       # DPI & VPN
       zapret
 
+      # Recording & streaming
+      obs-studio
+
       # Graphics.
       krita
+
+      # Audio tuning.
+      pavucontrol
+      helvum
+      easyeffects
 
       # Development.
       python3
@@ -90,7 +201,29 @@
 
       # Flash & program.
       ventoy-full-gtk
+      heimdall
+      imsprog
 
+      # Desktop.
+      xorg.xinit
+      cool-retro-term
+      xorg.xkill
+      wayland-utils
+      wl-clipboard
+      waybar
+      swaynotificationcenter
+      foot
+      kitty
+      fuzzel
+      swaybg
+      swaylock
+      xwayland-satellite
+      pywal
+      swayimg
     ];
   };
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.bigblue-terminal
+  ];
 }

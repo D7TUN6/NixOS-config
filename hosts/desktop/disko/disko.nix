@@ -21,7 +21,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "cryptssd";
+                name = "cryptroot";
                 extraOpenArgs = [ ];
                 settings = {
                   allowDiscards = true;
@@ -40,40 +40,40 @@
       zroot = {
         type = "zpool";
         rootFsOptions = {
-	  mountpoint = "none";
+      	  mountpoint = "none";
           compression = "zstd-19";
           acltype = "posixacl";
           xattr = "sa";
           atime = "off";
-	  dnodesize="auto";
-	  normalization="formD";
-	  dedup="on";
+      	  dnodesize="auto";
+      	  normalization="formD";
+      	  # dedup="on";
         };
-	options = {
-	  ashift = "12";
-	  autotrim = "on";
+      	options = {
+      	  ashift = "12";
+      	  autotrim = "on";
         };
-	datasets = {
-	  "root" = {
-	    type = "zfs_fs";
-	    mountpoint = "/";
-	  };
-	  "root/home" = {
-	    type = "zfs_fs";
-	    options.mountpoint = "/home";
-	    mountpoint = "/home";
-	  };
-	  "root/nixos" = {
-	    type = "zfs_fs";
-	    options.mountpoint = "/etc/nixos";
-	    mountpoint = "/etc/nixos";
-	  };
-	  "root/nix" = {
-	    type = "zfs_fs";
-	    options.mountpoint = "/nix";
-	    mountpoint = "/nix";
-	  };
-    	};
+      	datasets = {
+      	  "root" = {
+      	    type = "zfs_fs";
+      	    mountpoint = "/";
+      	  };
+      	  "root/home" = {
+      	    type = "zfs_fs";
+      	    options.mountpoint = "/home";
+      	    mountpoint = "/home";
+      	  };
+      	  "root/nixos" = {
+      	    type = "zfs_fs";
+      	    options.mountpoint = "/etc/nixos";
+      	    mountpoint = "/etc/nixos";
+      	  };
+      	  "root/nix" = {
+      	    type = "zfs_fs";
+      	    options.mountpoint = "/nix";
+      	    mountpoint = "/nix";
+      	  };
+        };
       };
     };
   };

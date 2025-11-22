@@ -3,7 +3,7 @@
   lib,
   ...
 }: {
-  home. file.".config/niri/config.kdl" = {
+  home.file.".config/niri/config.kdl" = {
     text = ''
       // Input section.
       input {

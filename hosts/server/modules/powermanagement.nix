@@ -7,7 +7,8 @@
 }: {
   powerManagement = {
     enable = true;
-    cpuFreqGovernor = "performance";
+    cpuFreqGovernor = "ondemand";
     scsiLinkPolicy = "max_performance";
+    powertop.enable = true;
   };
 }

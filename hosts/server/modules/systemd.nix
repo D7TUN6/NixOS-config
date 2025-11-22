@@ -6,22 +6,11 @@
   ...
 }: {
   systemd = {
-    targets = {
-      sleep.enable = false;
-      suspend.enable = false;
-      hibernate.enable = false;
-      hybrid-sleep.enable = false;
-    };
-    network.wait-online.enable = false;
     tmpfiles.rules = [
-      # "w! /sys/kernel/mm/transparent_hugepage/khugepaged/max_ptes_none - - - - 409"
       "d /var/lib/systemd/coredump 0755 root root 3d"
       "w! /sys/module/zswap/parameters/enabled - - - - 0"
       "w! /sys/kernel/mm/lru_gen/min_ttl_ms - - - - 2000"
       "w /sys/kernel/mm/lru_gen/enabled - - - - 5"
-      # "w /sys/kernel/mm/transparent_hugepage/enabled - - - - madvise"
-      # "w /sys/kernel/mm/transparent_hugepage/shmem_enabled - - - - advise"
-      # "w /sys/kernel/mm/transparent_hugepage/defrag - - - - never"
     ];
     user = {
       extraConfig = ''
@@ -43,9 +32,15 @@
         };
       };
     };
-    extraConfig = "
-      DefaultLimitNOFILE=523288
-      DefaultTimeoutStopSec=5s
-    ";
+    # extraConfig = "
+    #   DefaultLimitNOFILE=523288
+    #   DefaultTimeoutStopSec=5s
+    # ";
+    settings = {
+      Manager = {
+        DefaultLimitNOFILE = 523288;
+        DefaultTimeoutStopSec = "5s";    
+      };
+    };
   };
 }

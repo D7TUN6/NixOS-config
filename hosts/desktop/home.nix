@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  outputs,
   ...
 }: {
   imports = [
@@ -36,9 +37,9 @@
     # User packages.
     packages = with pkgs; [
       # Home-manager itself (for management).
-      inputs.home-manager.packages.${pkgs.system}.default
+      inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default
       # Freesm Minecraft launcher.
-      # inputs.freesm.packages.${pkgs.system}.freesmlauncher
+      # inputs.freesm.packages.${pkgs.stdenv.hostPlatform.system}.freesmlauncher
     ];
   };
 

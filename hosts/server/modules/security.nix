@@ -6,8 +6,7 @@
   ...
 }: {
   security = {
-    polkit.enable = lib.mkForce false;
-    lsm = lib.mkForce [];
+    polkit.enable = true;
     rtkit.enable = true;
     pam = {
       loginLimits = [
@@ -59,11 +58,35 @@
           item = "nofile";
           value = "523288";
         }
+        {
+          domain = "*";
+          item = "core";
+          type = "hard";
+          value = "0";
+        }
       ];
     };
     sudo = {
       enable = true;
-      wheelNeedsPassword = true;
+      wheelNeedsPassword = false;
+      extraRules = [
+        {
+          commands = [
+            {
+              command = "${pkgs.systemd}/bin/systemctl suspend";
+              options = ["NOPASSWD"];
+            }
+            {
+              command = "${pkgs.systemd}/bin/reboot";
+              options = ["NOPASSWD"];
+            }
+            {
+              command = "${pkgs.systemd}/bin/poweroff";
+              options = ["NOPASSWD"];
+            }
+          ];
+        }
+      ];
     };
   };
 }

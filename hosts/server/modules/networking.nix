@@ -6,30 +6,23 @@
   ...
 }: {
   networking = {
-    hostName = "server";
+    hostName = "desktop";
     enableIPv6 = true;
-    hostId = lib.mkDefault "d33db33f";
-    useDHCP = true;
-    interfaces.eth0.useDHCP = lib.mkDefault true;
-    nat = {
+    hostId = lib.mkDefault "8425e349";
+    networkmanager = {
       enable = true;
-      enableIPv6 = true;
-      internalInterfaces = ["ve-+"];
-      externalInterface = "enp4s0";
     };
+    interfaces.eth0.useDHCP = lib.mkDefault true;
+    nat.enable = true;
     firewall = {
       enable = true;
       allowPing = false;
       rejectPackets = true;
       allowedTCPPorts = [
-        443
-        80
-        25565
+        # 17011 # Wormnet.
       ];
       allowedUDPPorts = [
-        443
-        80
-        25565
+        # 17011 # Wormnet.
       ];
     };
   };

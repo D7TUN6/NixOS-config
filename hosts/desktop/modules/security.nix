@@ -6,6 +6,7 @@
   ...
 }: {
   security = {
+    polkit.enable = true;
     rtkit.enable = true;
     pam = {
       loginLimits = [

@@ -1,7 +1,7 @@
 {
   config,
-  libs,
-  packages,
+  lib,
+  pkgs,
   inputs,
   ...
 }: {
@@ -13,11 +13,8 @@
     interactiveShellInit = ''
       # Disable greeting.
       set fish_greeting
-      # if status is-login
-      #     if test -z "$DISPLAY" -a "$(tty)" = /dev/tty1
-      #         niri-session
-      #     end
-      # end
+    '';
+    shellInit = ''
     '';
   };
 }

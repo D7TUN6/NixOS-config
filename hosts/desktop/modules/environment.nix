@@ -4,13 +4,19 @@
   lib,
   inputs,
   outputs,
-  pkgsStable,
-  pkgsMaster,
   ...
 }: {
   environment = {
-    # memoryAllocator.provider = "graphene-hardened";
     sessionVariables = {
+      __GL_MaxFramesAllowed = 1;
+      __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = 1;
+      __GL_THREADED_OPTIMIZATIONS = 1;
+      RUSTICL_ENABLE = "radeonsi";
+      RADV_PERFTEST = "sam";
+      mesa_glthread = "true";
+      __GL_YIELD = "NOTHING";
+      
+      
     };
     systemPackages = with pkgs; [
       (let
@@ -31,7 +37,7 @@
     exec qemu-system-x86_64 \
       -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
       "$@"
-  '')
+      '')
 
       # CLI.
       curl
@@ -63,7 +69,8 @@
       # lib.
       glib
       gsettings-desktop-schemas
-      
+      libsForQt5.qt5.qtwayland
+      kdePackages.qtwayland
 
       # Network
       traceroute
@@ -106,7 +113,6 @@
 
       # Base software.
       telegram-desktop
-      ayugram-desktop
       overskride
       vesktop
       strawberry
@@ -123,13 +129,14 @@
       schismtracker
       imv
       mpv
-      cmus
       bleachbit
       gnome-calculator
       cheese
       joplin-desktop
       obsidian
       gnome-sound-recorder
+      gparted
+      gnome-disk-utility
       gnome-text-editor
       wlr-randr
 
