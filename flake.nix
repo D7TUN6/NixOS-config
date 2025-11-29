@@ -2,9 +2,10 @@
   description = "D7TUN6's personal flake.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    freesm.url = "github:FreesmTeam/FreesmLauncher";
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -51,6 +52,25 @@
 
             # User-specific configuration.
             users.d7tun6.imports = [./hosts/server/home.nix];
+          };
+        }
+      ];
+    };
+    nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./hosts/laptop/configuration.nix
+        inputs.home-manager.nixosModules.default
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            backupFileExtension = "backup";
+            # Pass inputs to Home-manager.
+            extraSpecialArgs = {inherit inputs;};
+
+            # User-specific configuration.
+            users.user.imports = [./hosts/laptop/home.nix];
           };
         }
       ];

@@ -58,7 +58,7 @@
       }
 
       layout {
-          gaps 16
+          gaps 14
           center-focused-column "never"
           preset-column-widths {
               proportion 0.33333
@@ -98,7 +98,7 @@
       spawn-sh-at-startup "swaync"
       spawn-sh-at-startup "polkit-agent-helper-1"
       spawn-sh-at-startup "systemctl start --user polkit-gnome-authentication-agent-1"
-      spawn-sh-at-startup "swaybg -i ~/files/files/wallpaper/OSX-10-6-6k-detuned-krita.jpg"
+      spawn-sh-at-startup "swaybg -i ~/files/wallpaper/OSX-10-6-6k-detuned-krita.jpg"
 
       hotkey-overlay {
       }
@@ -145,7 +145,7 @@
 
       // Example: enable rounded corners for all windows.
       // (This example rule is commented out with a "/-" in front.)
-      /-window-rule {
+      window-rule {
           geometry-corner-radius 12
           clip-to-geometry true
       }

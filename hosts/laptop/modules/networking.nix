@@ -10,7 +10,7 @@
       "127.0.0.1"
       "::1"
     ];
-    hostName = "desktop";
+    hostName = "laptop";
     enableIPv6 = true;
     hostId = lib.mkDefault "8425e349";
     networkmanager = {
@@ -28,38 +28,18 @@
     };
     interfaces = {
       eth0 = {
-        mtu = 1500;
+        mtu = 1400;
       };
     };
     firewall = {
       enable = true;
-      # allowPing = false;
-      # rejectPackets = true;
+      allowPing = false;
+      rejectPackets = true;
       allowedTCPPorts = [
         67 # DHCP Server.
-        17011 # Wormnet.
-        25565 # Minecraft Server.
-        2017 # v2raya web interface.
-        21435 # SSH
-        8388 # vpn server
-        443
-        80
-        1080
-        53
-        14027
       ];
       allowedUDPPorts = [
         67 # DHCP Server.
-        17011 # Wormnet.
-        25565 # Minecraft Server.
-        2017 # v2raya web interface.
-        21435 # SSH
-        8388 # vpn server
-        443
-        80
-        1080
-        53
-        14027
       ];
     };
   };

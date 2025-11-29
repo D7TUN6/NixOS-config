@@ -8,6 +8,12 @@
 }: {
   environment = {
     sessionVariables = {
+      __GL_MaxFramesAllowed = 1;
+      __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = 1;
+      __GL_THREADED_OPTIMIZATIONS = 1;
+      RUSTICL_ENABLE = "radeonsi";
+      mesa_glthread = "true";
+      __GL_YIELD = "USLEEP";
     };
     systemPackages = with pkgs; [
       (let
@@ -54,8 +60,9 @@
       tree
       ncdu
       w3m
-      tty-clock
-      kernel-hardening-checker
+      sbctl
+      tpm2-tools
+      tpm2-tss
 
       # lib.
       glib
@@ -98,80 +105,44 @@
       nvme-cli
       ms-sys
       
-      
       # Firmware.
       linux-firmware
 
       # Base software.
       telegram-desktop
       overskride
-      vesktop
       strawberry
       firefox
       brave
       google-chrome
       zathura
       mupdf
-      tor-browser
       qbittorrent
       keepassxc
       libreoffice
+      onlyoffice-desktopeditors
       vlc
-      schismtracker
       imv
       mpv
       bleachbit
       gnome-calculator
       cheese
-      joplin-desktop
-      obsidian
       gnome-sound-recorder
       gparted
       gnome-disk-utility
       gnome-text-editor
       wlr-randr
-
-      # Gaming.
-      osu-lazer-bin
-      mangohud
-      protonup-qt
-      protontricks
-      cabextract
-      dxvk
-      vkd3d
-      faudio
-      gamemode
-      gamescope
-      lutris
-        
+       
       # Nix.
       appimage-run
       alejandra
       nixfmt-tree
       disko
-
-      # Audio production.
-      # DAW.
-      reaper
-      renoise
-      audacity
-      # Synth.
-      zynaddsubfx
-      cardinal
-      surge-XT
-      vital
-      odin2
-      dexed
-      
-      # Compatability, virtulisation, emulation, etc...
+     
       # Wine.
       wineWowPackages.yabridge
       winetricks
       
-      # Yabridge.
-      yabridgectl
-      yabridge
-
       # Virtualisation tools.
       qemu
       pcem
@@ -206,7 +177,6 @@
 
       # Desktop.
       xorg.xinit
-      cool-retro-term
       xorg.xkill
       wayland-utils
       wl-clipboard
@@ -222,8 +192,4 @@
       swayimg
     ];
   };
-
-  fonts.packages = with pkgs; [
-    nerd-fonts.bigblue-terminal
-  ];
 }

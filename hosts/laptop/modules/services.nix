@@ -6,8 +6,49 @@
   ...
 }: {
   services = {
+    desktopManager.plasma6.enable = true;
+    auto-cpufreq.settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "ondemand";
+        turbo = "auto";
+      };
+    };
+    logind = {
+      lidSwitch = "suspend";
+      lidSwitchExternalPower = "lock";
+      lidSwitchDocked = "ignore";
+    };
     lact.enable = true;
     thermald.enable = true;
+    dnscrypt-proxy = {
+      enable = true;
+      # Settings reference:
+      # https://github.com/DNSCrypt/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
+      settings = {
+        ipv4_servers = true;
+        ipv6_servers = true;
+        dnscrypt_servers = true;
+        doh_servers = true;
+        require_nofilter = true;
+        require_dnssec = true;
+        # Add this to test if dnscrypt-proxy is actually used to resolve DNS requests
+        query_log.file = "/var/log/dnscrypt-proxy/query.log";
+        sources.public-resolvers = {
+          urls = [
+            "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md"
+            "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"
+          ];
+          cache_file = "/var/cache/dnscrypt-proxy/public-resolvers.md";
+          minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
+        };
+        # You can choose a specific set of servers from https://github.com/DNSCrypt/dnscrypt-resolvers/blob/master/v3/public-resolvers.md
+        # server_names = [ ... ];
+      };
+    };
     zapret = {
       enable = true;
       whitelist = [
@@ -18,6 +59,7 @@
         "discord.com"
         "discord-attachmets-uploads-prd.storage.googleapis.com"
         "googleapis.com"
+        "x.com"
       ];
       params = [
         "--dpi-desync=fake,disorder2"
@@ -32,10 +74,10 @@
         autoNumlock = true;
       };
       autoLogin = {
-        user = "d7tun6";
+        user = "user";
         enable = true;
       };
-      defaultSession = "niri";
+      defaultSession = "plasma";
     };
     dbus.implementation = "broker";
     blueman.enable = true;
@@ -54,7 +96,7 @@
       autoScrub = {
         enable = true;
         pools = [
-          "zroot"
+          "zpool-laptop-main"
         ];
         randomizedDelaySec = "12h";
         interval = "monthly";

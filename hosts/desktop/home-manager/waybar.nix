@@ -11,7 +11,6 @@
         # Set space between modules.
         spacing = 0;
         # Set margins (floating).
-        #margin-right = 10;
         margin-left = 10;
         margin-right = 10;
         margin-top = 10;
@@ -22,7 +21,7 @@
         # Modules placement.
         # Left modules.
         modules-left = [
-          "custom/menu"
+          # "custom/menu"
           "niri/workspaces"
         ];
 
@@ -51,11 +50,11 @@
           format-ru = "Ru";
         };
 
-        # Menu module.
-        "custom/menu" = {
-          format = " menu";
-          on-click = "fuzzel";
-        };
+        # # Menu module.
+        # "custom/menu" = {
+        #   format = " menu";
+        #   on-click = "fuzzel";
+        # };
         # Power menu module.
         "custom/power" = {
           format = "pomer";
@@ -175,9 +174,9 @@
       window#waybar > box {
         /*border: 4px solid @blue;*/
         background-color: @bg;
+        border-radius: 20;
       }
 
-      #workspaces,
       #custom-weather,
       #cpu,
       #memory,
@@ -194,13 +193,18 @@
         font-family: BigBlueTermPlusNerdFont;
         font-size: 12px;
         background-color: @overlay;
+        border-radius: 20;
+        border-radius: 20;
       }
 
-      #custom-menu {
+      #workspaces {
         padding: 2px;
         margin: 5 2 5 5px;
         color: @text;
+        font-family: BigBlueTermPlusNerdFont;
+        font-size: 12px;
         background-color: @overlay;
+        border-radius: 20;
       }
 
       #custom-notifications {
@@ -208,6 +212,7 @@
         margin: 5 5 5 2px;
         color: @text;
         background-color: @overlay;
+        border-radius: 20;
       }
 
       #network {
@@ -215,6 +220,7 @@
         margin: 5 2 5 2px;
         color: @text;
         background-color: @overlay;
+        border-radius: 20;
       }
 
       #custom-menu:hover {
@@ -223,12 +229,14 @@
 
       button {
         border: none;
+        border-radius: 20;
       }
 
       button:hover {
         background: inherit;
         box-shadow: inset 0 -3px transparent;
         padding: 2px;
+        border-radius: 20;
       }
 
       #workspaces button {
@@ -236,31 +244,38 @@
         padding: 2px;
         background-color: transparent;
         color: @text;
+        border-radius: 20;
       }
 
       #workspaces button.active {
         background-color: #696673;
         padding: 2px;
+        border-radius: 20;
       }
 
       #workspaces button:hover {
         background-color: #696673;
+        border-radius: 20;
       }
 
       #workspaces button.urgent {
         color: @red;
+        border-radius: 20;
       }
 
       #pulseaudio.muted {
         color: @red;
+        border-radius: 20;
       }
 
       #pulseaudio:hover {
         color: @focused;
+        border-radius: 20;
       }
 
       #battery.charging, #battery.plugged {
         color: @focused;
+        border-radius: 20;
       }
 
       tooltip {

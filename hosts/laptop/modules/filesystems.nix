@@ -7,35 +7,35 @@
 }: {
   fileSystems = {
     "/" = {
-      device = "zroot/root";
+      device = "zpool-laptop-main";
       fsType = "zfs";
       options = [
         "zfsutil"
       ];
     };
     "/nix" = {
-      device = "zroot/root/nix";
+      device = "zpool-laptop-main/root/nix";
       fsType = "zfs";
       options = [
         "zfsutil"
       ];
     };
     "/etc/nixos" = {
-      device = "zroot/root/nixos";
+      device = "zpool-laptop-main/root/nixos";
       fsType = "zfs";
       options = [
         "zfsutil"
       ];
     };
     "/home" = {
-      device = "zroot/root/home";
+      device = "zpool-laptop-main/root/home";
       fsType = "zfs";
       options = [
         "zfsutil"
       ];
     };
     "/boot" = {
-      device = "/dev/disk/by-uuid/EF37-2B27";
+      device = "/dev/disk/by-partlabel/disk-laptop-boot";
       fsType = "vfat";
       options = [
         "defaults"

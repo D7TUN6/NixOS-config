@@ -65,6 +65,10 @@
       w3m
       tty-clock
       kernel-hardening-checker
+      sbctl
+      tpm2-tools
+      tpm2-tss
+      powertop
 
       # lib.
       glib
@@ -84,6 +88,10 @@
       sshfs-fuse
       socat
       screen
+      # net-tools
+      iftop
+      iproute2
+      nethogs
 
       # Apple
       libimobiledevice
@@ -92,7 +100,7 @@
             
       # Compression & archives.
       unzip
-      unrar
+      # unrar
       p7zip
       lrzip
       
@@ -106,6 +114,9 @@
       sdparm
       nvme-cli
       ms-sys
+      mission-center
+      lm_sensors
+      xsensors
       
       
       # Firmware.
@@ -161,20 +172,21 @@
 
       # Audio production.
       # DAW.
-      reaper
-      renoise
-      audacity
+      # reaper
+      # renoise
+      # audacity
       # Synth.
-      zynaddsubfx
-      cardinal
-      surge-XT
-      vital
-      odin2
-      dexed
+      # zynaddsubfx
+      # cardinal
+      # surge-XT
+      # vital
+      # odin2
+      # dexed
       
       # Compatability, virtulisation, emulation, etc...
       # Wine.
-      wineWowPackages.yabridge
+      # wineWow64Packages.yabridge
+      # wineWow64Packages.waylandFull
       winetricks
       
       # Yabridge.
@@ -209,7 +221,7 @@
       javaPackages.compiler.temurin-bin.jre-21
 
       # Flash & program.
-      ventoy-full-gtk
+      # ventoy-full-gtk
       heimdall
       imsprog
 

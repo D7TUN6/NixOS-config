@@ -15,11 +15,11 @@
       ext4 = true;
     };
     zfs = {
-      extraPools = [ "zroot" ];
+      extraPools = [ "zpool-laptop-main" ];
       forceImportRoot = true;
-      package = pkgs.zfs_unstable;
+      # package = pkgs.zfs_unstable;
     };
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages;
     loader = {
       systemd-boot.editor = lib.mkDefault false;
       timeout = 0;
@@ -35,25 +35,36 @@
     };
     initrd = {
       verbose = false;
-      systemd.enable = true;
+      systemd = {
+        enable = true;
+        enableTpm2 = true;
+      };
       luks = {
         devices = {
           "cryptroot" = {
-            device = "/dev/disk/by-uuid/fa869168-f013-4537-ab26-19a80857234e";
+            device = "/dev/disk/by-partlabel/disk-laptop-main";
             preLVM = true;
+            allowDiscards = true;
           };
         };
       };
       availableKernelModules = [
+        "ahci"
       	"xhci_pci"
-      	"ahci"
+        "ehci_pci"
+        "ohci_pci"
+        "tpm_tis"
+        "thunderbolt"          
+        "vmd"
+        "nvme"
+        "usb_storage"
+        "sd_mod"
       ];
       kernelModules = [
       ];
     };
     kernelModules = [
       "kvm-amd"
-      "atk-kbd"
       "usb-hid"
       "tcp-bbr"
       "tun"
@@ -69,37 +80,10 @@
       # Silent boot.
       "quiet"
       "udev.log_level=3"
+      "audit=0"
 
-      # GPU.
-      "video=HDMI-A-1:1920x1080@74"
-       
-      # CPU.
-      "idle=poll"
-
-      # Disable CPU powersaving features.
-      # Global.
-      # "processor.max_cstate=0"
-      # "cpuidle.off=1"
-      # Intel.
-      # "intel_idle.max_cstate=0"
-      # "intel_pstate=disable"
-      # AMD.
-      # "amd_pstate=disable"
-      
       # # Network.
       "net.ifnames=0"
-
-      # Optimizations.
-      "tsc=reliable" 
-      "clocksource=tsc"
-      "clock=tsc"
-      "nosoftlockup"
-      "preempt=full"
-
-      # Security.
-      "slab_nomerge"
-      "init_on_alloc=1"
-      "page_alloc.shuffle=1"
     ];
     kernel = {
       sysctl = {      

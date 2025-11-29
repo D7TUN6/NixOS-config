@@ -6,24 +6,9 @@
   outputs,
   ...
 }: {
-  imports = [
-    # Desktop.
-    ./home-manager/desktop/niri.nix
-    ./home-manager/desktop/waybar.nix
-    ./home-manager/desktop/foot.nix
-    ./home-manager/desktop/kitty.nix
-    ./home-manager/desktop/fuzzel.nix
-    ./home-manager/desktop/gtk.nix
-
-    # Apps.
-    ./home-manager/apps/helix.nix
-    ./home-manager/apps/btop.nix
-    ./home-manager/apps/fastfetch.nix
-
-    # System.
-    ./home-manager/system/fish.nix
-  ];
-
+  imports = lib.filter
+            (n: lib.strings.hasSuffix ".nix" n)
+            (lib.filesystem.listFilesRecursive ./home-manager);
   home = {
     # Username of the user.
     username = "d7tun6";

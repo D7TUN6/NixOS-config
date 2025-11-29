@@ -6,17 +6,15 @@
   ...
 }: {
   services = {
-    lact.enable = true;
+    # lact.enable = true;
     thermald.enable = true;
-    cloudflared.enable = true;
-    v2raya = {
+    # cloudflared.enable = true;
+    fstrim = {
       enable = true;
-      cliPackage = pkgs.xray;
+      interval = "weekly";
     };
-    dnscrypt-proxy = {
+    dnscrypt-proxy2 = {
       enable = true;
-      # Settings reference:
-      # https://github.com/DNSCrypt/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
       settings = {
         ipv4_servers = true;
         ipv6_servers = true;
@@ -24,7 +22,6 @@
         doh_servers = true;
         require_nofilter = true;
         require_dnssec = true;
-        # Add this to test if dnscrypt-proxy is actually used to resolve DNS requests
         query_log.file = "/var/log/dnscrypt-proxy/query.log";
         sources.public-resolvers = {
           urls = [
@@ -38,26 +35,67 @@
         # server_names = [ ... ];
       };
     };
-    zapret = {
+    xray = {
       enable = true;
-      whitelist = [
-        "youtube.com"
-        "googlevideo.com"
-        "ytimg.com"
-        "youtu.be"
-        "discord.com"
-        "discord-attachmets-uploads-prd.storage.googleapis.com"
-        "googleapis.com"
-        "x.com"
-        # "nixos.org"
-        # "nixos.wiki"
-        # "rule34.xxx"
-      ];
-      params = [
-        "--dpi-desync=fake,disorder2"
-        "--dpi-desync-ttl=1"
-        "--dpi-desync-autottl=2"
-      ];
+      settings = {
+        log = {
+          loglevel = "warning";
+        };
+        inbounds = [
+          {
+            listen = "0.0.0.0";
+            port = 443;
+            protocol = "vless";
+            settings = {
+              clients = [
+                {
+                  id = "c5609e76-e4b4-4a98-adc9-e788cc0727ed";
+                  flow = "xtls-rprx-vision";
+                  # level = 0;
+                }
+              ];
+              decryption = "none";
+            };
+            streamSettings = {
+              network = "tcp";
+              security = "reality";
+              realitySettings = {
+                  show = false;
+                  dest = "www.google.com:443";
+                  xver = 0;
+                  serverNames = [
+                    "www.google.com"
+                  ];
+                  privateKey = "eIUNF3d0HNfGMX7KLTj3dKrg2qk-BBxpvw-QA5hn0EA";
+                  shortIds = ["a1b2c3d4"];
+              };
+            };
+            sniffing = {
+              enabled = true;
+              destOverride = [ "http" "tls" ];
+            };
+          }
+        ];
+        outbounds = [
+          {
+            protocol = "freedom";
+            tag = "direct";
+          }
+          {
+            protocol = "blackhole";
+            tag = "block";
+          }
+        ];
+      };
+    };
+    openssh = {
+      enable = true;
+      ports = [ 21435 ];
+      settings = {
+        PasswordAuthentication = true;
+        PermitRootLogin = "no";
+        AllowUsers = [ "d7tun6" ];
+      };
     };
     displayManager = {
       sddm = {
@@ -84,19 +122,16 @@
         options = "grp:caps_toggle";
       };
     };
-    zfs = {
+    btrfs = {
       autoScrub = {
         enable = true;
-        pools = [
-          "zroot"
+        fileSystems = [
+          "/"
+          "/nix"
+          "/home"
+          "/etc/nixos"
         ];
-        randomizedDelaySec = "12h";
         interval = "monthly";
-      };
-      trim = {
-        enable = true;
-        randomizedDelaySec = "12h";
-        interval = "weekly";
       };
     };
     pipewire = {

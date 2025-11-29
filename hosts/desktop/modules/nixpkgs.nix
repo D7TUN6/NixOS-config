@@ -14,6 +14,7 @@
       permittedInsecurePackages = [
         "ventoy-gtk3-1.1.05"
         "ventoy-gtk3-1.1.07"
+        "mbedtls-2.28.10"
       ];
     };
   };

@@ -26,10 +26,10 @@
 
   home = {
     # Username of the user.
-    username = "d7tun6";
+    username = "user";
 
     # Home directory of the user.
-    homeDirectory = "/home/d7tun6";
+    homeDirectory = "/home/user";
 
     # Home-manager version.
     stateVersion = "25.05";

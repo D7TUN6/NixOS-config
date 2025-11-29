@@ -43,14 +43,6 @@
       enable = true;
       binfmt = true;
     };
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-      localNetworkGameTransfers.openFirewall = true;
-      extraPackages = [ pkgs.jdk ];
-      # gamescopeSession.enable = true;
-    };
     throne = {
       enable = true;
       tunMode.enable = true;

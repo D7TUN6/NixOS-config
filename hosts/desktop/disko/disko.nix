@@ -8,8 +8,9 @@
           type = "gpt";
           partitions = {
             ESP = {
-              size = "500M";
+              size = "2048M";
               type = "EF00";
+              label = "drive-desktop-esp";
               content = {
                 type = "filesystem";
                 format = "vfat";
@@ -19,60 +20,46 @@
             };
             luks = {
               size = "100%";
+              label = "drive-desktop-luks-main";
               content = {
                 type = "luks";
-                name = "cryptroot";
+                name = "drive-desktop-luks-main";
                 extraOpenArgs = [ ];
                 settings = {
                   allowDiscards = true;
                 };
                 content = {
-                  type = "zfs";
-                  pool = "zroot";
+                  type = "btrfs";
+                  subvolumes = {
+                    "@root" = {
+                      mountpoint = "/";
+                    };
+                    "@home" = {
+                      mountpoint = "/home";
+                    };
+                    "@nixos" = {
+                      mountpoint = "/etc/nixos";
+                    };
+                    "@nix" = {
+                      mountpoint = "/nix";
+                    };
+                    "@snapshots" = {
+                      mountpoint = "/.snapshots";
+                    };
+                  };
+                  mountOptions = [
+                    "defaults"
+                    "noatime"
+                    "compress=zstd:19"
+                    "ssd"
+                    "discard=async"
+                    "space_cache=v2"
+                    "autodefrag"
+                  ];
                 };
               };
             };
           };
-        };
-      };
-    };
-    zpool = {
-      zroot = {
-        type = "zpool";
-        rootFsOptions = {
-      	  mountpoint = "none";
-          compression = "zstd-19";
-          acltype = "posixacl";
-          xattr = "sa";
-          atime = "off";
-      	  dnodesize="auto";
-      	  normalization="formD";
-      	  # dedup="on";
-        };
-      	options = {
-      	  ashift = "12";
-      	  autotrim = "on";
-        };
-      	datasets = {
-      	  "root" = {
-      	    type = "zfs_fs";
-      	    mountpoint = "/";
-      	  };
-      	  "root/home" = {
-      	    type = "zfs_fs";
-      	    options.mountpoint = "/home";
-      	    mountpoint = "/home";
-      	  };
-      	  "root/nixos" = {
-      	    type = "zfs_fs";
-      	    options.mountpoint = "/etc/nixos";
-      	    mountpoint = "/etc/nixos";
-      	  };
-      	  "root/nix" = {
-      	    type = "zfs_fs";
-      	    options.mountpoint = "/nix";
-      	    mountpoint = "/nix";
-      	  };
         };
       };
     };
