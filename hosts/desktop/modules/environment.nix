@@ -40,6 +40,7 @@
       '')
 
       # CLI.
+      lsd
       curl
       wget
       fastfetch
@@ -172,21 +173,21 @@
 
       # Audio production.
       # DAW.
-      # reaper
-      # renoise
-      # audacity
+      reaper
+      renoise
+      audacity
       # Synth.
-      # zynaddsubfx
-      # cardinal
-      # surge-XT
-      # vital
-      # odin2
-      # dexed
+      zynaddsubfx
+      cardinal
+      surge-XT
+      vital
+      odin2
+      dexed
       
       # Compatability, virtulisation, emulation, etc...
       # Wine.
       # wineWow64Packages.yabridge
-      # wineWow64Packages.waylandFull
+      wineWow64Packages.waylandFull
       winetricks
       
       # Yabridge.

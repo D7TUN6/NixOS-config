@@ -35,6 +35,25 @@
         # server_names = [ ... ];
       };
     };
+
+    v2ray = {
+      enable = true;
+      config = 
+          {
+            inbounds = [
+              {
+                listen = "127.0.0.1";
+                port = 1080;
+                protocol = "http";
+              }
+            ];
+            outbounds = [
+              {
+                protocol = "freedom";
+              }
+            ];
+          };
+    };
     xray = {
       enable = true;
       settings = {
