@@ -8,6 +8,7 @@
   services = {
     lact.enable = true;
     thermald.enable = true;
+    power-profiles-daemon.enable = lib.mkForce false;
     fstrim = {
       enable = true;
       interval = "weekly";
