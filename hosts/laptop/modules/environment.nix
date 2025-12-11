@@ -12,8 +12,11 @@
       __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = 1;
       __GL_THREADED_OPTIMIZATIONS = 1;
       RUSTICL_ENABLE = "radeonsi";
+      RADV_PERFTEST = "sam";
       mesa_glthread = "true";
-      __GL_YIELD = "USLEEP";
+      __GL_YIELD = "NOTHING";
+      
+      
     };
     systemPackages = with pkgs; [
       (let
@@ -37,6 +40,7 @@
       '')
 
       # CLI.
+      lsd
       curl
       wget
       fastfetch
@@ -60,9 +64,15 @@
       tree
       ncdu
       w3m
+      tty-clock
+      kernel-hardening-checker
       sbctl
       tpm2-tools
       tpm2-tss
+      powertop
+      rt-tests
+      tuna
+      lshw
 
       # lib.
       glib
@@ -82,6 +92,10 @@
       sshfs-fuse
       socat
       screen
+      # net-tools
+      iftop
+      iproute2
+      nethogs
 
       # Apple
       libimobiledevice
@@ -90,7 +104,7 @@
             
       # Compression & archives.
       unzip
-      unrar
+      # unrar
       p7zip
       lrzip
       
@@ -104,6 +118,9 @@
       sdparm
       nvme-cli
       ms-sys
+      mission-center
+      lm_sensors
+      xsensors
       
       # Firmware.
       linux-firmware
@@ -117,11 +134,16 @@
       google-chrome
       zathura
       mupdf
+      tor-browser
       qbittorrent
       keepassxc
       libreoffice
       onlyoffice-desktopeditors
+      kdePackages.dolphin
+      kdePackages.gwenview
+      kdePackages.okular
       vlc
+      schismtracker
       imv
       mpv
       bleachbit
@@ -132,15 +154,17 @@
       gnome-disk-utility
       gnome-text-editor
       wlr-randr
-       
+      
       # Nix.
       appimage-run
       alejandra
       nixfmt-tree
       disko
-     
+      
+      # Compatability, virtulisation, emulation, etc...
       # Wine.
-      wineWowPackages.yabridge
+      # wineWow64Packages.yabridge
+      wineWow64Packages.waylandFull
       winetricks
       
       # Virtualisation tools.
@@ -171,12 +195,13 @@
       javaPackages.compiler.temurin-bin.jre-21
 
       # Flash & program.
-      ventoy-full-gtk
+      # ventoy-full-gtk
       heimdall
       imsprog
 
       # Desktop.
       xorg.xinit
+      cool-retro-term
       xorg.xkill
       wayland-utils
       wl-clipboard

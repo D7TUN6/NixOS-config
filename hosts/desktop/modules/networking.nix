@@ -10,6 +10,9 @@
       "127.0.0.1"
       "::1"
     ];
+    stevenBlackHosts = {
+      enableIPv6 = true;
+    };
     hostName = "desktop";
     enableIPv6 = true;
     hostId = lib.mkDefault "8425e349";
@@ -41,12 +44,14 @@
         25565 # Minecraft Server.
         2017 # v2raya web interface.
         21435 # SSH
-        8388 # vpn server
+        444 # vpn server
         443
         80
         1080
         53
         14027
+        5201
+        5001
       ];
       allowedUDPPorts = [
         67 # DHCP Server.
@@ -54,12 +59,14 @@
         25565 # Minecraft Server.
         2017 # v2raya web interface.
         21435 # SSH
-        8388 # vpn server
+        444 # vpn server
         443
         80
         1080
         53
         14027
+        5201
+        5001
       ];
     };
   };

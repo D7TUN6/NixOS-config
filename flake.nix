@@ -2,18 +2,14 @@
   description = "D7TUN6's personal flake";
 
   inputs = {
-    # Stable
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    # Beta
-    nixpkgs-beta.url = "github:nixos/nixpkgs/nixos-25.11";
-    # Unstable
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    # Master
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
-    
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     freesm.url = "github:FreesmTeam/FreesmLauncher";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hosts = {
+      url = "github:StevenBlack/hosts"; # or a fork/mirror
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -22,33 +18,10 @@
     {
       self,
       nixpkgs,
-      nixpkgs-beta,
-      nixpkgs-unstable,
-      nixpkgs-master,
       home-manager,
+      hosts,
       ...
     } @inputs:
-      let
-      args = {
-        pkgsStable = import nixpkgs {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
-        pkgsMaster = import nixpkgs-master {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
-        pkgsBeta = import nixpkgs-beta {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
-        pkgsUnstable = import nixpkgs-unstable {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
-        inherit inputs;
-      };
-      in
     {
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem {
@@ -57,6 +30,9 @@
         modules = [
           ./hosts/desktop/configuration.nix
           home-manager.nixosModules.home-manager
+          hosts.nixosModule {
+            networking.stevenBlackHosts.enable = true;
+          }
           {
             home-manager = {
               useGlobalPkgs = true;
@@ -93,13 +69,16 @@
         modules = [
           ./hosts/laptop/configuration.nix
           home-manager.nixosModules.home-manager
+          hosts.nixosModule {
+            networking.stevenBlackHosts.enable = true;
+          }
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";
               extraSpecialArgs = { inherit inputs; };
-              users.user.imports = [ ./hosts/laptop/home.nix ];
+              users.alex.imports = [ ./hosts/laptop/home.nix ];
             };
           }
         ];

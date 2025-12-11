@@ -5,6 +5,10 @@
   inputs,
   ...
 }: {
+security.    acme = {
+  acceptTerms = true;
+  defaults.email = "d7tun6.site";
+};
   security = {
     polkit.enable = true;
     rtkit.enable = true;

@@ -58,7 +58,7 @@
       }
 
       layout {
-          gaps 16
+          gaps 14
           center-focused-column "never"
           preset-column-widths {
               proportion 0.33333
@@ -98,13 +98,14 @@
       spawn-sh-at-startup "swaync"
       spawn-sh-at-startup "polkit-agent-helper-1"
       spawn-sh-at-startup "systemctl start --user polkit-gnome-authentication-agent-1"
-      spawn-sh-at-startup "swaybg -i ~/files/files/wallpaper/OSX-10-6-6k-detuned-krita.jpg"
+      spawn-sh-at-startup "swaybg -i ~/files/wallpaper/OSX-10-6-6k-detuned-krita.jpg"
 
       hotkey-overlay {
       }
       prefer-no-csd
       screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
       animations {
+          off
           workspace-switch {
               curve "cubic-bezier" 0.05 0.9 0.1 1
               duration-ms 300
@@ -145,7 +146,7 @@
 
       // Example: enable rounded corners for all windows.
       // (This example rule is commented out with a "/-" in front.)
-      /-window-rule {
+      window-rule {
           geometry-corner-radius 12
           clip-to-geometry true
       }
@@ -155,7 +156,7 @@
           Mod+Shift+Slash { show-hotkey-overlay; }
 
           // Terminal.
-          Mod+Shift+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
+          Mod+Shift+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
           // Launcher.
           Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
           // Lock.

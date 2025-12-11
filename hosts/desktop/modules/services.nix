@@ -6,14 +6,65 @@
   ...
 }: {
   services = {
-    # lact.enable = true;
+    nginx = {
+      enable = true;
+      # recommendedGzipSettings = true;
+      # recommendedOptimisation = true;
+      # recommendedTlsSettings = true;
+      # recommendedProxySettings = true;
+      virtualHosts = {
+        "d7tun6.site" = {
+          addSSL = true;
+          enableACME = true;
+          root = "/var/www/d7tun6.site";
+          # locations = {
+          #   "/" = {
+          #     extraConfig = ''
+          #         try_files /index.html =404;
+          #       '';
+          #   };
+          #   "/bio" = {
+          #     extraConfig = ''
+          #         try_files /bio/index.html =404;
+          #       '';
+          #   };
+          #   "/git" = {
+          #     extraConfig = ''
+          #         try_files /gio/index.html =404;
+          #       '';
+          #   };
+          #   "/music" = {
+          #     extraConfig = ''
+          #         try_files /music/index.html =404;
+          #       '';
+          #   };
+          #   "/news" = {
+          #     extraConfig = ''
+          #         try_files /news/index.html =404;
+          #       '';
+          #   };
+          #   "/blog" = {
+          #     extraConfig = ''
+          #         try_files /blog/index.html =404;
+          #       '';
+          #   };
+          #   "/links" = {
+          #     extraConfig = ''
+          #         try_files /links/index.html =404;
+          #       '';
+          #   };
+          # };
+        };
+      };
+    };
+    lact.enable = true;
     thermald.enable = true;
     # cloudflared.enable = true;
     fstrim = {
       enable = true;
       interval = "weekly";
     };
-    dnscrypt-proxy2 = {
+    dnscrypt-proxy = {
       enable = true;
       settings = {
         ipv4_servers = true;
@@ -36,41 +87,41 @@
       };
     };
 
-    v2ray = {
-      enable = true;
-      config = 
-          {
-            inbounds = [
-              {
-                listen = "127.0.0.1";
-                port = 1080;
-                protocol = "http";
-              }
-            ];
-            outbounds = [
-              {
-                protocol = "freedom";
-              }
-            ];
-          };
-    };
+    # v2ray = {
+    #   enable = true;
+    #   config = 
+    #       {
+    #         inbounds = [
+    #           {
+    #             listen = "127.0.0.1";
+    #             port = 1080;
+    #             protocol = "http";
+    #           }
+    #         ];
+    #         outbounds = [
+    #           {
+    #             protocol = "freedom";
+    #           }
+    #         ];
+    #       };
+    # };
     xray = {
       enable = true;
       settings = {
-        log = {
-          loglevel = "warning";
-        };
+        # log = {
+        #   loglevel = "warning";
+        # };
         inbounds = [
           {
             listen = "0.0.0.0";
-            port = 443;
+            port = 444;
             protocol = "vless";
             settings = {
               clients = [
                 {
                   id = "c5609e76-e4b4-4a98-adc9-e788cc0727ed";
                   flow = "xtls-rprx-vision";
-                  # level = 0;
+                  level = 0;
                 }
               ];
               decryption = "none";
@@ -80,7 +131,7 @@
               security = "reality";
               realitySettings = {
                   show = false;
-                  dest = "www.google.com:443";
+                  dest = "www.microsoft.com:443";
                   xver = 0;
                   serverNames = [
                     "www.google.com"
@@ -107,6 +158,28 @@
         ];
       };
     };
+
+  zapret = {
+    enable = true;
+    whitelist = [
+      "youtube.com"
+      "googlevideo.com"
+      "ytimg.com"
+      "youtu.be"
+      "discord.com"
+      "discord-attachmets-uploads-prd.storage.googleapis.com"
+      "googleapis.com"
+      "gstatic.com"
+      "www.google.com"
+    ];
+    params = [
+      "--dpi-desync=fake,disorder2"
+      "--dpi-desync-ttl=1"
+      "--dpi-desync-autottl=2"
+    ];
+  };
+
+    
     openssh = {
       enable = true;
       ports = [ 21435 ];

@@ -10,6 +10,9 @@
       "127.0.0.1"
       "::1"
     ];
+    stevenBlackHosts = {
+      enableIPv6 = true;
+    };
     hostName = "laptop";
     enableIPv6 = true;
     hostId = lib.mkDefault "8425e349";
@@ -28,7 +31,7 @@
     };
     interfaces = {
       eth0 = {
-        mtu = 1400;
+        mtu = 1500;
       };
     };
     firewall = {
@@ -36,10 +39,10 @@
       allowPing = false;
       rejectPackets = true;
       allowedTCPPorts = [
-        67 # DHCP Server.
+        32546 # SSH
       ];
       allowedUDPPorts = [
-        67 # DHCP Server.
+        21435 # SSH
       ];
     };
   };

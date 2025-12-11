@@ -7,7 +7,7 @@
 }: {
   fileSystems = {
     "/" = {
-      device = "/dev/mapper/drive-desktop-luks-main";
+      device = "/dev/mapper/drive-desktop-luks-main-2";
       fsType = "btrfs";
       options = [
         "subvol=@root"
@@ -21,7 +21,7 @@
       ];
     };
     "/nix" = {
-      device = "/dev/mapper/drive-desktop-luks-main";
+      device = "/dev/mapper/drive-desktop-luks-main-2";
       fsType = "btrfs";
       options = [
         "subvol=@nix"
@@ -35,7 +35,7 @@
       ];
     };
     "/etc/nixos" = {
-      device = "/dev/mapper/drive-desktop-luks-main";
+      device = "/dev/mapper/drive-desktop-luks-main-2";
       fsType = "btrfs";
       options = [
         "subvol=@nixos"
@@ -49,7 +49,7 @@
       ];
     };
     "/home" = {
-      device = "/dev/mapper/drive-desktop-luks-main";
+      device = "/dev/mapper/drive-desktop-luks-main-2";
       fsType = "btrfs";
       options = [
         "subvol=@home"
@@ -63,7 +63,7 @@
       ];
     };
     "/boot" = {
-      device = "/dev/disk/by-partlabel/drive-desktop-esp";
+      device = "/dev/disk/by-partlabel/drive-desktop-esp-2";
       fsType = "vfat";
       options = [
         "defaults"

@@ -6,8 +6,8 @@
   ...
 }: {
   boot = {
-    consoleLogLevel = 0;
-    plymouth.enable = true;
+    consoleLogLevel = 3;
+    # plymouth.enable = true;
     supportedFilesystems = {
       vfat = true;
       btrfs = true;
@@ -15,7 +15,7 @@
     };
     kernelPackages = pkgs.linuxPackages;
     loader = {
-      timeout = 0;
+      timeout = 3;
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot";
@@ -27,13 +27,19 @@
       };
     };
     initrd = {
-      verbose = false;
+      compressor = "zstd";
+      compressorArgs = ["-19"];
+      verbose = true;
       systemd = {
         enable = true;
         tpm2.enable = true;
       };
       luks = {
         devices = {
+          "drive-desktop-luks-main-2" = {
+            device = "/dev/disk/by-partlabel/drive-desktop-luks-main-2";
+            preLVM = true;
+          };
           "drive-desktop-luks-main" = {
             device = "/dev/disk/by-partlabel/drive-desktop-luks-main";
             preLVM = true;
@@ -61,6 +67,7 @@
       "usb-hid"
       "tcp-bbr"
       "tun"
+      "snd_pcsp"
     ];
 
     blacklistedKernelModules = [
@@ -69,11 +76,11 @@
       "iTCO_wdt"
     ];
     
-    kernelParams = [
+    kernelParams = [     
       # Silent boot.
-      "quiet"
-      "udev.log_level=3"
-      "audit=0"
+      # "quiet"
+      # "udev.log_level=3"
+      # "audit=0"
 
       # GPU.
       "video=HDMI-A-1:1920x1080@74"
@@ -83,16 +90,16 @@
 
       # RT.
       "preempt=full"
-
+     
       # Power.
       "acpi_osi=Linux"
-      "amd_pstate=active"
-      "processor.max_cstate=5"
-      "intel_idle.max_cstate=5"
       
       # Optimizations.
       "clocksource=tsc"
-      "nosoftlockup"
+      "nosoftlockup=1"
+      "page_alloc.shuffle=1"
+      "nowatchdog"
+      "nmi_watchdog=0"
     ];
     kernel = {
       sysctl = {      
@@ -112,7 +119,7 @@
         "vm.watermark_boost_factor" = 1;
         "vm.watermark_scale_factor" = 100;
         "vm.zone_reclaim_mode" = 0;
-        "vm.page_lock_unfairness" = 1;       
+        "vm.page_lock_unfairness" = 1;
        
         # Increase limits.
         "fs.inotify.max_user_watches" = 524288;
@@ -160,6 +167,7 @@
         "net.ipv4.tcp_notsent_lowat" = 131072;
         # other things.
         "kernel.watchdog" = 0;
+        "kernel.nmi_watchdog" = 0;
       };
     };
   };

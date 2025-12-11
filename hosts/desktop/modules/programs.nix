@@ -55,7 +55,7 @@
       extraPackages = [ pkgs.jdk ];
       # gamescopeSession.enable = true;
     };
-    nekoray = {
+    throne = {
       enable = true;
       tunMode.enable = true;
     };

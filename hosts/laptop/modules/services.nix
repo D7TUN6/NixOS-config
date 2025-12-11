@@ -6,28 +6,14 @@
   ...
 }: {
   services = {
-    desktopManager.plasma6.enable = true;
-    auto-cpufreq.settings = {
-      battery = {
-        governor = "powersave";
-        turbo = "never";
-      };
-      charger = {
-        governor = "ondemand";
-        turbo = "auto";
-      };
-    };
-    logind = {
-      lidSwitch = "suspend";
-      lidSwitchExternalPower = "lock";
-      lidSwitchDocked = "ignore";
-    };
     lact.enable = true;
     thermald.enable = true;
+    fstrim = {
+      enable = true;
+      interval = "weekly";
+    };
     dnscrypt-proxy = {
       enable = true;
-      # Settings reference:
-      # https://github.com/DNSCrypt/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
       settings = {
         ipv4_servers = true;
         ipv6_servers = true;
@@ -35,7 +21,6 @@
         doh_servers = true;
         require_nofilter = true;
         require_dnssec = true;
-        # Add this to test if dnscrypt-proxy is actually used to resolve DNS requests
         query_log.file = "/var/log/dnscrypt-proxy/query.log";
         sources.public-resolvers = {
           urls = [
@@ -49,23 +34,45 @@
         # server_names = [ ... ];
       };
     };
-    zapret = {
+
+
+  zapret = {
+    enable = true;
+    whitelist = [
+      "youtube.com"
+      "googlevideo.com"
+      "ytimg.com"
+      "youtu.be"
+      "discord.com"
+      "discord-attachmets-uploads-prd.storage.googleapis.com"
+      "googleapis.com"
+      "gstatic.com"
+      "www.google.com"
+      "telegram.com"
+      "telegram.org"
+      "whatsapp.com"
+    ];
+    params = [
+      "--dpi-desync=fake,disorder2"
+      "--dpi-desync-ttl=1"
+      "--dpi-desync-autottl=2"
+    ];
+  };
+
+    
+    openssh = {
       enable = true;
-      whitelist = [
-        "youtube.com"
-        "googlevideo.com"
-        "ytimg.com"
-        "youtu.be"
-        "discord.com"
-        "discord-attachmets-uploads-prd.storage.googleapis.com"
-        "googleapis.com"
-        "x.com"
-      ];
-      params = [
-        "--dpi-desync=fake,disorder2"
-        "--dpi-desync-ttl=1"
-        "--dpi-desync-autottl=2"
-      ];
+      ports = [ 32546 ];
+      settings = {
+        PasswordAuthentication = true;
+        PermitRootLogin = "no";
+        AllowUsers = [ "alex" ];
+      };
+    };
+    desktopManager = {
+      plasma6 = {
+        enable = true;
+      };
     };
     displayManager = {
       sddm = {
@@ -74,7 +81,7 @@
         autoNumlock = true;
       };
       autoLogin = {
-        user = "user";
+        user = "alex";
         enable = true;
       };
       defaultSession = "plasma";
@@ -89,22 +96,19 @@
       };
       xkb = {
         layout = "us,ru";
-        options = "grp:caps_toggle";
+        options = "grp:alt_shift_toggle";
       };
     };
-    zfs = {
+    btrfs = {
       autoScrub = {
         enable = true;
-        pools = [
-          "zpool-laptop-main"
+        fileSystems = [
+          "/"
+          "/nix"
+          "/home"
+          "/etc/nixos"
         ];
-        randomizedDelaySec = "12h";
         interval = "monthly";
-      };
-      trim = {
-        enable = true;
-        randomizedDelaySec = "12h";
-        interval = "weekly";
       };
     };
     pipewire = {

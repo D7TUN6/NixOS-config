@@ -6,22 +6,21 @@
   ...
 }: {
   hardware = {
-    enableAllFirmware = true;
-    enableAllHardware = true;
+    # enableAllFirmware = true;
+    # enableAllHardware = true;
     enableRedistributableFirmware = true;
     firmware = with pkgs; [linux-firmware];
     amdgpu = {
       opencl.enable = true;
       legacySupport.enable = true;
-      initrd.enable = true;
     };
     block = {
       scheduler = {
-        "mmcblk[0-9]*" = "bfq";
+        "mmcblk[0-9]*" = "none";
         "nvme[0-9]*" = "none";
         "sd[a-z]*" = "none";
       };
-      defaultSchedulerRotational = "bfq";
+      defaultSchedulerRotational = "none";
     };
     cpu = {
       amd = {

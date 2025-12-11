@@ -5,6 +5,7 @@
   inputs,
   ...
 }: {
+systemd.services.nginx.serviceConfig.ProtectHome = false;
   systemd = {
     services = {
       minecraft-server-thecomboxmc = {
@@ -44,15 +45,15 @@
         };
       };
     };
-    extraConfig = "
-      DefaultLimitNOFILE=523288
-      DefaultTimeoutStopSec=5s
-    ";
-    # settings = {
-    #   Manager = {
-    #     DefaultLimitNOFILE = 523288;
-    #     DefaultTimeoutStopSec = "15s";    
-    #   };
-    # };
+    # extraConfig = "
+    #   DefaultLimitNOFILE=523288
+    #   DefaultTimeoutStopSec=5s
+    # ";
+    settings = {
+      Manager = {
+        DefaultLimitNOFILE = 523288;
+        DefaultTimeoutStopSec = "15s";    
+      };
+    };
   };
 }

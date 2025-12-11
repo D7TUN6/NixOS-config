@@ -10,18 +10,11 @@
     plymouth.enable = true;
     supportedFilesystems = {
       vfat = true;
-      zfs = true;
       btrfs = true;
       ext4 = true;
     };
-    zfs = {
-      extraPools = [ "zpool-laptop-main" ];
-      forceImportRoot = true;
-      # package = pkgs.zfs_unstable;
-    };
     kernelPackages = pkgs.linuxPackages;
     loader = {
-      systemd-boot.editor = lib.mkDefault false;
       timeout = 0;
       efi = {
         canTouchEfiVariables = true;
@@ -34,17 +27,18 @@
       };
     };
     initrd = {
-      verbose = false;
+      compressor = "zstd";
+      compressorArgs = ["-19"];
+      verbose = true;
       systemd = {
         enable = true;
-        enableTpm2 = true;
+        # tpm2.enable = true;
       };
       luks = {
         devices = {
-          "cryptroot" = {
-            device = "/dev/disk/by-partlabel/disk-laptop-main";
+          "drive-laptop-luks-main" = {
+            device = "/dev/disk/by-partlabel/drive-laptop-luks-main";
             preLVM = true;
-            allowDiscards = true;
           };
         };
       };
@@ -65,25 +59,40 @@
     };
     kernelModules = [
       "kvm-amd"
+      "atk-kbd"
       "usb-hid"
       "tcp-bbr"
       "tun"
+      "snd_pcsp"
     ];
 
     blacklistedKernelModules = [
-      "radeon"
+      # "radeon"
       "sp5100-tco"
       "iTCO_wdt"
     ];
     
-    kernelParams = [
+    kernelParams = [     
       # Silent boot.
       "quiet"
       "udev.log_level=3"
       "audit=0"
-
+           
       # # Network.
       "net.ifnames=0"
+
+      # RT.
+      "preempt=full"
+     
+      # Power.
+      "acpi_osi=Linux"
+      
+      # Optimizations.
+      "clocksource=tsc"
+      "nosoftlockup=1"
+      "page_alloc.shuffle=1"
+      "nowatchdog"
+      "nmi_watchdog=0"
     ];
     kernel = {
       sysctl = {      
@@ -103,7 +112,7 @@
         "vm.watermark_boost_factor" = 1;
         "vm.watermark_scale_factor" = 100;
         "vm.zone_reclaim_mode" = 0;
-        "vm.page_lock_unfairness" = 1;       
+        "vm.page_lock_unfairness" = 1;
        
         # Increase limits.
         "fs.inotify.max_user_watches" = 524288;
@@ -118,12 +127,12 @@
         "net.core.rmem_max" = 536870912;
         "net.core.wmem_default" = 8388608;
         "net.core.wmem_max" = 536870912;
-        "net.core.optmem_max" = 40960;
+        "net.core.optmem_max" = 65536;
         "net.ipv4.tcp_synack_retries" = 5;
-        "net.ipv4.tcp_rmem" = "8192 262144 536870912";
-        "net.ipv4.tcp_wmem" = "4096 16384 536870912";
-        "net.ipv4.udp_rmem_min" = 8192;
-        "net.ipv4.udp_wmem_min" = 4096;
+        "net.ipv4.tcp_rmem" = "8192 524288 536870912";
+        "net.ipv4.tcp_wmem" = "4096 262144 536870912";
+        "net.ipv4.udp_rmem_min" = 16384;
+        "net.ipv4.udp_wmem_min" = 16384;
         # Other.
         "net.ipv4.tcp_base_mss" = 1024;
         "net.core.netdev_budget" = 600;
@@ -138,19 +147,20 @@
         "net.ipv4.tcp_fastopen" = 3;
         "net.ipv4.tcp_mtu_probing" = 1;
         "net.ipv4.tcp_timestamps" = 1;
-        "net.ipv4.tcp_keepalive_time" = "60";
-        "net.ipv4.tcp_keepalive_intvl" = 10;
-        "net.ipv4.tcp_keepalive_probes" = 6;
+        "net.ipv4.tcp_keepalive_time" = "600";
+        "net.ipv4.tcp_keepalive_intvl" = 60;
+        "net.ipv4.tcp_keepalive_probes" = 4;
         "net.ipv4.tcp_max_syn_backlog" = 8192;
-        "net.ipv4.tcp_max_tw_buckets" = 2000000;
-        "net.ipv4.tcp_fin_timeout" = 10;
+        "net.ipv4.tcp_max_tw_buckets" = 100000;
+        "net.ipv4.tcp_fin_timeout" = 30;
         "net.ipv4.tcp_tw_reuse" = 1;
         "net.ipv4.tcp_ecn" = 0;
-        "net.core.somaxconn" = 8192;
+        "net.core.somaxconn" = 32768;
         "net.ipv4.tcp_adv_win_scale" = -2;
         "net.ipv4.tcp_notsent_lowat" = 131072;
         # other things.
         "kernel.watchdog" = 0;
+        "kernel.nmi_watchdog" = 0;
       };
     };
   };

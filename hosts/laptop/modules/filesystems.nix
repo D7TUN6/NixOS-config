@@ -7,35 +7,63 @@
 }: {
   fileSystems = {
     "/" = {
-      device = "zpool-laptop-main";
-      fsType = "zfs";
+      device = "/dev/mapper/drive-laptop-luks-main";
+      fsType = "btrfs";
       options = [
-        "zfsutil"
+        "subvol=@root"
+        "defaults"
+        "noatime"
+        "compress=zstd:19"
+        "ssd"
+        "discard=async"
+        "space_cache=v2"
+        "autodefrag"
       ];
     };
     "/nix" = {
-      device = "zpool-laptop-main/root/nix";
-      fsType = "zfs";
+      device = "/dev/mapper/drive-laptop-luks-main";
+      fsType = "btrfs";
       options = [
-        "zfsutil"
+        "subvol=@nix"
+        "defaults"
+        "noatime"
+        "compress=zstd:19"
+        "ssd"
+        "discard=async"
+        "space_cache=v2"
+        "autodefrag"
       ];
     };
     "/etc/nixos" = {
-      device = "zpool-laptop-main/root/nixos";
-      fsType = "zfs";
+      device = "/dev/mapper/drive-laptop-luks-main";
+      fsType = "btrfs";
       options = [
-        "zfsutil"
+        "subvol=@nixos"
+        "defaults"
+        "noatime"
+        "compress=zstd:19"
+        "ssd"
+        "discard=async"
+        "space_cache=v2"
+        "autodefrag"
       ];
     };
     "/home" = {
-      device = "zpool-laptop-main/root/home";
-      fsType = "zfs";
+      device = "/dev/mapper/drive-laptop-luks-main";
+      fsType = "btrfs";
       options = [
-        "zfsutil"
+        "subvol=@home"
+        "defaults"
+        "noatime"
+        "compress=zstd:19"
+        "ssd"
+        "discard=async"
+        "space_cache=v2"
+        "autodefrag"
       ];
     };
     "/boot" = {
-      device = "/dev/disk/by-partlabel/disk-laptop-boot";
+      device = "/dev/disk/by-partlabel/drive-laptop-esp";
       fsType = "vfat";
       options = [
         "defaults"
@@ -50,7 +78,7 @@
   zramSwap = {
     enable = true;
     priority = 100;
-    algorithm = "lz4";
+    algorithm = "zstd";
     memoryPercent = 100;
   };
 }

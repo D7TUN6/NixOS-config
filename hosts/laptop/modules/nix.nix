@@ -11,9 +11,9 @@
       substitute = true;
       allowed-users = [ "@users" ];
       download-buffer-size = "99999999999";
-      max-jobs = 1;
-      cores = 1;
-      build-cores = 1;
+      max-jobs = 13;
+      cores = 13;
+      build-cores = 13;
       substituters = [
         "https://cache.nixos.org/"
         # "https://cache.m7.rs"

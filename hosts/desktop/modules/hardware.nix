@@ -13,15 +13,16 @@
     amdgpu = {
       opencl.enable = true;
       legacySupport.enable = true;
+      overdrive.enable = true;
       initrd.enable = true;
     };
     block = {
       scheduler = {
-        "mmcblk[0-9]*" = "bfq";
+        "mmcblk[0-9]*" = "none";
         "nvme[0-9]*" = "none";
-        "sd[a-z]*" = "mq-deadline";
+        "sd[a-z]*" = "none";
       };
-      defaultSchedulerRotational = "bfq";
+      defaultSchedulerRotational = "none";
     };
     cpu = {
       amd = {

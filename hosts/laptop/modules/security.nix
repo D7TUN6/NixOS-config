@@ -5,11 +5,39 @@
   inputs,
   ...
 }: {
+security.    acme = {
+  acceptTerms = true;
+  defaults.email = "d7tun6.site";
+};
   security = {
     polkit.enable = true;
     rtkit.enable = true;
     pam = {
       loginLimits = [
+        {
+          domain = "@audio";
+          item = "memlock";
+          type = "-";
+          value = "unlimited";
+        }
+        {
+          domain = "@audio";
+          item = "rtprio";
+          type = "-";
+          value = "99";
+        }
+        {
+          domain = "@audio";
+          item = "nofile";
+          type = "soft";
+          value = "99999";
+        }
+        {
+          domain = "@audio";
+          item = "nofile";
+          type = "hard";
+          value = "99999";
+        }
         {
           domain = "*";
           type = "hard";
@@ -18,6 +46,18 @@
         }
         {
           domain = "*";
+          type = "soft";
+          item = "nofile";
+          value = "523288";
+        }
+        {
+          domain = "d7tun6";
+          type = "hard";
+          item = "nofile";
+          value = "524288";
+        }
+        {
+          domain = "d7tun6";
           type = "soft";
           item = "nofile";
           value = "523288";

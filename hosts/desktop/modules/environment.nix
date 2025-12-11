@@ -70,6 +70,9 @@
       tpm2-tools
       tpm2-tss
       powertop
+      rt-tests
+      tuna
+      lshw
 
       # lib.
       glib
@@ -173,8 +176,8 @@
 
       # Audio production.
       # DAW.
-      reaper
-      renoise
+      # reaper
+      # renoise
       audacity
       # Synth.
       zynaddsubfx

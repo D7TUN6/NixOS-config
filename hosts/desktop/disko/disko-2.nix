@@ -3,14 +3,14 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/sdd";
+        device = "/dev/sdb";
         content = {
           type = "gpt";
           partitions = {
             ESP = {
               size = "2048M";
               type = "EF00";
-              label = "drive-laptop-esp";
+              label = "drive-desktop-esp-2";
               content = {
                 type = "filesystem";
                 format = "vfat";
@@ -20,10 +20,10 @@
             };
             luks = {
               size = "100%";
-              label = "drive-laptop-luks-main";
+              label = "drive-desktop-luks-main-2";
               content = {
                 type = "luks";
-                name = "drive-laptop-luks-main";
+                name = "drive-desktop-luks-main-2";
                 extraOpenArgs = [ ];
                 settings = {
                   allowDiscards = true;
@@ -65,3 +65,4 @@
     };
   };
 }
+
