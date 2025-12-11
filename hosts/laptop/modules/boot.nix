@@ -13,7 +13,7 @@
       btrfs = true;
       ext4 = true;
     };
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       timeout = 0;
       efi = {
@@ -32,7 +32,10 @@
       verbose = true;
       systemd = {
         enable = true;
-        # tpm2.enable = true;
+        tpm2 = {
+          enable = lib.mkForce false;
+          pkcs11.enable = lib.mkForce false;
+        };
       };
       luks = {
         devices = {

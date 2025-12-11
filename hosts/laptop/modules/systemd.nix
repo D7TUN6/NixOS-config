@@ -7,6 +7,7 @@
 }: {
 systemd.services.nginx.serviceConfig.ProtectHome = false;
   systemd = {
+    tpm2.enable = lib.mkForce false;
     tmpfiles.rules = [
       "d /var/lib/systemd/coredump 0755 root root 3d"
       "w! /sys/module/zswap/parameters/enabled - - - - 0"
