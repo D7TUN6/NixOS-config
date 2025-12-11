@@ -8,7 +8,7 @@
 }: {
   imports = lib.filter
             (n: lib.strings.hasSuffix ".nix" n)
-            (lib.filesystem.listFilesRecursive ./hm-modules);
+            (lib.filesystem.listFilesRecursive ./home-manager);
   home = {
     # Username of the user.
     username = "alex";
