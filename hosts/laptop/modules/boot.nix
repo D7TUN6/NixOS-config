@@ -34,7 +34,6 @@
         enable = true;
         tpm2 = {
           enable = lib.mkForce false;
-          pkcs11.enable = lib.mkForce false;
         };
       };
       luks = {
