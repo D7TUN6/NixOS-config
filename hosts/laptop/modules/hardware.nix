@@ -6,8 +6,9 @@
   ...
 }: {
   hardware = {
-    enableAllFirmware = true;
+    # enableAllFirmware = true;
     enableAllHardware = true;
+    system76.enable.all = true;
     enableRedistributableFirmware = true;
     firmware = with pkgs; [linux-firmware];
     amdgpu = {

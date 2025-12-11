@@ -6,6 +6,10 @@
   ...
 }: {
   programs = {
+    coolercontrol = {
+      enable = true;
+      nvidiaSupport = true;
+    };
     java = {
       enable = true;
       package = pkgs.javaPackages.compiler.temurin-bin.jre-21;
