@@ -105,7 +105,6 @@
       prefer-no-csd
       screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
       animations {
-          off
           workspace-switch {
               curve "cubic-bezier" 0.05 0.9 0.1 1
               duration-ms 300

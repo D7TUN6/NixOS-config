@@ -7,7 +7,6 @@
 }: {
   powerManagement = {
     enable = true;
-    powertop.enable = true;
-    # cpuFreqGovernor = "powersave";
+    cpuFreqGovernor = "performance";
   };
 }

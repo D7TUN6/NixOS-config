@@ -69,11 +69,10 @@
     ];
 
     blacklistedKernelModules = [
-      "radeon"
+      # "radeon"
       "sp5100-tco"
       "iTCO_wdt"
       "tpm_crb"
-      "asus_wmi"
     ];
     
     kernelParams = [     
@@ -87,17 +86,13 @@
 
       # RT.
       "preempt=full"
-
-      # GPU.
-      "amdgpu.vm_fault_interval=0"
-      "amdgpu.vm_update_mode=0"
-     
+   
       # Power.
-      "acpi_osi=Linux"
-      "acpi=force"
+      # "acpi_osi=Linux"
+      # "acpi=force"
       "tpm_tis.interrupts=0"
       "tpm_crb.interrupts=0"
-      "acpi_enforce_resources=lax"
+      # "acpi_enforce_resources=lax"
       
       # Optimizations.
       "clocksource=tsc"

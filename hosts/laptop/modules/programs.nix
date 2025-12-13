@@ -6,6 +6,7 @@
   ...
 }: {
   programs = {
+    niri.enable = true;
     coolercontrol = {
       enable = true;
     };

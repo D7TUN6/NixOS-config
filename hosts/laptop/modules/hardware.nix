@@ -6,7 +6,7 @@
   ...
 }: {
   hardware = {
-    enableAllFirmware = true;
+    # enableAllFirmware = true;
     # enableAllHardware = true;
     enableRedistributableFirmware = true;
     firmware = with pkgs; [linux-firmware];
@@ -18,7 +18,7 @@
       scheduler = {
         "mmcblk[0-9]*" = "none";
         "nvme[0-9]*" = "none";
-        "sd[a-z]*" = "none";
+        "sd[a-z]*" = "mq-deadline";
       };
       defaultSchedulerRotational = "none";
     };
