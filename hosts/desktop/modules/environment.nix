@@ -73,6 +73,8 @@
       rt-tests
       tuna
       lshw
+      ffmpeg
+
 
       # lib.
       glib

@@ -6,14 +6,14 @@
   ...
 }: {
   boot = {
-    consoleLogLevel = 3;
-    # plymouth.enable = true;
+    consoleLogLevel = 0;
+    plymouth.enable = true;
     supportedFilesystems = {
       vfat = true;
       btrfs = true;
       ext4 = true;
     };
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       timeout = 3;
       efi = {
@@ -78,9 +78,9 @@
     
     kernelParams = [     
       # Silent boot.
-      # "quiet"
-      # "udev.log_level=3"
-      # "audit=0"
+      "quiet"
+      "udev.log_level=3"
+      "audit=0"
 
       # GPU.
       "video=HDMI-A-1:1920x1080@74"
@@ -88,6 +88,24 @@
       # # Network.
       "net.ifnames=0"
 
+      # CPU
+      "mitigations=off"
+      "idle=poll"
+      "nohz_full=all"
+      "rcu_nocbs=all"
+      "irqaffinity=0"
+    
+      # Disable CPU powersaving.  
+      "cpufreq.performance=1"
+      "processor.ignore_ppc=1"
+      "processor.max_cstate=0"
+      "cpuidle.off=1"
+      # Intel.
+      "intel_idle.max_cstate=0"
+      "intel_pstate=disable"
+      # AMD.
+      "amd_pstate=disable"
+      
       # RT.
       "preempt=full"
      
