@@ -87,25 +87,7 @@
             
       # # Network.
       "net.ifnames=0"
-
-      # CPU
-      "mitigations=off"
-      "idle=poll"
-      "nohz_full=all"
-      "rcu_nocbs=all"
-      "irqaffinity=0"
-    
-      # Disable CPU powersaving.  
-      "cpufreq.performance=1"
-      "processor.ignore_ppc=1"
-      "processor.max_cstate=0"
-      "cpuidle.off=1"
-      # Intel.
-      "intel_idle.max_cstate=0"
-      "intel_pstate=disable"
-      # AMD.
-      "amd_pstate=disable"
-      
+          
       # RT.
       "preempt=full"
      
