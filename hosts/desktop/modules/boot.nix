@@ -68,6 +68,7 @@
       "tcp-bbr"
       "tun"
       "snd_pcsp"
+      "amd_pstate"
     ];
 
     blacklistedKernelModules = [
@@ -84,7 +85,7 @@
 
       # GPU.
       "video=HDMI-A-1:1920x1080@74"
-            
+      
       # # Network.
       "net.ifnames=0"
           
@@ -93,7 +94,9 @@
      
       # Power.
       "acpi_osi=Linux"
-      
+      "iommu=soft"
+      "amd_pstate=active"
+
       # Optimizations.
       "clocksource=tsc"
       "nosoftlockup=1"
