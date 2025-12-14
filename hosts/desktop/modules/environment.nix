@@ -8,6 +8,7 @@
 }: {
   environment = {
     sessionVariables = {
+      # COSMIC_DATA_CONTROL_ENABLED = 1;
       __GL_MaxFramesAllowed = 1;
       __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = 1;
       __GL_THREADED_OPTIMIZATIONS = 1;
