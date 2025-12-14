@@ -100,13 +100,23 @@
 
       # Mitigations.
       "mitigations=auto,nosmt"
+      "nosmt"
+      "spectre_v2=on"
+      "spec_store_bypass_disable=on"
+      "l1tf=full,force"
+      "mds=full,nosmt"
+      "tsx=off"
+      "tsx_async_abort=full"
 
       # Hardening.
       "slab_nomerge"
+      "init_on_alloc=1"
       "init_on_free=1"
-      "randomize_kstack_offset=on"
-      "vsyscall=none"
-      "debugfs=off"
+      "page_alloc.shuffle=1"
+      "randomize_kstack_offset=1"
+      "iommu.strict=1"
+      "oops=panic"
+      "page_poison=1"
     ];
     kernel = {
       sysctl = {      
@@ -172,21 +182,6 @@
         "net.core.somaxconn" = 32768;
         "net.ipv4.tcp_adv_win_scale" = -2;
         "net.ipv4.tcp_notsent_lowat" = 131072;
-
-        # Hardening.
-        "net.core.bpf_jit_harden" = 2;
-        "kernel.perf_event_paranoid" = 3;
-        "dev.tty.ldisc_autoload" = 0;
-        "kernel.kptr_restrict" = 2;
-        "user.max_user_namespaces" = 0;
-        "kernel.io_uring_disabled" = 2;
-        "vm.unprivileged_userfaultfd" = 0;
-        "fs.protected_fifos" = 2;
-        "fs.protected_regular" = 2;
-        "fs.suid_dumpable" = 0;
-        "kernel.yama.ptrace_scope" = 1;
-        "kernel.kexec_load_disabled" = 1;
-        "kernel.unprivileged_bpf_disabled" = 1;
       };
     };
   };

@@ -36,8 +36,9 @@
     };
     firewall = {
       enable = true;
-      # allowPing = false;
-      # rejectPackets = true;
+      allowPing = false;
+      rejectPackets = true;
+      logRefusedConnections = false;
       allowedTCPPorts = [
         67 # DHCP Server.
         17011 # Wormnet.

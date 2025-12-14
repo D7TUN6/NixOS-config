@@ -6,8 +6,19 @@
   ...
 }: {
   security = {
+    tpm2 = {
+      enable = true;
+    };
     polkit.enable = true;
     rtkit.enable = true;
+    apparmor = {
+      enable = true;
+      killUnconfinedConfinables = true;
+    };
+    # allowUserNamespaces = false;
+    virtualisation = {
+      flushL1DataCache = "always";
+    };
     pam = {
       loginLimits = [
         {
