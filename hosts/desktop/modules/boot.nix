@@ -6,7 +6,7 @@
   ...
 }: {
   boot = {
-    consoleLogLevel = 0;
+    consoleLogLevel = 3;
     plymouth.enable = true;
     supportedFilesystems = {
       vfat = true;
@@ -67,21 +67,16 @@
       "usb-hid"
       "tcp-bbr"
       "tun"
-      "snd_pcsp"
       "amd_pstate"
     ];
 
     blacklistedKernelModules = [
       "radeon"
-      "sp5100-tco"
-      "iTCO_wdt"
     ];
     
     kernelParams = [     
       # Silent boot.
       "quiet"
-      "udev.log_level=3"
-      "audit=0"
 
       # GPU.
       "video=HDMI-A-1:1920x1080@74"
@@ -94,15 +89,15 @@
      
       # Power.
       "acpi_osi=Linux"
-      "iommu=soft"
+      "amd_iommu=on"
       "amd_pstate=active"
 
       # Optimizations.
       "clocksource=tsc"
       "nosoftlockup=1"
-      "page_alloc.shuffle=1"
-      "nowatchdog"
-      "nmi_watchdog=0"
+
+      # Mitigations.
+      "mitigations=auto,nosmt"
     ];
     kernel = {
       sysctl = {      
@@ -168,9 +163,6 @@
         "net.core.somaxconn" = 32768;
         "net.ipv4.tcp_adv_win_scale" = -2;
         "net.ipv4.tcp_notsent_lowat" = 131072;
-        # other things.
-        "kernel.watchdog" = 0;
-        "kernel.nmi_watchdog" = 0;
       };
     };
   };
