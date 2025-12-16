@@ -76,6 +76,10 @@
       lshw
       ffmpeg
 
+      # Deploy.
+      compose2nix
+      docker-compose
+      docker
 
       # lib.
       glib
