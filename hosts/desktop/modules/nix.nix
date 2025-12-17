@@ -6,6 +6,10 @@
   ...
 }: {
   nix = {
+    optimise = {
+      automatic = true;
+      dates = "daily";
+    };
     settings = {
       auto-optimise-store = true;
       substitute = true;
