@@ -31,7 +31,7 @@ systemd.services.nginx.serviceConfig.ProtectHome = false;
       nixos-autoUpgrade = {
         script = ''
             set -eu
-            ${pkgs.coreutils}/bin/sh "nix flake update --commit-lock-file --flake ~/files/git/D7TUN6/NixOS-config/. && nixos-rebuild switch --refresh --upgrade --flake ~/files/git/D7TUN6/NixOS-config#desktop && nix-collect-garbage -d && nix-store --optimize && nix-store --verify --check-contents --repair"
+            ${pkgs.bash}/bin/bash "nix flake update --commit-lock-file --flake ~/files/git/D7TUN6/NixOS-config/. && nixos-rebuild switch --refresh --upgrade --flake ~/files/git/D7TUN6/NixOS-config#desktop && nix-collect-garbage -d && nix-store --optimize && nix-store --verify --check-contents --repair"
           '';
         serviceConfig = {
           Type = "oneshot";
