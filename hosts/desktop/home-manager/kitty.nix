@@ -19,6 +19,8 @@
     };
     # Configure kitty.
     settings = {
+      # Disable confirmation when closing window.
+      confirm_os_window_close = 0;
       # Set width of window padding.
       window_padding_width = 16;
       cursor_trail = 3;

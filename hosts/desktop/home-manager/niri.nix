@@ -155,7 +155,7 @@
           Mod+Shift+Slash { show-hotkey-overlay; }
 
           // Terminal.
-          Mod+Shift+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
+          Mod+Shift+Return hotkey-overlay-title="Open terminal" { spawn "kitty"; }
           // Launcher.
           Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
           // Lock.

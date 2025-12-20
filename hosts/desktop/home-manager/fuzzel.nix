@@ -15,7 +15,7 @@
         # Set layer for fuzzel window.
         layer = "overlay";
         # Set default terminal.
-        terminal = "${pkgs.foot}/bin/foot";
+        terminal = "${pkgs.kitty}/bin/kitty";
         icon-theme = "Papirus-Dark";
       };
       colors = {
