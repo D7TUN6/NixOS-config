@@ -7,16 +7,6 @@
 }: {
 systemd.services.nginx.serviceConfig.ProtectHome = false;
   systemd = {
-    timers = {
-      "nixos-autoUpgrade" = {
-        wantedBy = [ "timers.target" ];
-        timerConfig = {
-          OnCalendar = "daily";
-          Persistent = true;
-          Unit = "nixos-autoUpgrade.service";
-        };
-      };
-    };
     services = {
       minecraft-server-thecomboxmc = {
         wantedBy = [ "multi-user.target" ];
@@ -26,16 +16,6 @@ systemd.services.nginx.serviceConfig.ProtectHome = false;
           ExecStart = "${pkgs.bash}/bin/bash -c 'cd /home/d7tun6/files/data/server/data/combox-space/game-servers/mc-1_21_5-private/mc && ${pkgs.javaPackages.compiler.temurin-bin.jdk-21}/bin/java -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar server.jar --nogui'";
           Restart = "on-failure";
           User = "d7tun6";
-        };
-      };
-      nixos-autoUpgrade = {
-        script = ''
-            set -eu
-            ${pkgs.bash}/bin/bash "nix flake update --commit-lock-file --flake /home/d7tun6/files/git/D7TUN6/NixOS-config/. && nixos-rebuild switch --refresh --upgrade --flake /home/d7tun6/files/git/D7TUN6/NixOS-config#desktop && nix-collect-garbage -d && nix-store --optimize && nix-store --verify --check-contents --repair"
-          '';
-        serviceConfig = {
-          Type = "oneshot";
-          User = "root";
         };
       };
     };
