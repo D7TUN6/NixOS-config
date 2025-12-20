@@ -24,6 +24,7 @@
           "pipewire"
           "plugdev"
           "input"
+          "camera"
         ];
         shell = pkgs.fish;
       };

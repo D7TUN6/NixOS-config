@@ -6,6 +6,7 @@
   ...
 }: {
   services = {
+    gvfs.enable = true;
     nginx = {
       enable = true;
       # recommendedGzipSettings = true;

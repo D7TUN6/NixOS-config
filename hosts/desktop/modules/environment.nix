@@ -65,6 +65,9 @@
       tree
       ncdu
       w3m
+      lynx
+      links2
+      elinks
       tty-clock
       kernel-hardening-checker
       sbctl
@@ -139,6 +142,14 @@
       vesktop
       strawberry
       firefox
+      netsurf-browser
+      dillo
+      dillo-plus
+      qutebrowser
+      nyxt
+      # librewolf-bin-unwrapped
+      chromium
+      ungoogled-chromium
       brave
       google-chrome
       zathura
@@ -161,6 +172,10 @@
       gnome-disk-utility
       gnome-text-editor
       wlr-randr
+      nautilus
+      xfce.thunar
+      nemo
+      
 
       # Gaming.
       osu-lazer-bin
@@ -252,6 +267,11 @@
       xwayland-satellite
       pywal
       swayimg
+
+      # Camera.
+      gphoto2
+      libgphoto2
+      gphoto2fs
     ];
   };
 
