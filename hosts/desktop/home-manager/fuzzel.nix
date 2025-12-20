@@ -16,6 +16,7 @@
         layer = "overlay";
         # Set default terminal.
         terminal = "${pkgs.foot}/bin/foot";
+        icon-theme = "Papirus-Dark";
       };
       colors = {
         background = "1c1c24dd";

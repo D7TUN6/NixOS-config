@@ -98,14 +98,13 @@
       spawn-sh-at-startup "swaync"
       spawn-sh-at-startup "polkit-agent-helper-1"
       spawn-sh-at-startup "systemctl start --user polkit-gnome-authentication-agent-1"
-      spawn-sh-at-startup "swaybg -i ~/files/wallpaper/OSX-10-6-6k-detuned-krita.jpg"
+      spawn-sh-at-startup "swaybg -i ~/files/wallpaper/wall.jpg"
 
       hotkey-overlay {
       }
       prefer-no-csd
       screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
       animations {
-          off
           workspace-switch {
               curve "cubic-bezier" 0.05 0.9 0.1 1
               duration-ms 300

@@ -13,11 +13,6 @@
       # Modules settings.
       modules = [
         # Username and hostname.
-        {
-          type = "title";
-          key = "   ";
-          format = "{1}@{2}";
-        }
         # Distro name.
         {
           type = "os";
@@ -33,6 +28,13 @@
         {
           type = "packages";
           key = "packages ";
+        }
+        {
+          type = "initsystem";
+          key = "init ";
+        }
+        {
+          type = "break";
         }
         # Desktop environment.
         {
@@ -69,20 +71,35 @@
           type = "icons";
           key = "icons ";
         }
+        {
+          type = "break";
+        }
         # Motherboard name (if available).
         {
-          type = "host";
-          key = "host ";
+          type = "board";
+          key = "board ";
+        }
+        # BIOS.
+        {
+          type = "bios";
+          key = "bios ";
+        }
+        # TPM.
+        {
+          type = "tpm";
+          key = "tpm ";
         }
         # Cpu model.
         {
           type = "cpu";
           key = "cpu ";
+          temp = true;
         }
         # Gpu model.
         {
           type = "gpu";
           key = "gpu ";
+          temp = true;
         }
         # Disks, mounts and space.
         {
@@ -99,11 +116,17 @@
           type = "display";
           key = "disp ";
         }
+        # Local IP.
+        {
+          type = "localip";
+          key = "local ip ";
+          showSpeed = true;
+        }
+        # Uptime.
         {
           type = "uptime";
           key = "uptime ";
         }
-        # Software information column
         {
           type = "colors";
           paddingLeft = 2;
