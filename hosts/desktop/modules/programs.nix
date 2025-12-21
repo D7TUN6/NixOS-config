@@ -10,7 +10,6 @@
     hyprland = {
      enable = true;
      xwayland.enable = true;
-     withUWSM = true; 
     };
     niri.enable = true;
     java = {
