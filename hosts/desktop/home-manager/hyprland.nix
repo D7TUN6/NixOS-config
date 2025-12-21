@@ -42,6 +42,7 @@
       "$ScreenshotScr" = "grimblast copysave screen $ScreenshotsDir/Screenshot-$(date +%s).png";
       # Take screenshot of area, copy and save.
       "$ScreenshotArea" = "grimblast --freeze copysave area $scr/Screen-$(date +%s).png";
+      "$LockScreen" = "swaylock";
 
       # Default apps.
       # Terminal emulator.
