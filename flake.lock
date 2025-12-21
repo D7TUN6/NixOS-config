@@ -24,11 +24,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1766184547,
-        "narHash": "sha256-DHKBJ8TAuVeJXJ8MoCVgOVsHYU2D1Z7t/+BzTqpeMRc=",
+        "lastModified": 1766267220,
+        "narHash": "sha256-ZU+W0HaCjglMqChAbZymIC1k2UAJlOkCBUSMn6LkD9I=",
         "owner": "FreesmTeam",
         "repo": "FreesmLauncher",
-        "rev": "56b3930ec200673329757b9bd0b15984394d9b3c",
+        "rev": "62765d146219a7016dcd1fac5d4958cdd3e43d8c",
         "type": "github"
       },
       "original": {
@@ -44,11 +44,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1766171975,
-        "narHash": "sha256-47Ee0bTidhF/3/sHuYnWRuxcCrrm0mBNDxBkOTd3wWQ=",
+        "lastModified": 1766282146,
+        "narHash": "sha256-0V/nKU93KdYGi+5LB/MVo355obBJw/2z9b2xS3bPJxY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "bb35f07cc95a73aacbaf1f7f46bb8a3f40f265b5",
+        "rev": "61fcc9de76b88e55578eb5d79fc80f2b236df707",
         "type": "github"
       },
       "original": {
