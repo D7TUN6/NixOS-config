@@ -98,16 +98,6 @@
       "clocksource=tsc"
       "nosoftlockup=1"
 
-      # Mitigations.
-      "mitigations=auto,nosmt"
-      "nosmt"
-      "spectre_v2=on"
-      "spec_store_bypass_disable=on"
-      "l1tf=full,force"
-      "mds=full,nosmt"
-      "tsx=off"
-      "tsx_async_abort=full"
-
       # Hardening.
       "slab_nomerge"
       "init_on_alloc=1"
