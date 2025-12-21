@@ -175,6 +175,7 @@
       nautilus
       xfce.thunar
       nemo
+      tailscale
       
 
       # Gaming.

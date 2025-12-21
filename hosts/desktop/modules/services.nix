@@ -7,6 +7,11 @@
 }: {
   services = {
     gvfs.enable = true;
+    tailscale = {
+      enable = true;
+      useRoutingFeatures = "both";
+      
+    };
     nginx = {
       enable = true;
       # recommendedGzipSettings = true;
