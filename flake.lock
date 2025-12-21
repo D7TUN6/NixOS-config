@@ -24,11 +24,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1766267220,
-        "narHash": "sha256-ZU+W0HaCjglMqChAbZymIC1k2UAJlOkCBUSMn6LkD9I=",
+        "lastModified": 1766324483,
+        "narHash": "sha256-MAzCYlhZ1CZsPzPaSvF+QVchADoqaoS97d4HuutXO4E=",
         "owner": "FreesmTeam",
         "repo": "FreesmLauncher",
-        "rev": "62765d146219a7016dcd1fac5d4958cdd3e43d8c",
+        "rev": "0b160ab5b44cb56645cb0536757374ef2108d2ce",
         "type": "github"
       },
       "original": {
