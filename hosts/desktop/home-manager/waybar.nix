@@ -22,8 +22,8 @@
         # Left modules.
         modules-left = [
           "custom/menu"
-          "hyprland/workspaces"
-          # "niri/workspaces"
+          # "hyprland/workspaces"
+          "niri/workspaces"
         ];
 
         # Center modules.
@@ -36,8 +36,8 @@
           "cpu"
           "memory"
           "tray"
-          # "niri/language"
-          "hyprland/language"
+          "niri/language"
+          # "hyprland/language"
           "network"
           "pulseaudio"
           "clock"
