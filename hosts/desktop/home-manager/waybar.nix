@@ -21,8 +21,9 @@
         # Modules placement.
         # Left modules.
         modules-left = [
-          # "custom/menu"
-          "niri/workspaces"
+          "custom/menu"
+          "hyprland/workspaces"
+          # "niri/workspaces"
         ];
 
         # Center modules.
@@ -35,7 +36,8 @@
           "cpu"
           "memory"
           "tray"
-          "niri/language"
+          # "niri/language"
+          "hyprland/language"
           "network"
           "pulseaudio"
           "clock"
@@ -50,11 +52,17 @@
           format-ru = "Ru";
         };
 
+        "hyprland/language" = {
+          format = "{}";
+          format-en = "Us";
+          format-ru = "Ru";
+        };
+
         # # Menu module.
-        # "custom/menu" = {
-        #   format = " menu";
-        #   on-click = "fuzzel";
-        # };
+        "custom/menu" = {
+          format = " menu";
+          on-click = "fuzzel";
+        };
         # Power menu module.
         "custom/power" = {
           format = "pomer";
@@ -177,6 +185,7 @@
         border-radius: 20;
       }
 
+      #workspaces,
       #custom-weather,
       #cpu,
       #memory,
@@ -197,7 +206,7 @@
         border-radius: 20;
       }
 
-      #workspaces {
+      #custom-menu {
         padding: 2px;
         margin: 5 2 5 5px;
         color: @text;

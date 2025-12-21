@@ -269,6 +269,9 @@
       xwayland-satellite
       pywal
       swayimg
+      grim
+      slurp
+      grimblast
 
       # Camera.
       gphoto2

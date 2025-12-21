@@ -32,7 +32,7 @@
       # Bar.
       "$Bar" = "waybar";
       # Wallpaper.
-      "$Wallpaper" = "swaybg -i ~/files/walls/wall.jpg";
+      "$Wallpaper" = "swaybg -i ~/files/wallpaper/wall.jpg";
       # Notification Centre.
       "$NotificationCentre" = "swaync";
       # Desktop init.
@@ -141,17 +141,17 @@
       # General settings.
       general = {
         # Gaps beetween windows.
-        gaps_in = 5;
+        gaps_in = 7;
         # Gaps between windows and desktop.
-        gaps_out = 10;
+        gaps_out = 14;
         # Size of border, 0 = off.
-        border_size = 0;
+        border_size = 4;
         # Default layout for new windows.
         layout = "dwindle";
         # Toggle tearing (enable for gaming).
         allow_tearing = true;
         # Colors of active and inactive borders (useless if border_size = 0).
-        #"col.active_border" = "rgb(b4befe)";
+        "col.active_border" = "rgb(7f7fb3)";
         #"col.inactive_border" = "rgb(313244)";
       };
 
@@ -204,7 +204,7 @@
         # Keyboard layout.
         kb_layout = "us,ru";
         # Hotkeys for changing keymap.
-        kb_options = "grp:alt_shift_toggle";
+        kb_options = "grp:caps_toggle";
         # Follow mouse.
         follow_mouse = 1;
         # Force disable acceleration.
