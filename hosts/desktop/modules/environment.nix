@@ -78,6 +78,7 @@
       tuna
       lshw
       ffmpeg
+      mesa-demos
 
       # Deploy.
       compose2nix
