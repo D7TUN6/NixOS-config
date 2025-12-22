@@ -29,7 +29,7 @@
     nat = {
       enable = true;
       internalInterfaces = ["ve-+"];
-      externalInterface = "ens3";
+      externalInterface = "eth0";
     };
     interfaces = {
       eth0 = {

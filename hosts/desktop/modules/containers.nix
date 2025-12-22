@@ -8,14 +8,10 @@
   containers = {
     webserver-d7tun6-site = {
       autoStart = true;
-      privateNetwork = true;
-      hostAddress = "192.168.1.10";
-      localAddress = "192.168.1.11";
-      hostAddress6 = "fc00::1";
-      localAddress6 = "fc00::2";
+      privateNetwork = false;
       bindMounts = {
         "/var/www/d7tun6.site" = {
-          hostPath = "/var/www/d7tun6.site";
+          hostPath = "/home/d7tun6/files/data/server/data/d7tun6-space/site";
           isReadOnly = false;
         };
       };
