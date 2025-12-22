@@ -21,9 +21,6 @@
             "8.8.8.8"
           ];
           firewall = {
-            # allowPing = false;
-            # rejectPackets = true;
-            # logRefusedConnections = false;
             allowedTCPPorts = [
               443
               80
@@ -39,18 +36,18 @@
             enable = true;
             virtualHosts = {
               "d7tun6.site" = {
-                # addSSL = true;
-                # enableACME = true;
+                addSSL = true;
+                enableACME = true;
                 root = "/var/www/d7tun6.site";
               };
             };
           };
         };
         security = {
-          # acme = {
-          #   acceptTerms = true;
-          #   defaults.email = "d7tun6.site";
-          # };
+          acme = {
+            acceptTerms = true;
+            defaults.email = "d7tun6@gmail.com";
+          };
         };
         system = {
           stateVersion = "24.11";

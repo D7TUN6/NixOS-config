@@ -79,6 +79,7 @@
       lshw
       ffmpeg
       mesa-demos
+      certbot
 
       # Deploy.
       compose2nix
