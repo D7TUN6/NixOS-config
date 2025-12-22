@@ -10,62 +10,19 @@
     tailscale = {
       enable = true;
       useRoutingFeatures = "both";
-      
     };
-    nginx = {
-      enable = true;
-      # recommendedGzipSettings = true;
-      # recommendedOptimisation = true;
-      # recommendedTlsSettings = true;
-      # recommendedProxySettings = true;
-      virtualHosts = {
-        "d7tun6.site" = {
-          addSSL = true;
-          enableACME = true;
-          root = "/var/www/d7tun6.site";
-          # locations = {
-          #   "/" = {
-          #     extraConfig = ''
-          #         try_files /index.html =404;
-          #       '';
-          #   };
-          #   "/bio" = {
-          #     extraConfig = ''
-          #         try_files /bio/index.html =404;
-          #       '';
-          #   };
-          #   "/git" = {
-          #     extraConfig = ''
-          #         try_files /gio/index.html =404;
-          #       '';
-          #   };
-          #   "/music" = {
-          #     extraConfig = ''
-          #         try_files /music/index.html =404;
-          #       '';
-          #   };
-          #   "/news" = {
-          #     extraConfig = ''
-          #         try_files /news/index.html =404;
-          #       '';
-          #   };
-          #   "/blog" = {
-          #     extraConfig = ''
-          #         try_files /blog/index.html =404;
-          #       '';
-          #   };
-          #   "/links" = {
-          #     extraConfig = ''
-          #         try_files /links/index.html =404;
-          #       '';
-          #   };
-          # };
-        };
-      };
-    };
+    # nginx = {
+    #   enable = true;
+    #   virtualHosts = {
+    #     "d7tun6.site" = {
+    #       addSSL = true;
+    #       enableACME = true;
+    #       root = "/var/www/d7tun6.site";
+    #     };
+    #   };
+    # };
     lact.enable = true;
     thermald.enable = true;
-    # cloudflared.enable = true;
     fstrim = {
       enable = true;
       interval = "weekly";
@@ -88,35 +45,12 @@
           cache_file = "/var/cache/dnscrypt-proxy/public-resolvers.md";
           minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
         };
-        # You can choose a specific set of servers from https://github.com/DNSCrypt/dnscrypt-resolvers/blob/master/v3/public-resolvers.md
-        # server_names = [ ... ];
       };
     };
 
-    # v2ray = {
-    #   enable = true;
-    #   config = 
-    #       {
-    #         inbounds = [
-    #           {
-    #             listen = "127.0.0.1";
-    #             port = 1080;
-    #             protocol = "http";
-    #           }
-    #         ];
-    #         outbounds = [
-    #           {
-    #             protocol = "freedom";
-    #           }
-    #         ];
-    #       };
-    # };
     xray = {
       enable = true;
       settings = {
-        # log = {
-        #   loglevel = "warning";
-        # };
         inbounds = [
           {
             listen = "0.0.0.0";

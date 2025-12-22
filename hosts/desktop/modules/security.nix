@@ -15,7 +15,6 @@
       enable = true;
       killUnconfinedConfinables = true;
     };
-    # allowUserNamespaces = false;
     virtualisation = {
       flushL1DataCache = "always";
     };

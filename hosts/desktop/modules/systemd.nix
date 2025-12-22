@@ -5,9 +5,11 @@
   inputs,
   ...
 }: {
-systemd.services.nginx.serviceConfig.ProtectHome = false;
   systemd = {
     services = {
+      nginx = {
+        serviceConfig.ProtectHome = false;
+      };
       minecraft-server-thecomboxmc = {
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {
@@ -45,10 +47,6 @@ systemd.services.nginx.serviceConfig.ProtectHome = false;
         };
       };
     };
-    # extraConfig = "
-    #   DefaultLimitNOFILE=523288
-    #   DefaultTimeoutStopSec=5s
-    # ";
     settings = {
       Manager = {
         DefaultLimitNOFILE = 523288;
