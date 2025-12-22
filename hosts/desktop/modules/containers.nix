@@ -58,7 +58,7 @@
         };
       };
     };
-    "mc-private-vanilla-main" = {
+    "mc-private-vanilla-main-combox" = {
       autoStart = true;
       privateNetwork = false;
       bindMounts = {
@@ -108,7 +108,7 @@
         };
       };
     };
-    xray-vpn = {
+    "xray-vpn-tb-303" = {
       autoStart = true;
       privateNetwork = false;
       bindMounts = {
