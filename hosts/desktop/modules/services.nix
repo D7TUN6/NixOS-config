@@ -11,16 +11,6 @@
       enable = true;
       useRoutingFeatures = "both";
     };
-    # nginx = {
-    #   enable = true;
-    #   virtualHosts = {
-    #     "d7tun6.site" = {
-    #       addSSL = true;
-    #       enableACME = true;
-    #       root = "/var/www/d7tun6.site";
-    #     };
-    #   };
-    # };
     lact.enable = true;
     thermald.enable = true;
     fstrim = {
@@ -47,58 +37,6 @@
         };
       };
     };
-
-    xray = {
-      enable = true;
-      settings = {
-        inbounds = [
-          {
-            listen = "0.0.0.0";
-            port = 444;
-            protocol = "vless";
-            settings = {
-              clients = [
-                {
-                  id = "c5609e76-e4b4-4a98-adc9-e788cc0727ed";
-                  flow = "xtls-rprx-vision";
-                  level = 0;
-                }
-              ];
-              decryption = "none";
-            };
-            streamSettings = {
-              network = "tcp";
-              security = "reality";
-              realitySettings = {
-                  show = false;
-                  dest = "www.microsoft.com:443";
-                  xver = 0;
-                  serverNames = [
-                    "www.google.com"
-                  ];
-                  privateKey = "eIUNF3d0HNfGMX7KLTj3dKrg2qk-BBxpvw-QA5hn0EA";
-                  shortIds = ["a1b2c3d4"];
-              };
-            };
-            sniffing = {
-              enabled = true;
-              destOverride = [ "http" "tls" ];
-            };
-          }
-        ];
-        outbounds = [
-          {
-            protocol = "freedom";
-            tag = "direct";
-          }
-          {
-            protocol = "blackhole";
-            tag = "block";
-          }
-        ];
-      };
-    };
-
   zapret = {
     enable = true;
     whitelist = [
@@ -111,6 +49,7 @@
       "googleapis.com"
       "gstatic.com"
       "www.google.com"
+      "letsencrypt.org"
     ];
     params = [
       "--dpi-desync=fake,disorder2"
@@ -118,8 +57,6 @@
       "--dpi-desync-autottl=2"
     ];
   };
-
-    
     openssh = {
       enable = true;
       ports = [ 21435 ];
