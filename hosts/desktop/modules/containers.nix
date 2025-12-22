@@ -25,9 +25,9 @@
             "127.0.0.1"
             "::1"
           ];
-          stevenBlackHosts = {
-            enableIPv6 = true;
-          };
+          # stevenBlackHosts = {
+          #   enableIPv6 = true;
+          # };
           firewall = {
             allowPing = false;
             rejectPackets = true;
