@@ -6,7 +6,7 @@
   ...
 }: {
   containers = {
-    webserver = {
+    webserver-d7tun6-site = {
       autoStart = true;
       privateNetwork = true;
       hostAddress = "192.168.1.10";
