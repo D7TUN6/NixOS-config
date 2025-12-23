@@ -133,56 +133,56 @@
           };
         };
         services = {
-          xray = {
-            enable = true;
-            settings = {
-              inbounds = [
-                {
-                  listen = "0.0.0.0";
-                  port = 444;
-                  protocol = "vless";
-                  settings = {
-                    clients = [
-                      {
-                        id = "c5609e76-e4b4-4a98-adc9-e788cc0727ed";
-                        flow = "xtls-rprx-vision";
-                        level = 0;
-                      }
-                    ];
-                    decryption = "none";
-                  };
-                  streamSettings = {
-                    network = "tcp";
-                    security = "reality";
-                    realitySettings = {
-                        show = false;
-                        dest = "www.microsoft.com:443";
-                        xver = 0;
-                        serverNames = [
-                          "www.google.com"
-                        ];
-                        privateKey = "eIUNF3d0HNfGMX7KLTj3dKrg2qk-BBxpvw-QA5hn0EA";
-                        shortIds = ["a1b2c3d4"];
-                    };
-                  };
-                  sniffing = {
-                    enabled = true;
-                    destOverride = [ "http" "tls" ];
-                  };
-                }
-              ];
-              outbounds = [
-                {
-                  protocol = "freedom";
-                  tag = "direct";
-                }
-                {
-                  protocol = "blackhole";
-                  tag = "block";
-                }
-              ];
-            };
-          };
+          # xray = {
+          #   enable = true;
+          #   settings = {
+          #     inbounds = [
+          #       {
+          #         listen = "0.0.0.0";
+          #         port = 444;
+          #         protocol = "vless";
+          #         settings = {
+          #           clients = [
+          #             {
+          #               id = "c5609e76-e4b4-4a98-adc9-e788cc0727ed";
+          #               flow = "xtls-rprx-vision";
+          #               level = 0;
+          #             }
+          #           ];
+          #           decryption = "none";
+          #         };
+          #         streamSettings = {
+          #           network = "tcp";
+          #           security = "reality";
+          #           realitySettings = {
+          #               show = false;
+          #               dest = "www.microsoft.com:443";
+          #               xver = 0;
+          #               serverNames = [
+          #                 "www.google.com"
+          #               ];
+          #               privateKey = "eIUNF3d0HNfGMX7KLTj3dKrg2qk-BBxpvw-QA5hn0EA";
+          #               shortIds = ["a1b2c3d4"];
+          #           };
+          #         };
+          #         sniffing = {
+          #           enabled = true;
+          #           destOverride = [ "http" "tls" ];
+          #         };
+          #       }
+          #     ];
+          #     outbounds = [
+          #       {
+          #         protocol = "freedom";
+          #         tag = "direct";
+          #       }
+          #       {
+          #         protocol = "blackhole";
+          #         tag = "block";
+          #       }
+          #     ];
+          #   };
+          # };
         };
         system = {
           stateVersion = "24.11";
