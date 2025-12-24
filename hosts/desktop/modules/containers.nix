@@ -106,6 +106,15 @@
         system = {
           stateVersion = "24.11";
         };
+        # security = {
+        #   acme = {
+        #     acceptTerms = true;
+        #     defaults.email = "d7tun6@gmail.com";
+        #     certs = {
+        #       "thecombox.site".email = "d7tun6@gmail.com";
+        #     };
+        #   };
+        # };
       };
     };
     "xray-vpn-tb-303" = {
