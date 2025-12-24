@@ -15,6 +15,12 @@
       flags = [
         "--refresh"
         "-L"
+        "--update-input"
+        "nixpkgs"
+        "--update-input"
+        "home-manager"
+        "--update-input"
+        "hosts"
       ];
     };
   };

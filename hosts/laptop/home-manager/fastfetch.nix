@@ -12,109 +12,121 @@
     settings = {
       # Modules settings.
       modules = [
-        # Hardware Information column.
-        {
-          type = "custom";
-          format = "┏━━━━━━━━━━━━━ Hardware Information ━━━━━━━━━━━━━┓";
-        }
-        # Motherboard name (if available).
-        {
-          type = "host";
-          key = "   ";
-        }
-        # Cpu model.
-        {
-          type = "cpu";
-          key = "   ";
-        }
-        # Gpu model.
-        {
-          type = "gpu";
-          key = "   ";
-        }
-        # Disks, mounts and space.
-        {
-          type = "disk";
-          key = "   ";
-        }
-        # Ram amount and usage.
-        {
-          type = "memory";
-          key = "   ";
-        }
-        # Displays information.
-        {
-          type = "display";
-          key = "  󰍹 ";
-        }
-        # Software information column
-        {
-          type = "custom";
-          format = "┣━━━━━━━━━━━━━ Software Information ━━━━━━━━━━━━━┫";
-        }
         # Username and hostname.
-        {
-          type = "title";
-          key = "   ";
-          format = "{1}@{2}";
-        }
         # Distro name.
         {
           type = "os";
-          key = "   ";
+          key = "distro ";
         }
         # Kernel version.
         {
           type = "kernel";
-          key = "   ";
+          key = "kernel ";
           format = "{1} {2}";
         }
         # Amount of packages.
         {
           type = "packages";
-          key = "  󰏖 ";
+          key = "packages ";
+        }
+        {
+          type = "initsystem";
+          key = "init ";
+        }
+        {
+          type = "break";
         }
         # Desktop environment.
         {
           type = "de";
-          key = "   ";
+          key = "de ";
         }
         # Window manager.
         {
           type = "wm";
-          key = "   ";
+          key = "wm ";
         }
         # Shell name.
         {
           type = "shell";
-          key = "   ";
+          key = "sh ";
         }
         # Terminal name.
         {
           type = "terminal";
-          key = "   ";
+          key = "term ";
         }
         # Terminal font name.
         {
           type = "terminalfont";
-          key = "   ";
+          key = "font ";
         }
         # Theme name.
         {
           type = "theme";
-          key = "  󰉼 ";
+          key = "theme ";
         }
         # Icon theme name.
         {
           type = "icons";
-          key = "  󰀻 ";
+          key = "icons ";
         }
-        # End column.
         {
-          type = "custom";
-          format = "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛";
+          type = "break";
         }
-        # Colors module.
+        # Motherboard name (if available).
+        {
+          type = "board";
+          key = "board ";
+        }
+        # BIOS.
+        {
+          type = "bios";
+          key = "bios ";
+        }
+        # TPM.
+        {
+          type = "tpm";
+          key = "tpm ";
+        }
+        # Cpu model.
+        {
+          type = "cpu";
+          key = "cpu ";
+          temp = true;
+        }
+        # Gpu model.
+        {
+          type = "gpu";
+          key = "gpu ";
+          temp = true;
+        }
+        # Disks, mounts and space.
+        {
+          type = "disk";
+          key = "disk ";
+        }
+        # Ram amount and usage.
+        {
+          type = "memory";
+          key = "ram ";
+        }
+        # Displays information.
+        {
+          type = "display";
+          key = "disp ";
+        }
+        # Local IP.
+        {
+          type = "localip";
+          key = "local ip ";
+          showSpeed = true;
+        }
+        # Uptime.
+        {
+          type = "uptime";
+          key = "uptime ";
+        }
         {
           type = "colors";
           paddingLeft = 2;
