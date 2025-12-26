@@ -13,7 +13,7 @@
       btrfs = true;
       ext4 = true;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_testing;
     loader = {
       timeout = 0;
       efi = {
@@ -76,6 +76,8 @@
     ];
     
     kernelParams = [     
+      # video
+      "video=1366x768@68"
       # Silent boot.
       "quiet"
       "udev.log_level=3"
