@@ -13,7 +13,7 @@
       btrfs = true;
       ext4 = true;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_testing;
     loader = {
       timeout = 3;
       efi = {
@@ -64,10 +64,10 @@
     kernelModules = [
       "kvm-amd"
       "atk-kbd"
-      "usb-hid"
-      "tcp-bbr"
-      "tun"
-      "amd_pstate"
+      # "usb-hid"
+      # "tcp-bbr"
+      # "tun"
+      # "amd_pstate"
     ];
 
     blacklistedKernelModules = [
@@ -79,34 +79,38 @@
       "quiet"
 
       # GPU.
-      "video=HDMI-A-1:1920x1080@74"
+      "video=DVI-D-1:1920x1080@60"
       
       # # Network.
       "net.ifnames=0"
           
       # RT.
       "preempt=full"
-     
+      "idle=poll"
+      "nohz_full=all"
+      "rcu_nocbs=all"
+      "rcu_nocb_poll=all"
+           
       # Power.
       "acpi_osi=Linux"
       "amd_iommu=on"
       "iommu=force"
-      "amd_pstate=active"
-      "acpi=force"
 
       # Optimizations.
       "clocksource=tsc"
       "nosoftlockup=1"
-
-      # Hardening.
-      "slab_nomerge"
-      "init_on_alloc=1"
-      "init_on_free=1"
-      "page_alloc.shuffle=1"
-      "randomize_kstack_offset=1"
-      "iommu.strict=1"
-      "oops=panic"
-      "page_poison=1"
+      "mitigations=off"
+      
+      # Disable CPU powersaving features.
+      # Global.
+      "cpufreq.performance=1"
+      "processor.max_cstate=0"
+      "cpuidle.off=1"
+      # Intel.
+      "intel_idle.max_cstate=0"
+      "intel_pstate=disable"
+      # AMD.
+      "amd_pstate=disable"
     ];
     kernel = {
       sysctl = {      
@@ -133,20 +137,21 @@
         "fs.file-max" = 9223372036854775807;
 
         # Network optimizations.
+        "net.core.busy_poll" = 1;
         # Algos.
         "net.ipv4.tcp_congestion_control" = "bbr";
         "net.core.default_qdisc" = "cake";
         # Buffers.
-        "net.core.rmem_default" = 8388608;
-        "net.core.rmem_max" = 536870912;
-        "net.core.wmem_default" = 8388608;
-        "net.core.wmem_max" = 536870912;
+        # "net.core.rmem_default" = 8388608;
+        "net.core.rmem_max" = 1048576;
+        # "net.core.wmem_default" = 8388608;
+        "net.core.wmem_max" = 1048576;
         "net.core.optmem_max" = 65536;
         "net.ipv4.tcp_synack_retries" = 5;
-        "net.ipv4.tcp_rmem" = "8192 524288 536870912";
-        "net.ipv4.tcp_wmem" = "4096 262144 536870912";
-        "net.ipv4.udp_rmem_min" = 16384;
-        "net.ipv4.udp_wmem_min" = 16384;
+        "net.ipv4.tcp_rmem" = "16777216 16777216 16777216";
+        "net.ipv4.tcp_wmem" = "16777216 16777216 16777216";
+        # "net.ipv4.udp_rmem_min" = 16384;
+        # "net.ipv4.udp_wmem_min" = 16384;
         # Other.
         "net.ipv4.tcp_base_mss" = 1024;
         "net.core.netdev_budget" = 600;
@@ -165,13 +170,15 @@
         "net.ipv4.tcp_keepalive_intvl" = 60;
         "net.ipv4.tcp_keepalive_probes" = 4;
         "net.ipv4.tcp_max_syn_backlog" = 8192;
-        "net.ipv4.tcp_max_tw_buckets" = 100000;
-        "net.ipv4.tcp_fin_timeout" = 30;
+        "net.ipv4.tcp_max_tw_buckets" = 450000;
+        "net.ipv4.tcp_fin_timeout" = 10;
         "net.ipv4.tcp_tw_reuse" = 1;
         "net.ipv4.tcp_ecn" = 0;
         "net.core.somaxconn" = 32768;
         "net.ipv4.tcp_adv_win_scale" = -2;
         "net.ipv4.tcp_notsent_lowat" = 131072;
+        "net.ipv4.tcp_limit_output_bytes" = 131072;
+        "net.ipv4.tcp_window_scaling" = 1;
       };
     };
   };
