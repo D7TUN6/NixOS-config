@@ -140,6 +140,7 @@
 
       # Base software.
       telegram-desktop
+      ayugram-desktop
       overskride
       vesktop
       strawberry
@@ -240,7 +241,8 @@
       pavucontrol
       helvum
       easyeffects
-
+      jamesdsp
+      
       # Development.
       python3
       gcc

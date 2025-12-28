@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     freesm.url = "github:FreesmTeam/FreesmLauncher";
+    ayugram-desktop = {
+      type = "git";
+      submodules = true;
+      url = "https://github.com/ndfined-crp/ayugram-desktop/";
+     };
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,6 +25,7 @@
       nixpkgs,
       home-manager,
       hosts,
+      ayugram-desktop,
       ...
     } @inputs:
     {

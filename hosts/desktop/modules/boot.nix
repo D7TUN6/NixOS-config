@@ -13,7 +13,7 @@
       btrfs = true;
       ext4 = true;
     };
-    kernelPackages = pkgs.linuxPackages_testing;
+    kernelPackages = pkgs.linuxPackages-rt_latest;
     loader = {
       timeout = 3;
       efi = {

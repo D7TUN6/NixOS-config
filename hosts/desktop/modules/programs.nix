@@ -7,10 +7,10 @@
 }: {
   programs = {
     gphoto2.enable = true;
-    hyprland = {
-     enable = true;
-     xwayland.enable = true;
-    };
+    # hyprland = {
+    #  enable = true;
+    #  xwayland.enable = true;
+    # };
     niri.enable = true;
     java = {
       enable = true;

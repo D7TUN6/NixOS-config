@@ -49,7 +49,7 @@
       }
 
       // Outputs section.
-      output "HDMI-A-1" {
+      output "DVI-D-1" {
           mode "1920x1080@74.013"
           transform "normal"
           position x=0 y=0

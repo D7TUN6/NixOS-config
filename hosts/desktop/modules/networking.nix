@@ -57,6 +57,7 @@
         5001
         8888
         456
+        9723 # torrent
       ];
       allowedUDPPorts = [
         67 # DHCP Server.
@@ -74,6 +75,7 @@
         5001
         8888
         456
+        9723 # torrent
       ];
     };
   };
