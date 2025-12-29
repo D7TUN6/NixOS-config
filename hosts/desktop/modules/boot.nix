@@ -113,7 +113,8 @@
       "amd_pstate=disable"
     ];
     kernel = {
-      sysctl = {      
+      sysctl = {
+        "kernel.sysrq" = 502; 
         # Memory optimizations.
         "vm.swappiness" = 10;
         "vm.vfs_cache_pressure" = 50;
