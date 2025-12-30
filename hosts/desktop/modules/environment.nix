@@ -80,6 +80,7 @@
       ffmpeg
       mesa-demos
       certbot
+      cava
 
       # Deploy.
       compose2nix
@@ -237,6 +238,10 @@
       # Graphics.
       krita
 
+      # Video.
+      kdePackages.kdenlive
+      shotcut
+      
       # Audio tuning.
       pavucontrol
       helvum

@@ -93,13 +93,13 @@
         {
           type = "cpu";
           key = "cpu ";
-          temp = true;
+          # temp = true;
         }
         # Gpu model.
         {
           type = "gpu";
           key = "gpu ";
-          temp = true;
+          # temp = true;
         }
         # Disks, mounts and space.
         {
