@@ -13,7 +13,7 @@
       btrfs = true;
       ext4 = true;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages-rt_latest;
     loader = {
       timeout = 3;
       efi = {
@@ -85,31 +85,31 @@
           
       # RT.
       "preempt=full"
-      # "idle=poll"
-      # "nohz_full=all"
-      # "rcu_nocbs=all"
-      # "rcu_nocb_poll=all"
+      "idle=poll"
+      "nohz_full=all"
+      "rcu_nocbs=all"
+      "rcu_nocb_poll=all"
            
       # Power.
       "acpi_osi=Linux"
-      # "amd_iommu=on"
-      # "iommu=force"
+      "amd_iommu=on"
+      "iommu=force"
 
       # Optimizations.
       "clocksource=tsc"
       "nosoftlockup=1"
-      # "mitigations=off"
+      "mitigations=off"
       
       # Disable CPU powersaving features.
       # Global.
-      # "cpufreq.performance=1"
-      # "processor.max_cstate=0"
-      # "cpuidle.off=1"
+      "cpufreq.performance=1"
+      "processor.max_cstate=0"
+      "cpuidle.off=1"
       # Intel.
-      # "intel_idle.max_cstate=0"
-      # "intel_pstate=disable"
+      "intel_idle.max_cstate=0"
+      "intel_pstate=disable"
       # AMD.
-      # "amd_pstate=disable"
+      "amd_pstate=disable"
     ];
     kernel = {
       sysctl = {
