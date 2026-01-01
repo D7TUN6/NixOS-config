@@ -109,12 +109,7 @@
       iftop
       iproute2
       nethogs
-
-      # Apple
-      libimobiledevice
-      ideviceinstaller
-      bsdiff
-            
+          
       # Compression & archives.
       unzip
       # unrar
