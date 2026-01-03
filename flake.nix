@@ -2,7 +2,7 @@
   description = "D7TUN6's personal flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     freesm.url = "github:FreesmTeam/FreesmLauncher";
     ayugram-desktop = {
       type = "git";
@@ -10,7 +10,7 @@
       url = "https://github.com/ndfined-crp/ayugram-desktop/";
      };
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hosts = {

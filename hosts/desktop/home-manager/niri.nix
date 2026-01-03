@@ -49,12 +49,12 @@
       }
 
       // Outputs section.
-      output "DVI-D-1" {
-          mode "1920x1080@74.013"
+      output "DP-1" {
+          mode "1600x1200@68"
           transform "normal"
           position x=0 y=0
           scale 1
-          variable-refresh-rate
+          // variable-refresh-rate
       }
 
       layout {

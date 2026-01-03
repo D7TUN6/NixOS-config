@@ -78,7 +78,7 @@
       "quiet"
 
       # GPU.
-      "video=DVI-D-1:1920x1080@60"
+      "video=DP-1:1600x1200@68"
       
       # # Network.
       "net.ifnames=0"

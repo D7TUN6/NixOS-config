@@ -41,7 +41,6 @@
       '')
 
       # CLI.
-      lsd
       curl
       wget
       fastfetch
@@ -66,8 +65,6 @@
       ncdu
       w3m
       lynx
-      links2
-      elinks
       tty-clock
       kernel-hardening-checker
       sbctl
@@ -141,15 +138,10 @@
       vesktop
       strawberry
       firefox
-      netsurf-browser
-      dillo
-      dillo-plus
       qutebrowser
       nyxt
       # librewolf-bin-unwrapped
       chromium
-      ungoogled-chromium
-      brave
       google-chrome
       zathura
       mupdf
@@ -198,7 +190,7 @@
 
       # Audio production.
       # DAW.
-      # reaper
+      reaper
       # renoise
       audacity
       # Synth.
@@ -221,8 +213,8 @@
 
       # Virtualisation tools.
       qemu
-      pcem
-      distrobox
+      # pcem
+      # distrobox
 
       # DPI & VPN
       zapret
