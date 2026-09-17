@@ -1,0 +1,17 @@
+# nix build output
+/result
+/result-*
+
+# python bytecode
+__pycache__/
+*.py[cod]
+
+# licensed software (renoise) and local tls secrets (vaultwarden)
+hosts/*/smth/secrets/
+hosts/*/smth/vaultwarden-tls/
+
+# editor and misc backups
+*.bak
+*.swp
+*~
+.DS_Store
