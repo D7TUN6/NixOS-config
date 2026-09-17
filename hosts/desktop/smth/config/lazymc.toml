@@ -1,0 +1,34 @@
+# lazymc configuration
+# https://git.io/J1Fvq
+
+[public]
+address = "0.0.0.0:25565"
+
+[server]
+address = "127.0.0.1:25566"
+directory = "/home/d7tun6/files/mounts/TS480SSD/services/minecraft"
+command = "systemctl start minecraft"
+stop_command = "systemctl stop minecraft"
+start_timeout = 120
+stop_timeout = 60
+wake_on_crash = true
+
+[time]
+sleep_after = 180
+
+[motd]
+sleeping = "§8☠ TheComBox MC server is sleeping\n§7☻ Join to wake it up"
+starting = "§e☻ Server is starting...\n§7⌛ Please wait..."
+stopping = "§8☠ Server going to sleep...\n§7⌛ Please wait..."
+
+[advanced]
+rewrite_server_properties = false
+
+[join]
+methods = ["hold", "kick"]
+
+[join.kick]
+starting = "§6TheComBox MC is waking up... reconnect in a moment"
+
+[join.hold]
+timeout = 25

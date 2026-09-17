@@ -1,0 +1,28 @@
+--- a/telegram-bot-api/Client.cpp
++++ b/telegram-bot-api/Client.cpp
+@@ -8620,6 +8620,25 @@
+   options.net_query_stats = parameters_->net_query_stats_;
+   td_client_ = td::create_actor_on_scheduler<td::ClientActor>(
+       "TdClientActor", 0, td::make_unique<TdCallback>(actor_id(this)), std::move(options));
++
++  // Route all Telegram DC connections through the local MTProto proxy
++  // (tg-ws-proxy on 127.0.0.1:1443) when TG_WS_PROXY_SECRET is set.
++  const char *proxy_secret = std::getenv("TG_WS_PROXY_SECRET");
++  if (proxy_secret != nullptr && proxy_secret[0] != '\0') {
++    auto proxy = td_api::make_object<td_api::proxy>();
++    proxy->server_ = "127.0.0.1";
++    proxy->port_ = 1443;
++    proxy->type_ = td_api::make_object<td_api::proxyTypeMtproto>(td::string(proxy_secret));
++    auto add_proxy = td_api::make_object<td_api::addProxy>();
++    add_proxy->proxy_ = std::move(proxy);
++    add_proxy->enable_ = true;
++    add_proxy->comment_ = "tg-ws-proxy";
++    class IgnoreResult final : public TdQueryCallback {
++      void on_result(object_ptr<td_api::Object> result) final {
++      }
++    };
++    send_request(std::move(add_proxy), td::make_unique<IgnoreResult>());
++  }
+ }
+ 
+ void Client::send(PromisedQueryPtr query) {

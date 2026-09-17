@@ -1,0 +1,506 @@
+# {
+#   config,
+#   pkgs,
+#   lib,
+#   ...
+# }: let
+#   /*
+#   sing-box 1.13.x
+
+#   Схема:
+
+#     обычный трафик
+#            |
+#            v
+#          tun0
+#            |
+#         sing-box
+#         /      \
+#      RU/etc     остальное
+#        |           |
+#      direct       Tor
+#                    |
+#                127.0.0.1:9050
+
+
+#   ВАЖНО:
+
+#   1. TUN создаёт сам sing-box.
+#      Никаких ip tuntap add/del в systemd.
+
+#   2. DNS:
+#      sing-box -> 127.0.0.1:53 -> dnscrypt-proxy
+
+#   3. Российские домены/IP -> direct.
+
+#   4. Всё остальное -> Tor SOCKS5.
+
+#   6. Старые geosite/geoip не используются:
+#      вместо них rule-set.
+#   */
+#   configJSON =
+#     pkgs.writeText
+#     "sing-box-config.json"
+#     (builtins.toJSON {
+#       /*
+#       ============================================================
+#       LOG
+#       ============================================================
+#       */
+
+#       log = {
+#         level = "info";
+#         timestamp = true;
+#       };
+
+#       /*
+#       ============================================================
+#       DNS
+#       ============================================================
+
+#       dnscrypt-proxy слушает:
+#         127.0.0.1:53
+#         [::1]:53
+
+#       Используем новый DNS server format sing-box 1.12+.
+#       */
+
+#       dns = {
+#         servers = [
+#           {
+#             type = "udp";
+
+#             tag = "dnscrypt";
+
+#             server = "127.0.0.1";
+
+#             server_port = 53;
+#           }
+#         ];
+
+#         final = "dnscrypt";
+#       };
+
+#       /*
+#       ============================================================
+#       INBOUNDS
+#       ============================================================
+#       */
+
+#       inbounds = [
+#         /*
+#         TUN
+
+#         sing-box сам создаёт tun0.
+#         */
+
+#         {
+#           type = "tun";
+
+#           tag = "tun-in";
+
+#           interface_name = "tun0";
+
+#           address = [
+#             "172.19.0.1/30"
+#             "fdfe:dcba:9876::1/126"
+#           ];
+
+#           mtu = 1500;
+
+#           auto_route = true;
+
+#           strict_route = true;
+
+#           stack = "system";
+#         }
+
+#         /*
+#         Локальный SOCKS/HTTP proxy.
+
+#         Можно использовать вручную:
+
+#           SOCKS5 127.0.0.1:1080
+
+#         или HTTP proxy, если понадобится.
+#         */
+
+#         {
+#           type = "mixed";
+
+#           tag = "mixed-in";
+
+#           listen = "127.0.0.1";
+
+#           listen_port = 1080;
+#         }
+#       ];
+
+#       /*
+#       ============================================================
+#       OUTBOUNDS
+#       ============================================================
+#       */
+
+#       outbounds = [
+#         /*
+#         Обычный интернет через системный интерфейс.
+#         */
+
+#         {
+#           type = "direct";
+
+#           tag = "direct";
+#         }
+
+#         /*
+#         Tor SOCKS5.
+
+#         Tor daemon слушает 127.0.0.1:9050.
+#         */
+
+#         {
+#           type = "socks";
+
+#           tag = "tor";
+
+#           server = "127.0.0.1";
+
+#           server_port = 9050;
+#         }
+
+#         /*
+#         На всякий случай оставляем block.
+#         */
+
+#         {
+#           type = "block";
+
+#           tag = "block";
+#         }
+#       ];
+
+#       /*
+#       ============================================================
+#       ROUTING
+#       ============================================================
+#       */
+
+#       route = {
+#         /*
+#         sing-box автоматически определяет настоящий
+#         физический интерфейс.
+
+#         Это важно при auto_route, чтобы собственный
+#         трафик Tor не зациклился обратно в tun0.
+#         */
+
+#         auto_detect_interface = true;
+
+#         /*
+#         ----------------------------------------------------------
+#         RULE SETS
+#         ----------------------------------------------------------
+
+#         Старые:
+
+#           geosite
+#           geoip
+
+#         в sing-box 1.13 больше не используем.
+
+#         Вместо них remote SRS rule-sets.
+#         */
+
+#         rule_set = [
+#           /*
+#           Российские домены.
+
+#           Аналог старого:
+
+#             geosite:category-ru
+#           */
+
+#           {
+#             tag = "geosite-category-ru";
+
+#             type = "remote";
+
+#             format = "binary";
+
+#             url = "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ru.srs";
+
+#             download_detour = "direct";
+
+#             update_interval = "24h";
+#           }
+
+#           /*
+#           Российские IP.
+
+#           Аналог старого:
+
+#             geoip:ru
+#           */
+
+#           {
+#             tag = "geoip-ru";
+
+#             type = "remote";
+
+#             format = "binary";
+
+#             url = "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-ru.srs";
+
+#             download_detour = "direct";
+
+#             update_interval = "24h";
+#           }
+
+#           /*
+#           Google
+#           */
+
+#           {
+#             tag = "geosite-google";
+
+#             type = "remote";
+
+#             format = "binary";
+
+#             url = "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs";
+
+#             download_detour = "direct";
+
+#             update_interval = "24h";
+#           }
+
+#           /*
+#           Microsoft
+#           */
+
+#           {
+#             tag = "geosite-microsoft";
+
+#             type = "remote";
+
+#             format = "binary";
+
+#             url = "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-microsoft.srs";
+
+#             download_detour = "direct";
+
+#             update_interval = "24h";
+#           }
+#         ];
+
+#         /*
+#         ----------------------------------------------------------
+#         ROUTE RULES
+#         ----------------------------------------------------------
+#         */
+
+#         rules = [
+#           /*
+#           1. Сначала определяем протокол.
+
+#           Это необходимо для дальнейшего route matching.
+#           */
+
+#           {
+#             action = "sniff";
+#           }
+
+#           /*
+#           2. DNS-запросы не отправляем в Tor как обычный UDP.
+
+#           Они передаются внутреннему DNS-модулю sing-box,
+#           который отправляет их в dnscrypt-proxy.
+#           */
+
+#           /*
+#           3. Loopback.
+#           */
+
+#           {
+#             ip_cidr = [
+#               "127.0.0.0/8"
+#               "::1/128"
+#             ];
+
+#             outbound = "direct";
+#           }
+
+#           /*
+#           4. Private networks.
+
+#           LAN, Docker, Podman и т.п. не должны внезапно
+#           уходить через Tor.
+#           */
+
+#           {
+#             ip_is_private = true;
+
+#             outbound = "direct";
+#           }
+
+#           /*
+#           5. Российские домены.
+#           */
+
+#           {
+#             rule_set = [
+#               "geosite-category-ru"
+#             ];
+
+#             outbound = "direct";
+#           }
+
+#           /*
+#           6. Российские IP.
+#           */
+
+#           {
+#             rule_set = [
+#               "geoip-ru"
+#             ];
+
+#             outbound = "direct";
+#           }
+
+#           /*
+#           7. Google напрямую.
+#           */
+
+#           {
+#             rule_set = [
+#               "geosite-google"
+#             ];
+
+#             outbound = "direct";
+#           }
+
+#           /*
+#           8. Microsoft напрямую.
+#           */
+
+#           {
+#             rule_set = [
+#               "geosite-microsoft"
+#             ];
+
+#             outbound = "direct";
+#           }
+#         ];
+
+#         /*
+#         ----------------------------------------------------------
+#         FINAL
+#         ----------------------------------------------------------
+
+#         Всё, что не попало ни под одно правило,
+#         отправляется в Tor.
+#         */
+
+#         final = "tor";
+#       };
+
+#       /*
+#       ============================================================
+#       EXPERIMENTAL
+#       ============================================================
+
+#       Нужен cache_file для remote rule-set.
+#       */
+
+#       experimental = {
+#         cache_file = {
+#           enabled = true;
+
+#           path = "/var/lib/sing-box/cache.db";
+#         };
+#       };
+#     });
+# in {
+#   /*
+#   ================================================================
+#   CONFIG FILE
+#   ================================================================
+#   */
+
+#   environment.etc."sing-box/config.json".source = configJSON;
+
+#   /*
+#   ================================================================
+#   SYSTEMD SERVICE
+#   ================================================================
+#   */
+
+#   systemd.services.sing-box = {
+#     description = "Sing-box TUN proxy with Tor split routing";
+
+#     wantedBy = [
+#       "multi-user.target"
+#     ];
+
+#     after = [
+#       "network-online.target"
+#       "tor.service"
+#       "dnscrypt-proxy.service"
+#     ];
+
+#     requires = [
+#       "tor.service"
+#     ];
+
+#     wants = [
+#       "network-online.target"
+#     ];
+
+#     serviceConfig = {
+#       /*
+#       ВАЖНО:
+
+#       НЕТ:
+
+#         ip tuntap add tun0
+#         ip tuntap del tun0
+
+#       sing-box сам управляет TUN.
+#       */
+
+#       ExecStart = "${pkgs.sing-box}/bin/sing-box run -c /etc/sing-box/config.json";
+
+#       Restart = "always";
+
+#       RestartSec = 5;
+
+#       /*
+#       Создание TUN требует CAP_NET_ADMIN.
+#       */
+
+#       AmbientCapabilities = [
+#         "CAP_NET_ADMIN"
+#         "CAP_NET_BIND_SERVICE"
+#       ];
+
+#       CapabilityBoundingSet = [
+#         "CAP_NET_ADMIN"
+#         "CAP_NET_BIND_SERVICE"
+#       ];
+
+#       /*
+#       sing-box должен иметь возможность создать tun0
+#       и настроить маршруты.
+#       */
+
+#       NoNewPrivileges = false;
+
+#       /*
+#       Каталог для cache.db.
+#       */
+
+#       StateDirectory = "sing-box";
+#     };
+#   };
+# }
