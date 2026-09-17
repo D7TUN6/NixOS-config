@@ -1,0 +1,12 @@
+{...}: {
+  programs.firefox = {
+    profiles = {
+      d7tun6 = {
+        settings = {
+          "ui.systemUsesDarkTheme" = 1;
+          "widget.content.allow-privileged-apis" = true;
+        };
+      };
+    };
+  };
+}
