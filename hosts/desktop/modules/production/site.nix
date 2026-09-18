@@ -30,6 +30,13 @@ in {
     # Rotate by editing this value and re-running nixos-rebuild switch.
     icecastSourcePassword = "MthJxjkKuFvCTenpxF75NzJ0";
     domain = "radio.d7tun6.site";
+    # Background priority: keep the 24/7 streamer from starving the interactive
+    # desktop or the d7tun6 site server (CPU/IO weight + idle IO + hard caps).
+    niceLevel = 15;
+    cpuWeight = 20;
+    ioWeight = 20;
+    cpuQuota = "50%";
+    memoryMax = "512M";
   };
 
   # Polkit: allow d7tun6 to restart d7tun6-pm2.service without sudo
