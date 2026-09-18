@@ -1,6 +1,6 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}: {
   environment.systemPackages = with pkgs; [
-    (pkgs.renoise.override {releasePath = ../../smth/secrets/renoise/pkg.tar.gz;})
+    (pkgs.renoise.override {releasePath = inputs.renoise-pkg + "/pkg.tar.gz";})
   ];
 }
 

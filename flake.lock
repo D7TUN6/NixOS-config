@@ -37,8 +37,8 @@
     "d7tun6-radio": {
       "flake": false,
       "locked": {
-        "lastModified": 1789654208,
-        "narHash": "sha256-QQjYZlzUdO1Y1xxsALV4ci87llaAFNoHOx8JrBwpMYA=",
+        "lastModified": 1789748241,
+        "narHash": "sha256-nkuk904rfZn760de6eV3XioX1sKw5yiWGwJxkgq3cQM=",
         "path": "/home/d7tun6/files/mounts/TS480SSD/services/site/d7tun6/radio",
         "type": "path"
       },
@@ -268,6 +268,19 @@
         "type": "path"
       }
     },
+    "renoise-pkg": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789752898,
+        "narHash": "sha256-NBkAYKvqgnEHhSGvFQPhHGyUTy4N0b20Yd7T9NdJ/Dk=",
+        "path": "/home/d7tun6/files/secrets/renoise",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/d7tun6/files/secrets/renoise",
+        "type": "path"
+      }
+    },
     "root": {
       "inputs": {
         "chaotic": "chaotic",
@@ -282,6 +295,7 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "pidorbot": "pidorbot",
         "pivometr-bot": "pivometr-bot",
+        "renoise-pkg": "renoise-pkg",
         "shakalizator-bot": "shakalizator-bot",
         "sops-nix": "sops-nix",
         "tg-ws-proxy": "tg-ws-proxy"

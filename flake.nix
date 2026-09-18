@@ -19,6 +19,10 @@
       url = "path:/home/d7tun6/files/mounts/TS480SSD/services/site/d7tun6/radio";
       flake = false;
     };
+    renoise-pkg = {
+      url = "path:/home/d7tun6/files/secrets/renoise";
+      flake = false;
+    };
     dvigunchik-bot = {
       url = "git+file:///home/d7tun6/files/mounts/TS480SSD/services/bot-dvigunchik";
       flake = false;
